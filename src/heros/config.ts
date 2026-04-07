@@ -9,6 +9,37 @@ import {
 
 import { linkGroup } from '@/fields/linkGroup'
 
+// Reusable per-slide fields (used inside the slides array)
+const slideFields: Field[] = [
+  {
+    name: 'richText',
+    type: 'richText',
+    editor: lexicalEditor({
+      features: ({ rootFeatures }) => {
+        return [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ]
+      },
+    }),
+    label: 'Slide content',
+  },
+  linkGroup({
+    overrides: {
+      maxRows: 2,
+    },
+  }),
+  {
+    name: 'media',
+    type: 'upload',
+    label: 'Background image / video',
+    relationTo: 'media',
+    required: true,
+  },
+]
+
 export const hero: Field = {
   name: 'hero',
   type: 'group',
@@ -38,6 +69,21 @@ export const hero: Field = {
       ],
       required: true,
     },
+
+    // ── High Impact: array of slides ────────────────────────────────────────
+    {
+      name: 'slides',
+      type: 'array',
+      label: 'Carousel slides',
+      minRows: 1,
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+        initCollapsed: false,
+      },
+      fields: slideFields,
+    },
+
+    // ── Medium / Low Impact: single rich text + media (unchanged) ───────────
     {
       name: 'richText',
       type: 'richText',
@@ -51,18 +97,24 @@ export const hero: Field = {
           ]
         },
       }),
+      admin: {
+        condition: (_, { type } = {}) => type !== 'highImpact',
+      },
       label: false,
     },
     linkGroup({
       overrides: {
         maxRows: 2,
+        admin: {
+          condition: (_, { type } = {}) => type !== 'highImpact',
+        },
       },
     }),
     {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) => ['mediumImpact'].includes(type),
       },
       relationTo: 'media',
       required: true,

@@ -4,14 +4,18 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.js",
+    "config": "tailwind.config.mjs",
     "css": "src/app/(frontend)/globals.css",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
     "utils": "@/utilities/ui"
+  },
+  "registries": {
+    "@shadcnuikit": "https://shadcnuikit.com/r/{name}.json"
   }
 }
