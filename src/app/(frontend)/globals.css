@@ -19,6 +19,11 @@
   h6 {
     font-weight: unset;
     font-size: unset;
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  body {
+    font-family: var(--font-jost), system-ui, sans-serif;
   }
 }
 
@@ -36,6 +41,8 @@
 @source inline("bg-success/30");
 @source inline("border-warning");
 @source inline("bg-warning/30");
+@source inline("[html[data-theme=dark]_&]:block");
+@source inline("[html[data-theme=dark]_&]:hidden");
 
 @theme {
   --breakpoint-sm: 40rem;
@@ -43,8 +50,9 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
-  --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-jost);
+  --font-sans: var(--font-jost);
+  --font-serif: var(--font-playfair);
 }
 
 @layer utilities {
@@ -87,7 +95,7 @@
 }
 
 :root {
-  --background: oklch(100% 0 0deg);
+  --background: oklch(0.97, 0.003, 72);
   --foreground: oklch(14.5% 0 0deg);
   --card: oklch(96.5% 0.005 265deg);
   --card-foreground: oklch(14.5% 0 0deg);

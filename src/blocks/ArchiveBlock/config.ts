@@ -27,6 +27,18 @@ export const Archive: Block = {
       label: 'Intro Content',
     },
     {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'Grid',
+      options: [
+        { label: 'Grid', value: 'Grid' },
+        { label: 'Full Screen Carousel', value: 'FullScreenCarousel' },
+        { label: 'Cards Carousel', value: 'CardsCarousel' },
+        { label: 'List', value: 'List' },
+      ],
+      label: 'Layout',
+    },
+    {
       name: 'populateBy',
       type: 'select',
       defaultValue: 'collection',
@@ -50,10 +62,11 @@ export const Archive: Block = {
       defaultValue: 'posts',
       label: 'Collections To Show',
       options: [
-        {
-          label: 'Posts',
-          value: 'posts',
-        },
+        { label: 'Posts', value: 'posts' },
+        { label: 'Hotels', value: 'hotels' },
+        { label: 'Villas & Estates', value: 'villas-and-estates' },
+        { label: 'Experiences', value: 'experiences' },
+        { label: 'Journeys', value: 'journeys' },
       ],
     },
     {
@@ -84,7 +97,7 @@ export const Archive: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts'],
+      relationTo: ['posts', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
     },
   ],
   labels: {

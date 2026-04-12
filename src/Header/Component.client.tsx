@@ -1,59 +1,38 @@
 'use client'
+
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-
+import { Menu, X, Search } from 'lucide-react'
 import type { Header } from '@/payload-types'
-
+import logoWhite from './../../public/logo/white_logo_transparent.svg'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { cn } from '@/utilities/ui'
+import Image from 'next/image'
 
-interface HeaderClientProps {
-  data: Header
-}
-
-// Extracted to avoid triplicating Logo markup across desktop/mobile/drawer
-const LogoLink = ({ onClick, logoClassName }: { onClick?: () => void; logoClassName?: string }) => (
-  <Link href="/" onClick={onClick}>
-    <Logo loading="eager" priority="high" className={cn('invert dark:invert-0', logoClassName)} />
-  </Link>
-)
-
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  const [theme, setTheme] = useState<string | null>(null)
+export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
-  const [scrolledMore, setScrolledMore] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  // Reset theme + close drawer on route change (merged from two separate effects)
+  const isHome = pathname === '/'
+  const heroVisible = isHome && !scrolled
+
   useEffect(() => {
     setHeaderTheme(null)
     setDrawerOpen(false)
-  }, [pathname, setHeaderTheme])
+  }, [pathname])
 
-  // Sync theme from context
   useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-  }, [headerTheme, theme])
-
-  // Scroll threshold tracking
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY
-      setScrolled(y > 100)
-      setScrolledMore(y > 500)
-    }
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 80)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Lock body scroll when drawer is open; cleanup always resets
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? 'hidden' : ''
     return () => {
@@ -61,83 +40,146 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     }
   }, [drawerOpen])
 
+  const closeDrawer = () => setDrawerOpen(false)
+  const openDrawer = () => setDrawerOpen(true)
+
   return (
     <>
-      <header className="fixed z-20 w-full" data-theme={theme ?? undefined}>
-        {/* Desktop: Expanded header — slides up and hides on scroll */}
-        <div
-          className={cn(
-            'px-4 lg:px-16 transition-all duration-700 delay-500 flex-col justify-between items-center gap-6 py-8',
-            'hidden lg:flex',
-            scrolled && '-mt-[25vh]',
-            scrolledMore && 'hidden!',
-          )}
-        >
-          <LogoLink />
-          <HeaderNav data={data} />
-        </div>
+      {/* Desktop — Hero (homepage, pre-scroll): centered logo + spread nav */}
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-40 hidden flex-col items-center px-8 pt-7 pb-6 transition-opacity duration-500 lg:flex',
+          heroVisible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+        )}
+      >
+        <Link href="/" className="mb-6 block transition-opacity hover:opacity-80">
+          <Image
+            src={logoWhite}
+            alt="logo"
+            width={150}
+            height={50}
+            className="h-16 w-auto text-white"
+          />
+        </Link>
+        <HeaderNav data={data} variant="hero" />
+      </header>
 
-        {/* Desktop: Compact header — appears after scrolledMore threshold */}
-        <div
-          className={cn(
-            'fixed top-0 left-0 w-full px-4 flex-row justify-between items-center py-2 h-16 z-30',
-            'transition-all duration-700 delay-300',
-            'hidden lg:flex',
-            scrolledMore
-              ? 'opacity-100 pointer-events-auto bg-background translate-y-0'
-              : 'opacity-0 pointer-events-none -translate-y-10',
-          )}
+      {/* Desktop Compact (scrolled / inner pages): dark logo block + light bar */}
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-40 hidden h-18 transition-all duration-500 lg:flex',
+          !heroVisible
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-3 opacity-0',
+        )}
+      >
+        <Link
+          href="/"
+          aria-label="Home"
+          className="flex w-28 shrink-0 items-center justify-center bg-card transition-opacity hover:opacity-80"
         >
-          <LogoLink />
-          <HeaderNav data={data} />
-        </div>
-
-        {/* Mobile: Always-visible header */}
-        <div className="lg:hidden flex items-center justify-between px-4 py-2 bg-background">
+          <Logo className="text-primary-foreground" />
+        </Link>
+        <div className="flex flex-1 items-center justify-between border-b border-border bg-card px-6">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={openDrawer}
+              aria-label="Open menu"
+              aria-expanded={drawerOpen}
+              aria-controls="nav-drawer"
+              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+            >
+              <Menu size={20} strokeWidth={1.5} />
+            </button>
+            <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
+              Menu
+            </span>
+          </div>
           <button
-            onClick={() => setDrawerOpen(true)}
-            className="p-2 hover:bg-accent rounded-md transition-colors"
-            aria-label="Open menu"
+            aria-label="Search"
+            className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
           >
-            <Menu className="w-6 h-6 text-primary" />
+            <Link href="/search">
+              <Search size={17} strokeWidth={1.5} />
+            </Link>
           </button>
-          <LogoLink />
-          <div className="w-10" aria-hidden="true" /> {/* Spacer for centring logo */}
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
-      <div
+      {/* Mobile: logo left, hamburger right */}
+      <header
         className={cn(
-          'fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300',
-          drawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
+          'fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between px-4 transition-all duration-300 lg:hidden',
+          heroVisible ? 'bg-transparent' : 'bg-card',
         )}
-        onClick={() => setDrawerOpen(false)}
+      >
+        <Link href="/" aria-label="Home">
+          {heroVisible ? (
+            <Image src={logoWhite} alt="1524 Logo" width={150} height={34} className="h-8 w-auto" />
+          ) : (
+            <Logo className="h-8 w-auto" />
+          )}
+        </Link>
+        <button
+          onClick={openDrawer}
+          aria-label="Open menu"
+          aria-expanded={drawerOpen}
+          aria-controls="nav-drawer"
+          className={cn(
+            'flex h-9 w-9 items-center justify-center transition-colors',
+            heroVisible
+              ? 'text-white/80 hover:text-white'
+              : 'text-foreground/60 hover:text-foreground',
+          )}
+        >
+          <Menu size={22} strokeWidth={1.5} />
+        </button>
+      </header>
+
+      {/* Backdrop */}
+      <div
+        onClick={closeDrawer}
+        aria-hidden="true"
+        className={cn(
+          'fixed inset-0 z-50 bg-foreground/40 backdrop-blur-sm transition-opacity duration-300',
+          drawerOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+        )}
       />
 
-      {/* Mobile Drawer */}
+      {/* Side drawer — slides in from left */}
       <aside
+        id="nav-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
         className={cn(
-          'fixed top-0 left-0 h-full w-[280px] bg-background z-50 lg:hidden',
-          'transition-transform duration-300 ease-in-out',
-          'border-r border-border shadow-xl',
+          'fixed inset-y-0 left-0 z-60 flex w-80 max-w-[85vw] flex-col bg-card shadow-xl',
+          'transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
           drawerOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b border-border">
-            <LogoLink onClick={() => setDrawerOpen(false)} logoClassName="h-8" />
-            <button
-              onClick={() => setDrawerOpen(false)}
-              className="p-2 hover:bg-accent rounded-md transition-colors"
-              aria-label="Close menu"
-            >
-              <X className="w-6 h-6 text-primary" />
-            </button>
-          </div>
-          <nav className="flex-1 overflow-y-auto p-4">
-            <HeaderNav data={data} mobile />
-          </nav>
+        <div className="flex items-center justify-between border-b border-border px-6 py-5">
+          <Link href="/" onClick={closeDrawer}>
+            <Logo className="h-9 w-auto text-foreground" />
+          </Link>
+          <button
+            onClick={closeDrawer}
+            aria-label="Close menu"
+            className="flex h-9 w-9 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <X size={20} strokeWidth={1.5} />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-2">
+          <HeaderNav data={data} variant="drawer" onLinkClick={closeDrawer} />
+        </div>
+        <div className="border-t border-border px-6 py-5">
+          <button className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground">
+            <Link href="/search">
+              <Search size={15} strokeWidth={1.5} />
+              <span className="font-sans text-[10px] uppercase tracking-[0.35em]">Search</span>
+            </Link>
+          </button>
         </div>
       </aside>
     </>

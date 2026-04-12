@@ -3,45 +3,44 @@
 import React from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
-import Link from 'next/link'
-import { SearchIcon } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 
 interface HeaderNavProps {
   data: HeaderType
-  mobile?: boolean
+  variant?: 'hero' | 'drawer'
+  onLinkClick?: () => void
 }
 
-// Shared base classes for every mobile nav item
-const mobileItemBase =
-  'px-4 py-3 rounded-md hover:bg-accent transition-colors text-base text-foreground hover:text-primary'
-
-export const HeaderNav: React.FC<HeaderNavProps> = ({ data, mobile = false }) => {
+export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', onLinkClick }) => {
   const navItems = data?.navItems || []
 
-  if (mobile) {
+  if (variant === 'drawer') {
     return (
-      <nav className="flex flex-col gap-2">
-        {navItems.map(({ link }, i) => (
-          <CMSLink key={i} {...link} appearance="link" className={cn('block', mobileItemBase)} />
-        ))}
-        <Link href="/search" className={cn('flex items-center gap-3', mobileItemBase)}>
-          <SearchIcon className="w-5" />
-          <span>Search</span>
-        </Link>
+      <nav>
+        <ul role="list" className="flex flex-col">
+          {navItems.map(({ link }, i) => (
+            <li key={i} className="border-b border-border last:border-b-0 ">
+              <CMSLink
+                {...link}
+                onClick={onLinkClick}
+                className="block py-5 font-sans text-xs uppercase tracking-[0.3em] text-foreground/70 transition-colors hover:text-foreground"
+              />
+            </li>
+          ))}
+        </ul>
       </nav>
     )
   }
 
   return (
-    <nav className="flex gap-16 items-center justify-evenly">
+    <nav className="flex items-center justify-center gap-8 xl:gap-12">
       {navItems.map(({ link }, i) => (
-        <CMSLink key={i} {...link} appearance="link" />
+        <CMSLink
+          key={i}
+          {...link}
+          className="whitespace-nowrap font-sans text-[11px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
+        />
       ))}
-      <Link href="/search">
-        <span className="sr-only">Search</span>
-        <SearchIcon className="w-5 text-primary" />
-      </Link>
     </nav>
   )
 }

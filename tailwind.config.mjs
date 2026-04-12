@@ -2,6 +2,10 @@
 const config = {
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
+        sans: ['var(--font-jost)', 'system-ui', 'sans-serif'],
+      },
       typography: () => ({
         DEFAULT: {
           css: [
