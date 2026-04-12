@@ -37,16 +37,25 @@ export const Card: React.FC<{
       )}
       ref={card.ref}
     >
-      <div className="relative w-full aspect-[4/5] sm:aspect-square md:aspect-[3/4] overflow-hidden bg-muted">
-        {!metaImage && <div className="w-full h-full flex items-center justify-center text-muted-foreground">No image</div>}
+      <div className="relative w-full aspect-4/5 sm:aspect-square md:aspect-3/4 overflow-hidden bg-muted">
+        {!metaImage && (
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+            No image
+          </div>
+        )}
         {metaImage && typeof metaImage !== 'string' && (
           <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
-            <Media resource={metaImage} size="33vw" fill imgClassName="object-cover w-full h-full" />
+            <Media
+              resource={metaImage}
+              size="33vw"
+              fill
+              imgClassName="object-cover w-full h-full"
+            />
           </div>
         )}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
       <div className="absolute bottom-0 left-0 right-0 p-6 z-10 text-white flex flex-col justify-end">
         {showCategories && hasCategories && (
@@ -54,11 +63,11 @@ export const Card: React.FC<{
             {categories?.map((category, index) => {
               if (typeof category === 'object') {
                 const { title: titleFromCategory } = category
-  
+
                 const categoryTitle = titleFromCategory || 'Untitled category'
-  
+
                 const isLast = index === categories.length - 1
-  
+
                 return (
                   <Fragment key={index}>
                     {categoryTitle}
@@ -66,7 +75,7 @@ export const Card: React.FC<{
                   </Fragment>
                 )
               }
-  
+
               return null
             })}
           </div>
@@ -74,13 +83,21 @@ export const Card: React.FC<{
         {titleToUse && (
           <div className="prose prose-invert border-none">
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
-              <Link className="not-prose text-white hover:text-white/90 transition-colors before:absolute before:inset-0" href={href} ref={link.ref}>
+              <Link
+                className="not-prose text-white hover:text-white/90 transition-colors before:absolute before:inset-0"
+                href={href}
+                ref={link.ref}
+              >
                 {titleToUse}
               </Link>
             </h3>
           </div>
         )}
-        {description && <div className="mt-2 line-clamp-2 text-sm text-white/70">{description && <p className="m-0">{sanitizedDescription}</p>}</div>}
+        {description && (
+          <div className="mt-2 line-clamp-2 text-sm text-white/70">
+            {description && <p className="m-0">{sanitizedDescription}</p>}
+          </div>
+        )}
       </div>
     </article>
   )

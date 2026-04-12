@@ -14,7 +14,7 @@ export const ListView: React.FC<{
         const { slug, title, meta, categories } = result || {}
         const { description, image: metaImage } = meta || {}
         const href = `/${relationTo}/${slug}`
-        
+
         return (
           <Link
             key={index}
@@ -24,11 +24,11 @@ export const ListView: React.FC<{
             {/* Thumbnail Image */}
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 overflow-hidden rounded-lg bg-muted flex items-center justify-center">
               {metaImage && typeof metaImage !== 'string' ? (
-                <Media 
-                  resource={metaImage} 
-                  size="10vw" 
+                <Media
+                  resource={metaImage}
+                  size="10vw"
                   fill
-                  imgClassName="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" 
+                  imgClassName="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
                 <span className="text-xs text-muted-foreground">No image</span>
@@ -36,10 +36,13 @@ export const ListView: React.FC<{
             </div>
 
             {/* Content Area */}
-            <div className="flex flex-col flex-grow py-1">
+            <div className="flex flex-col grow py-1">
               {categories && Array.isArray(categories) && categories.length > 0 && (
                 <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
-                  {categories.map((c: any) => typeof c === 'object' ? c.title : '').filter(Boolean).join(', ')}
+                  {categories
+                    .map((c: any) => (typeof c === 'object' ? c.title : ''))
+                    .filter(Boolean)
+                    .join(', ')}
                 </div>
               )}
               <h3 className="text-lg sm:text-xl font-bold mb-1 group-hover:text-primary transition-colors line-clamp-2">
