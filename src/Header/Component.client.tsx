@@ -9,6 +9,7 @@ import type { Header } from '@/payload-types'
 import logoWhite from './../../public/logo/white_logo_transparent.svg'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { cn } from '@/utilities/ui'
 import Image from 'next/image'
 
@@ -58,7 +59,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
             alt="logo"
             width={150}
             height={50}
-            className="h-16 w-auto text-white"
+            className="h-14 w-auto text-white"
           />
         </Link>
         <HeaderNav data={data} variant="hero" />
@@ -67,7 +68,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
       {/* Desktop Compact (scrolled / inner pages): dark logo block + light bar */}
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-40 hidden h-18 transition-all duration-500 lg:flex',
+          'fixed inset-x-0 top-0 z-40 hidden h-16 transition-all duration-500 lg:flex',
           !heroVisible
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-3 opacity-0',
@@ -95,14 +96,16 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
               Menu
             </span>
           </div>
-          <button
-            aria-label="Search"
-            className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
-          >
-            <Link href="/search">
-              <Search size={17} strokeWidth={1.5} />
-            </Link>
-          </button>
+          <div>
+            <button
+              aria-label="Search"
+              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+            >
+              <Link href="/search">
+                <Search size={17} strokeWidth={1.5} />
+              </Link>
+            </button>
+          </div>
         </div>
       </header>
 

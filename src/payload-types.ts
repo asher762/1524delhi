@@ -660,6 +660,8 @@ export interface ArchiveBlock {
 export interface Hotel {
   id: number;
   title: string;
+  location: string;
+  logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -1678,6 +1680,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface HotelsSelect<T extends boolean = true> {
   title?: T;
+  location?: T;
+  logoImage?: T;
   heroImage?: T;
   content?: T;
   relatedHotels?: T;
@@ -2219,17 +2223,6 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

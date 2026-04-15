@@ -55,7 +55,7 @@ export const Card: React.FC<{
         )}
       </div>
 
-      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent pointer-events-none" />
 
       <div className="absolute bottom-0 left-0 right-0 p-6 z-10 text-white flex flex-col justify-end">
         {showCategories && hasCategories && (

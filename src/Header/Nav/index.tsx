@@ -38,7 +38,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', on
         <CMSLink
           key={i}
           {...link}
-          className="whitespace-nowrap font-sans text-[11px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
+          className="whitespace-nowrap font-sans text-[10px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
         />
       ))}
     </nav>

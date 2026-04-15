@@ -16,6 +16,7 @@
     "utils": "@/utilities/ui"
   },
   "registries": {
-    "@shadcnuikit": "https://shadcnuikit.com/r/{name}.json"
+    "@shadcnuikit": "https://shadcnuikit.com/r/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}"
   }
 }

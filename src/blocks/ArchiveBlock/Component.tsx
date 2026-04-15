@@ -63,10 +63,10 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
+    <div className="container" id={`block-${id}`}>
       {introContent && (
-        <div className="container mb-16">
-          <RichText className="ms-0 max-w-3xl" data={introContent} enableGutter={false} />
+        <div className="mb-8">
+          <RichText className="ml-0 mx-0!" data={introContent} enableGutter={false} />
         </div>
       )}
       <CollectionArchive posts={posts} relationTo={targetCollection} layout={layout || 'Grid'} />

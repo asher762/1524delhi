@@ -24,12 +24,17 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (themeToSet === null) {
       window.localStorage.removeItem(themeLocalStorageKey)
       const implicitPreference = getImplicitPreference()
-      document.documentElement.setAttribute('data-theme', implicitPreference || '')
+      const resolved = implicitPreference || defaultTheme
+      document.documentElement.setAttribute('data-theme', resolved)
+      document.documentElement.classList.toggle('dark', resolved === 'dark')
+      window.localStorage.setItem('theme', resolved)
       if (implicitPreference) setThemeState(implicitPreference)
     } else {
       setThemeState(themeToSet)
       window.localStorage.setItem(themeLocalStorageKey, themeToSet)
+      window.localStorage.setItem('theme', themeToSet)
       document.documentElement.setAttribute('data-theme', themeToSet)
+      document.documentElement.classList.toggle('dark', themeToSet === 'dark')
     }
   }, [])
 
@@ -41,13 +46,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       themeToSet = preference
     } else {
       const implicitPreference = getImplicitPreference()
-
       if (implicitPreference) {
         themeToSet = implicitPreference
       }
     }
 
     document.documentElement.setAttribute('data-theme', themeToSet)
+    document.documentElement.classList.toggle('dark', themeToSet === 'dark')
+    window.localStorage.setItem('theme', themeToSet)
     setThemeState(themeToSet)
   }, [])
 

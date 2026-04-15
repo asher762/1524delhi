@@ -17,8 +17,6 @@
   h4,
   h5,
   h6 {
-    font-weight: unset;
-    font-size: unset;
     font-family: var(--font-playfair), Georgia, serif;
   }
 
@@ -229,4 +227,9 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
