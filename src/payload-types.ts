@@ -705,6 +705,8 @@ export interface Hotel {
 export interface VillasAndEstate {
   id: number;
   title: string;
+  location: string;
+  logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -748,6 +750,8 @@ export interface VillasAndEstate {
 export interface Experience {
   id: number;
   title: string;
+  location: string;
+  logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -791,6 +795,8 @@ export interface Experience {
 export interface Journey {
   id: number;
   title: string;
+  location: string;
+  logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -1706,6 +1712,8 @@ export interface HotelsSelect<T extends boolean = true> {
  */
 export interface VillasAndEstatesSelect<T extends boolean = true> {
   title?: T;
+  location?: T;
+  logoImage?: T;
   heroImage?: T;
   content?: T;
   relatedVillasAndEstates?: T;
@@ -1730,6 +1738,8 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
  */
 export interface ExperiencesSelect<T extends boolean = true> {
   title?: T;
+  location?: T;
+  logoImage?: T;
   heroImage?: T;
   content?: T;
   relatedExperiences?: T;
@@ -1754,6 +1764,8 @@ export interface ExperiencesSelect<T extends boolean = true> {
  */
 export interface JourneysSelect<T extends boolean = true> {
   title?: T;
+  location?: T;
+  logoImage?: T;
   heroImage?: T;
   content?: T;
   relatedJourneys?: T;

@@ -1,71 +1,67 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
 import React from 'react'
 
 import { Media } from '@/components/Media'
 
-type Category = any // using any for category since type might be complex
+type Category = any
 
 export const CollectionHero: React.FC<{
   doc: {
     title: string
+    logoImage?: any
     categories?: Category[]
     heroImage?: any
     publishedAt?: string | null
     location?: string | null
   }
 }> = ({ doc }) => {
-  const { categories, heroImage, publishedAt, title, location } = doc
+  const { categories, heroImage, title, location, logoImage } = doc
+
+  // Build the sub-heading: location parts + categories joined with " | "
+  const locationParts = location
+    ? location
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : []
+
+  const categoryTitles = (categories ?? [])
+    .filter((c): c is { title: string } => typeof c === 'object' && c !== null)
+    .map((c) => c.title ?? 'Untitled')
+
+  const subheadingParts = [...locationParts, ...categoryTitles]
 
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
-        <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
-          <div className="uppercase text-sm mb-6">
-            {categories?.map((category, index) => {
-              if (typeof category === 'object' && category !== null) {
-                const { title: categoryTitle } = category
-
-                const titleToUse = categoryTitle || 'Untitled category'
-
-                const isLast = index === categories.length - 1
-
-                return (
-                  <React.Fragment key={index}>
-                    {titleToUse}
-                    {!isLast && <React.Fragment>, &nbsp;</React.Fragment>}
-                  </React.Fragment>
-                )
-              }
-              return null
-            })}
+    <div className="bg-background pt-24 pb-0">
+      {/* ── Top text block ── */}
+      <div className="container flex flex-col items-center text-center gap-4 pb-8">
+        {/* Logo */}
+        {logoImage && typeof logoImage !== 'string' && (
+          <div className="relative w-38 h-24 mb-2">
+            <Media fill imgClassName="object-contain object-center" resource={logoImage} />
           </div>
+        )}
 
-          <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
-          </div>
+        {/* Title */}
+        <h1 className="font-serif text-3xl md:text-5xl lg:text-[3.25rem] leading-tight tracking-tight text-foreground max-w-3xl">
+          {title}
+        </h1>
 
-          <div className="flex flex-col md:flex-row gap-4 md:gap-16">
-            {location && (
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">Location</p>
-                <p>{location}</p>
-              </div>
-            )}
-            {publishedAt && (
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
-                <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
-              </div>
-            )}
+        {/* Location / categories */}
+        {subheadingParts.length > 0 && (
+          <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground mt-1">
+            {subheadingParts.join(' \u00a0|\u00a0 ')}
+          </p>
+        )}
+      </div>
+
+      {/* ── Hero image ── */}
+      {heroImage && typeof heroImage !== 'string' && (
+        <div className="container">
+          <div className="relative w-full aspect-video md:aspect-3/2 overflow-hidden">
+            <Media fill priority imgClassName="object-cover object-center" resource={heroImage} />
           </div>
         </div>
-      </div>
-      <div className="min-h-[80vh] select-none">
-        {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
-        )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-black to-transparent" />
-      </div>
+      )}
     </div>
   )
 }

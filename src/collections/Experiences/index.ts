@@ -68,6 +68,16 @@ export const Experiences: CollectionConfig<'experiences'> = {
       required: true,
     },
     {
+      name: 'location',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'logoImage',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       type: 'tabs',
       tabs: [
         {

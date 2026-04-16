@@ -68,6 +68,16 @@ export const VillasAndEstates: CollectionConfig<'villas-and-estates'> = {
       required: true,
     },
     {
+      name: 'location',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'logoImage',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       type: 'tabs',
       tabs: [
         {

@@ -68,6 +68,16 @@ export const Journeys: CollectionConfig<'journeys'> = {
       required: true,
     },
     {
+      name: 'location',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'logoImage',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       type: 'tabs',
       tabs: [
         {
