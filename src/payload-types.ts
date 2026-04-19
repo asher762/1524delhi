@@ -254,7 +254,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | CardsBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -542,6 +542,57 @@ export interface CallToActionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsBlock".
+ */
+export interface CardsBlock {
+  header?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  cards?:
+    | {
+        title: string;
+        media?:
+          | {
+              image: number | Media;
+              id?: string | null;
+            }[]
+          | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
@@ -753,7 +804,7 @@ export interface Experience {
   location: string;
   logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -767,7 +818,7 @@ export interface Experience {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   relatedExperiences?: (number | Experience)[] | null;
   categories?: (number | Category)[] | null;
   meta?: {
@@ -1408,6 +1459,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
@@ -1446,6 +1498,28 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsBlock_select".
+ */
+export interface CardsBlockSelect<T extends boolean = true> {
+  header?: T;
+  cards?:
+    | T
+    | {
+        title?: T;
+        media?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        description?: T;
         id?: T;
       };
   id?: T;
@@ -2094,26 +2168,15 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * e.g. mailto:hello@1524delhi.com or /contact
+   */
+  enquireUrl?: string | null;
+  newsletterUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  copyright?: string | null;
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2145,20 +2208,12 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
+  enquireUrl?: T;
+  newsletterUrl?: T;
+  privacyPolicyUrl?: T;
+  copyright?: T;
+  facebookUrl?: T;
+  instagramUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

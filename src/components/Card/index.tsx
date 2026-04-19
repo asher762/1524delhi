@@ -32,12 +32,12 @@ export const Card: React.FC<{
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-lg bg-card hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
+        'group relative overflow-hidden bg-card hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
         className,
       )}
       ref={card.ref}
     >
-      <div className="relative w-full aspect-4/5 sm:aspect-square md:aspect-3/4 overflow-hidden bg-muted">
+      <div className="relative w-full aspect-square overflow-hidden bg-muted">
         {!metaImage && (
           <div className="w-full h-full flex items-center justify-center text-muted-foreground">
             No image

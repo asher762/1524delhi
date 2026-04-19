@@ -12,6 +12,7 @@ import {
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
+import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidateVillaAndEstate } from './hooks/revalidateVillaAndEstate'
@@ -95,7 +96,7 @@ export const VillasAndEstates: CollectionConfig<'villas-and-estates'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, MediaBlock] }),
+                    BlocksFeature({ blocks: [Banner, CardsBlock, MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

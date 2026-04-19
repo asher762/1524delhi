@@ -21,6 +21,8 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
   const [selectedIndex, setSelectedIndex] = useState(0)
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  const [cursorDir, setCursorDir] = useState<'left' | 'right'>('right')
+
   const normalized: Slide[] = slides?.length ? slides : [{ richText, links, media }]
   const total = normalized.length
 
@@ -53,6 +55,19 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
     [total, startAuto, stopAuto],
   )
 
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (total <= 1) return
+      const mid = e.currentTarget.getBoundingClientRect().width / 2
+      if (e.nativeEvent.offsetX < mid) {
+        setCursorDir('left')
+      } else {
+        setCursorDir('right')
+      }
+    },
+    [total],
+  )
+
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (total <= 1) return
@@ -70,29 +85,27 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
   }
 
+  const cursorStyle = total > 1 ? (cursorDir === 'left' ? 'w-resize' : 'e-resize') : 'default'
+
   return (
     <div
       className="relative h-dvh w-full overflow-hidden bg-black select-none"
       onClick={handleClick}
-      style={{ cursor: total > 1 ? 'pointer' : 'default' }}
+      onMouseMove={handleMouseMove}
+      style={{ cursor: cursorStyle }}
     >
       {/* Slides */}
       {normalized.map((slide, i) => (
         <div
           key={i}
           className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-          style={{ opacity: i === selectedIndex ? 1 : 0, pointerEvents: 'none' }}
+          style={{ opacity: i === selectedIndex ? 1 : 0 }}
           aria-hidden={i !== selectedIndex}
         >
           {/* Background image */}
           {slide.media && typeof slide.media === 'object' && (
             <div className="absolute inset-0">
-              <Media
-                fill
-                imgClassName="object-cover"
-                priority={i === 0}
-                resource={slide.media}
-              />
+              <Media fill imgClassName="object-cover" priority={i === 0} resource={slide.media} />
               {/* Dark overlay */}
               <div className="absolute inset-0 bg-black/35" />
             </div>
@@ -106,13 +119,10 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
               </div>
             )}
             {Array.isArray(slide.links) && slide.links.length > 0 && (
-              <ul className="mt-2 flex flex-wrap justify-center gap-4">
+              <ul className="flex flex-wrap justify-center gap-4">
                 {slide.links.map(({ link }, j) => (
                   <li key={j}>
-                    <CMSLink
-                      {...link}
-                      className="font-sans text-[11px] uppercase tracking-[0.25em] text-white border-b border-white/70 pb-0.5 hover:border-white transition-colors"
-                    />
+                    <CMSLink {...link} className="" />
                   </li>
                 ))}
               </ul>

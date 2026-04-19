@@ -1,6 +1,5 @@
 import type { GlobalConfig } from 'payload'
 
-import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
 
 export const Footer: GlobalConfig = {
@@ -10,20 +9,39 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'navItems',
-      type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
-      maxRows: 6,
+      name: 'enquireUrl',
+      type: 'text',
+      label: 'Enquire For Bookings URL',
       admin: {
-        initCollapsed: true,
-        components: {
-          RowLabel: '@/Footer/RowLabel#RowLabel',
-        },
+        description: 'e.g. mailto:hello@1524delhi.com or /contact',
       },
+    },
+    {
+      name: 'newsletterUrl',
+      type: 'text',
+      label: 'Newsletter Signup URL',
+    },
+    {
+      name: 'privacyPolicyUrl',
+      type: 'text',
+      label: 'Privacy Policy URL',
+      defaultValue: '/privacy',
+    },
+    {
+      name: 'copyright',
+      type: 'text',
+      label: 'Copyright Text',
+      defaultValue: 'Copyright © 1524 Delhi 2020',
+    },
+    {
+      name: 'facebookUrl',
+      type: 'text',
+      label: 'Facebook URL',
+    },
+    {
+      name: 'instagramUrl',
+      type: 'text',
+      label: 'Instagram URL',
     },
   ],
   hooks: {

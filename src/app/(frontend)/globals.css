@@ -93,9 +93,9 @@
 }
 
 :root {
-  --background: oklch(0.97, 0.003, 72);
+  --background: oklch(0.8961 0.0191 96.89);
   --foreground: oklch(14.5% 0 0deg);
-  --card: oklch(96.5% 0.005 265deg);
+  --card: oklch(0.9542 0.008 98.88);
   --card-foreground: oklch(14.5% 0 0deg);
   --popover: oklch(100% 0 0deg);
   --popover-foreground: oklch(14.5% 0 0deg);
@@ -132,9 +132,9 @@
 }
 
 [data-theme='dark'] {
-  --background: oklch(14.5% 0 0deg);
-  --foreground: oklch(98.5% 0 0deg);
-  --card: oklch(17% 0 0deg);
+  --background: oklch(17.97% 0.00435 308.034);
+  --foreground: oklch(0.9542 0.008 98.88);
+  --card: oklch(24.543% 0.00403 308.043);
   --card-foreground: oklch(98.5% 0 0deg);
   --popover: oklch(14.5% 0 0deg);
   --popover-foreground: oklch(98.5% 0 0deg);
@@ -229,7 +229,8 @@ html[data-theme='light'] {
   opacity: initial;
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
