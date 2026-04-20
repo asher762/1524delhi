@@ -1,13 +1,12 @@
 /**
  * 1524 Delhi — Payload CMS Seed Script
- * Run with: npx ts-node seed.ts
- * Or via your package.json: "seed": "payload run seed.ts"
+ * Run with: npx tsx seed/seed.ts
  *
  * Requires: PAYLOAD_SECRET and DATABASE_URI in your .env
  */
 
+import 'dotenv/config'
 import payload from 'payload'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import config from '../src/payload.config'
 
 // ─── Import your data ─────────────────────────────────────────────────────────
@@ -36,11 +35,58 @@ function toRichText(text: string): any {
 
 // ─── Helper: slug map cache ───────────────────────────────────────────────────
 const categorySlugToId: Record<string, number> = {}
+const mediaSlugToId: Record<string, number> = {}
 
 async function main() {
   await payload.init({ config })
 
   console.log('🌱 Starting 1524 Delhi seed...\n')
+
+  // ─── 0. Seed Media ────────────────────────────────────────────────────
+  console.log('🖼️ Seeding media...')
+  for (const item of data.media) {
+    try {
+      const existing = await payload.find({
+        collection: 'media',
+        where: { alt: { equals: item.alt } },
+      })
+
+      if (existing.totalDocs > 0) {
+        mediaSlugToId[item.slug] = existing.docs[0].id as number
+        console.log(`  ↩  Skipped (exists): ${item.alt}`)
+        continue
+      }
+      
+      const res = await fetch(item.url)
+      if (!res.ok) throw new Error(`Failed to fetch image: ${res.statusText}`)
+      const arrayBuffer = await res.arrayBuffer()
+      const buffer = Buffer.from(arrayBuffer)
+      
+      const parts = item.filename.split('.')
+      const ext = parts.pop() || 'jpg'
+      let mimeType = 'image/jpeg'
+      if (ext.toLowerCase() === 'png') mimeType = 'image/png'
+      else if (ext.toLowerCase() === 'webp') mimeType = 'image/webp'
+      else if (ext.toLowerCase() === 'svg') mimeType = 'image/svg+xml'
+
+      const created = await payload.create({
+        collection: 'media',
+        data: {
+          alt: item.alt,
+        },
+        file: {
+          data: buffer,
+          mimetype: mimeType,
+          name: item.filename,
+          size: buffer.byteLength,
+        }
+      })
+      mediaSlugToId[item.slug] = created.id as number
+      console.log(`  ✅ Created media: ${item.alt}`)
+    } catch (err) {
+      console.error(`  ❌ Failed media: ${item.alt}`, err)
+    }
+  }
 
   // ─── 1. Seed Categories ────────────────────────────────────────────────────
   console.log('📂 Seeding categories...')
@@ -52,7 +98,7 @@ async function main() {
       })
 
       if (existing.totalDocs > 0) {
-        categorySlugToId[cat.slug] = existing.docs[0].id
+        categorySlugToId[cat.slug] = existing.docs[0].id as number
         console.log(`  ↩  Skipped (exists): ${cat.title}`)
         continue
       }
@@ -65,204 +111,130 @@ async function main() {
           generateSlug: false,
         },
       })
-      categorySlugToId[cat.slug] = created.id
+      categorySlugToId[cat.slug] = created.id as number
       console.log(`  ✅ Created: ${cat.title}`)
     } catch (err) {
       console.error(`  ❌ Failed: ${cat.title}`, err)
     }
   }
 
-  // ─── 2. Seed Hotels ────────────────────────────────────────────────────────
-  console.log('\n🏨 Seeding hotels...')
-  for (const hotel of data.hotels) {
-    try {
-      const existing = await payload.find({
-        collection: 'hotels',
-        where: { slug: { equals: hotel.slug } },
-      })
+  // ─── Helper for collection items ────────────────────────────────────────────────────────
+  async function seedCollection(collectionSlug: any, items: any[], name: string) {
+    console.log(`\n📄 Seeding ${name}...`)
+    for (const item of items) {
+      try {
+        const existing = await payload.find({
+          collection: collectionSlug,
+          where: { slug: { equals: item.slug } },
+        })
 
-      if (existing.totalDocs > 0) {
-        console.log(`  ↩  Skipped (exists): ${hotel.title}`)
-        continue
+        const categoryIds = (item.categories || []).map((s: string) => categorySlugToId[s]).filter(Boolean)
+        
+        let dataToCreate: any = {
+            title: item.title,
+            slug: item.slug,
+            generateSlug: false,
+            categories: categoryIds,
+            content: toRichText(item.content),
+            meta: {
+              title: item.meta?.title ?? item.title,
+              description: item.meta?.description ?? '',
+            },
+            _status: 'published',
+            publishedAt: new Date().toISOString(),
+        }
+        
+        if (item.location) {
+            dataToCreate.location = item.location
+        }
+        
+        if (item.heroImage && mediaSlugToId[item.heroImage]) {
+            dataToCreate.heroImage = mediaSlugToId[item.heroImage]
+        }
+        
+        if (item.meta?.image && mediaSlugToId[item.meta.image]) {
+            dataToCreate.meta.image = mediaSlugToId[item.meta.image]
+        }
+
+        if (existing.totalDocs > 0) {
+          await payload.update({
+            collection: collectionSlug,
+            id: existing.docs[0].id,
+            data: dataToCreate,
+          })
+          console.log(`  🔄 Updated: ${item.title}`)
+        } else {
+          await payload.create({
+            collection: collectionSlug,
+            data: dataToCreate,
+          })
+          console.log(`  ✅ Created: ${item.title}`)
+        }
+      } catch (err) {
+        console.error(`  ❌ Failed: ${item.title}`, err)
       }
-
-      const categoryIds = (hotel.categories || []).map((s) => categorySlugToId[s]).filter(Boolean)
-
-      await payload.create({
-        collection: 'hotels',
-        data: {
-          title: hotel.title,
-          slug: hotel.slug,
-          generateSlug: false,
-          location: hotel.location,
-          categories: categoryIds,
-          content: toRichText(hotel.content),
-          meta: {
-            title: hotel.meta?.title ?? hotel.title,
-            description: hotel.meta?.description ?? '',
-          },
-          _status: 'published',
-          publishedAt: new Date().toISOString(),
-        },
-      })
-      console.log(`  ✅ Created: ${hotel.title}`)
-    } catch (err) {
-      console.error(`  ❌ Failed: ${hotel.title}`, err)
     }
   }
 
-  // ─── 3. Seed Villas & Estates ──────────────────────────────────────────────
-  console.log('\n🏡 Seeding villas & estates...')
-  for (const villa of data.villasAndEstates) {
+  await seedCollection('hotels', data.hotels, 'hotels')
+  await seedCollection('villas-and-estates', data.villasAndEstates, 'villas & estates')
+  await seedCollection('experiences', data.experiences, 'experiences')
+  await seedCollection('journeys', data.journeys, 'journeys')
+  await seedCollection('posts', data.posts, 'blog posts')
+
+  // ─── 7. Seed Pages ──────────────────────────────────────────────────────────
+  console.log('\n📄 Seeding Pages...')
+  const pagesToSeed = [
+    { title: 'Home', slug: 'home', relationTo: 'posts' },
+    { title: 'Hotels', slug: 'hotels', relationTo: 'hotels' },
+    { title: 'Villas & Estates', slug: 'villas-and-estates', relationTo: 'villas-and-estates' },
+    { title: 'Experiences', slug: 'experiences', relationTo: 'experiences' },
+  ]
+
+  for (const p of pagesToSeed) {
     try {
       const existing = await payload.find({
-        collection: 'villas-and-estates',
-        where: { slug: { equals: villa.slug } },
+        collection: 'pages',
+        where: { slug: { equals: p.slug } },
       })
 
-      if (existing.totalDocs > 0) {
-        console.log(`  ↩  Skipped (exists): ${villa.title}`)
-        continue
+      let pageData: any = {
+        title: p.title,
+        slug: p.slug,
+        generateSlug: false,
+        _status: 'published',
+        publishedAt: new Date().toISOString(),
+        hero: {
+          type: 'none',
+        },
+        layout: [
+          {
+            blockType: 'archive',
+            introContent: toRichText(`Discover our ${p.title.toLowerCase()} collection.`),
+            populateBy: 'collection',
+            relationTo: p.relationTo,
+            limit: 20,
+            layout: 'Grid',
+          },
+        ],
       }
 
-      const categoryIds = (villa.categories || []).map((s) => categorySlugToId[s]).filter(Boolean)
-
-      await payload.create({
-        collection: 'villas-and-estates',
-        data: {
-          title: villa.title,
-          slug: villa.slug,
-          generateSlug: false,
-          location: villa.location,
-          categories: categoryIds,
-          content: toRichText(villa.content),
-          meta: {
-            title: villa.meta?.title ?? villa.title,
-            description: villa.meta?.description ?? '',
-          },
-          _status: 'published',
-          publishedAt: new Date().toISOString(),
-        },
-      })
-      console.log(`  ✅ Created: ${villa.title}`)
-    } catch (err) {
-      console.error(`  ❌ Failed: ${villa.title}`, err)
-    }
-  }
-
-  // ─── 4. Seed Experiences ───────────────────────────────────────────────────
-  console.log('\n✨ Seeding experiences...')
-  for (const exp of data.experiences) {
-    try {
-      const existing = await payload.find({
-        collection: 'experiences',
-        where: { slug: { equals: exp.slug } },
-      })
-
       if (existing.totalDocs > 0) {
-        console.log(`  ↩  Skipped (exists): ${exp.title}`)
-        continue
+        await payload.update({
+          collection: 'pages',
+          id: existing.docs[0].id,
+          data: pageData,
+        })
+        console.log(`  🔄 Updated Page: ${p.title}`)
+      } else {
+        await payload.create({
+          collection: 'pages',
+          data: pageData,
+        })
+        console.log(`  ✅ Created Page: ${p.title}`)
       }
-
-      const categoryIds = (exp.categories || []).map((s) => categorySlugToId[s]).filter(Boolean)
-
-      await payload.create({
-        collection: 'experiences',
-        data: {
-          title: exp.title,
-          slug: exp.slug,
-          generateSlug: false,
-          location: exp.location,
-          categories: categoryIds,
-          content: toRichText(exp.content),
-          meta: {
-            title: exp.meta?.title ?? exp.title,
-            description: exp.meta?.description ?? '',
-          },
-          _status: 'published',
-          publishedAt: new Date().toISOString(),
-        },
-      })
-      console.log(`  ✅ Created: ${exp.title}`)
     } catch (err) {
-      console.error(`  ❌ Failed: ${exp.title}`, err)
-    }
-  }
-
-  // ─── 5. Seed Journeys ─────────────────────────────────────────────────────
-  console.log('\n🗺️  Seeding journeys...')
-  for (const journey of data.journeys) {
-    try {
-      const existing = await payload.find({
-        collection: 'journeys',
-        where: { slug: { equals: journey.slug } },
-      })
-
-      if (existing.totalDocs > 0) {
-        console.log(`  ↩  Skipped (exists): ${journey.title}`)
-        continue
-      }
-
-      const categoryIds = (journey.categories || []).map((s) => categorySlugToId[s]).filter(Boolean)
-
-      await payload.create({
-        collection: 'journeys',
-        data: {
-          title: journey.title,
-          slug: journey.slug,
-          generateSlug: false,
-          location: journey.location,
-          categories: categoryIds,
-          content: toRichText(journey.content),
-          meta: {
-            title: journey.meta?.title ?? journey.title,
-            description: journey.meta?.description ?? '',
-          },
-          _status: 'published',
-          publishedAt: new Date().toISOString(),
-        },
-      })
-      console.log(`  ✅ Created: ${journey.title}`)
-    } catch (err) {
-      console.error(`  ❌ Failed: ${journey.title}`, err)
-    }
-  }
-
-  // ─── 6. Seed Blog Posts ───────────────────────────────────────────────────
-  console.log('\n📝 Seeding blog posts...')
-  for (const post of data.posts) {
-    try {
-      const existing = await payload.find({
-        collection: 'posts',
-        where: { slug: { equals: post.slug } },
-      })
-
-      if (existing.totalDocs > 0) {
-        console.log(`  ↩  Skipped (exists): ${post.title}`)
-        continue
-      }
-
-      const categoryIds = (post.categories || []).map((s) => categorySlugToId[s]).filter(Boolean)
-
-      await payload.create({
-        collection: 'posts',
-        data: {
-          title: post.title,
-          slug: post.slug,
-          generateSlug: false,
-          categories: categoryIds,
-          content: toRichText(post.content),
-          meta: {
-            title: post.meta?.title ?? post.title,
-            description: post.meta?.description ?? '',
-          },
-          _status: 'published',
-          publishedAt: new Date().toISOString(),
-        },
-      })
-      console.log(`  ✅ Created: ${post.title}`)
-    } catch (err) {
-      console.error(`  ❌ Failed: ${post.title}`, err)
+      console.error(`  ❌ Failed Page: ${p.title}`, err)
     }
   }
 

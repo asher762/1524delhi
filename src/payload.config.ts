@@ -24,7 +24,12 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    components: {},
+    components: {
+      graphics: {
+        Logo: '/components/Logo/AdminLogo',
+        Icon: '/components/Logo/AdminIcon',
+      },
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -59,7 +64,17 @@ export default buildConfig({
       url: process.env.DATABASE_URL || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Hotels, VillasAndEstates, Experiences, Journeys],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Hotels,
+    VillasAndEstates,
+    Experiences,
+    Journeys,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,
