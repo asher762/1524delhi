@@ -2,11 +2,12 @@ import { cn } from '@/utilities/ui'
 import React from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '../../components/Media'
+import { CMSLink } from '../../components/Link'
 
 import type { InfoBlock as InfoBlockProps } from '@/payload-types'
 
 export const InfoBlockComponent: React.FC<InfoBlockProps> = (props) => {
-  const { richText, media, reverse } = props
+  const { richText, media, reverse, enableLink, link } = props
 
   return (
     <div className="container my-16">
@@ -21,8 +22,9 @@ export const InfoBlockComponent: React.FC<InfoBlockProps> = (props) => {
             <Media imgClassName="rounded-xl w-full h-auto object-cover" resource={media} />
           )}
         </div>
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 flex flex-col gap-4">
           {richText && <RichText data={richText} enableGutter={false} />}
+          {enableLink && <CMSLink {...link} />}
         </div>
       </div>
     </div>

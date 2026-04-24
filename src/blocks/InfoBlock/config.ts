@@ -5,6 +5,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { link } from '../../fields/link'
 
 export const InfoBlock: Block = {
   slug: 'infoBlock',
@@ -37,5 +38,18 @@ export const InfoBlock: Block = {
       label: 'Reverse layout on large screens',
       defaultValue: false,
     },
+    {
+      name: 'enableLink',
+      type: 'checkbox',
+    },
+    link({
+      overrides: {
+        admin: {
+          condition: (_data, siblingData) => {
+            return Boolean(siblingData?.enableLink)
+          },
+        },
+      },
+    }),
   ],
 }
