@@ -119,7 +119,7 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
               </div>
             )}
             {Array.isArray(slide.links) && slide.links.length > 0 && (
-              <ul className="flex flex-wrap justify-center gap-4">
+              <ul className="flex flex-wrap justify-center gap-4 tracking-widest">
                 {slide.links.map(({ link }, j) => (
                   <li key={j}>
                     <CMSLink {...link} className="" />
