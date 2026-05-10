@@ -1,0 +1,8 @@
+// Override the frontend's anti-FOUC opacity rule.
+// globals.css sets html { opacity: 0 } and only restores it when data-theme
+// is set by InitTheme. The Payload admin never runs InitTheme and never sets
+// data-theme, so without this override the admin panel stays permanently
+// invisible (black screen).
+html {
+  opacity: 1 !important;
+}
