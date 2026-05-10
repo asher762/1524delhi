@@ -225,20 +225,20 @@ async function main() {
           id: existing.docs[0].id,
           data: pageData,
         })
-        console.log(`  🔄 Updated Page: ${p.title}`)
+        console.log(` Updated Page: ${p.title}`)
       } else {
         await payload.create({
           collection: 'pages',
           data: pageData,
         })
-        console.log(`  ✅ Created Page: ${p.title}`)
+        console.log(` Created Page: ${p.title}`)
       }
     } catch (err) {
-      console.error(`  ❌ Failed Page: ${p.title}`, err)
+      console.error(` Failed Page: ${p.title}`, err)
     }
   }
 
-  console.log('\n🎉 Seed complete!')
+  console.log('\n Seed complete!')
   process.exit(0)
 }
 
