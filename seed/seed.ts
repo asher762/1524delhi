@@ -34,8 +34,8 @@ function toRichText(text: string): any {
 }
 
 // ─── Helper: slug map cache ───────────────────────────────────────────────────
-const categorySlugToId: Record<string, number> = {}
-const mediaSlugToId: Record<string, number> = {}
+const categorySlugToId: Record<string, string> = {}
+const mediaSlugToId: Record<string, string> = {}
 
 async function main() {
   await payload.init({ config })
@@ -52,7 +52,7 @@ async function main() {
       })
 
       if (existing.totalDocs > 0) {
-        mediaSlugToId[item.slug] = existing.docs[0].id as number
+        mediaSlugToId[item.slug] = existing.docs[0].id as string
         console.log(`  ↩  Skipped (exists): ${item.alt}`)
         continue
       }
@@ -81,7 +81,7 @@ async function main() {
           size: buffer.byteLength,
         }
       })
-      mediaSlugToId[item.slug] = created.id as number
+      mediaSlugToId[item.slug] = created.id as string
       console.log(`  ✅ Created media: ${item.alt}`)
     } catch (err) {
       console.error(`  ❌ Failed media: ${item.alt}`, err)
@@ -98,7 +98,7 @@ async function main() {
       })
 
       if (existing.totalDocs > 0) {
-        categorySlugToId[cat.slug] = existing.docs[0].id as number
+        categorySlugToId[cat.slug] = existing.docs[0].id as string
         console.log(`  ↩  Skipped (exists): ${cat.title}`)
         continue
       }
@@ -111,7 +111,7 @@ async function main() {
           generateSlug: false,
         },
       })
-      categorySlugToId[cat.slug] = created.id as number
+      categorySlugToId[cat.slug] = created.id as string
       console.log(`  ✅ Created: ${cat.title}`)
     } catch (err) {
       console.error(`  ❌ Failed: ${cat.title}`, err)
