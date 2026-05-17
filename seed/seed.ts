@@ -1,248 +1,169 @@
-/**
- * 1524 Delhi — Payload CMS Seed Script
- * Run with: npx tsx seed/seed.ts
- *
- * Requires: PAYLOAD_SECRET and DATABASE_URI in your .env
- */
+import { MongoClient, ObjectId } from 'mongodb'
+import { config } from 'dotenv'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { readFileSync } from 'fs'
 
-import 'dotenv/config'
-import payload from 'payload'
-import config from '../src/payload.config'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-// ─── Import your data ─────────────────────────────────────────────────────────
-import data from './data.json'
+// Load .env from project root
+config({ path: resolve(__dirname, '../.env') })
 
-// ─── Helper: build Payload richText from a plain string ──────────────────────
-function toRichText(text: string): any {
-  return {
-    root: {
-      type: 'root',
-      children: text.split('\n\n').map((para) => ({
-        type: 'paragraph',
-        version: 1,
-        children: [{ type: 'text', version: 1, text: para.trim() }],
-        direction: 'ltr',
-        format: '',
-        indent: 0,
-      })),
-      direction: 'ltr',
-      format: '',
-      indent: 0,
-      version: 1,
-    },
-  }
-}
+// Load seed data
+const seedData = JSON.parse(readFileSync(resolve(__dirname, './seed-data.json'), 'utf-8'))
 
-// ─── Helper: slug map cache ───────────────────────────────────────────────────
-const categorySlugToId: Record<string, string> = {}
-const mediaSlugToId: Record<string, string> = {}
+type SeedDoc = Record<string, any>
+
+const isDefined = <T>(value: T | undefined | null): value is T =>
+  value !== undefined && value !== null
+
+const now = new Date().toISOString()
 
 async function main() {
-  await payload.init({ config })
+  const url = process.env.DATABASE_URL
+  if (!url) throw new Error('DATABASE_URL is not set in .env')
 
-  console.log('🌱 Starting 1524 Delhi seed...\n')
+  console.log('Connecting to MongoDB Atlas...')
+  const client = new MongoClient(url)
 
-  // ─── 0. Seed Media ────────────────────────────────────────────────────
-  console.log('🖼️ Seeding media...')
-  for (const item of data.media) {
+  try {
+    await client.connect()
+  } catch (err: any) {
+    throw new Error('MongoDB connection failed: ' + err.message)
+  }
+
+  console.log('Connected.')
+
+  const dbName = (() => {
     try {
-      const existing = await payload.find({
-        collection: 'media',
-        where: { alt: { equals: item.alt } },
-      })
-
-      if (existing.totalDocs > 0) {
-        mediaSlugToId[item.slug] = existing.docs[0].id as string
-        console.log(`  ↩  Skipped (exists): ${item.alt}`)
-        continue
-      }
-      
-      const res = await fetch(item.url)
-      if (!res.ok) throw new Error(`Failed to fetch image: ${res.statusText}`)
-      const arrayBuffer = await res.arrayBuffer()
-      const buffer = Buffer.from(arrayBuffer)
-      
-      const parts = item.filename.split('.')
-      const ext = parts.pop() || 'jpg'
-      let mimeType = 'image/jpeg'
-      if (ext.toLowerCase() === 'png') mimeType = 'image/png'
-      else if (ext.toLowerCase() === 'webp') mimeType = 'image/webp'
-      else if (ext.toLowerCase() === 'svg') mimeType = 'image/svg+xml'
-
-      const created = await payload.create({
-        collection: 'media',
-        data: {
-          alt: item.alt,
-        },
-        file: {
-          data: buffer,
-          mimetype: mimeType,
-          name: item.filename,
-          size: buffer.byteLength,
-        }
-      })
-      mediaSlugToId[item.slug] = created.id as string
-      console.log(`  ✅ Created media: ${item.alt}`)
-    } catch (err) {
-      console.error(`  ❌ Failed media: ${item.alt}`, err)
+      return (
+        new URL(url.replace('mongodb+srv://', 'https://')).pathname.replace('/', '') || 'payload'
+      )
+    } catch {
+      return 'payload'
     }
-  }
+  })()
 
-  // ─── 1. Seed Categories ────────────────────────────────────────────────────
-  console.log('📂 Seeding categories...')
-  for (const cat of data.categories) {
-    try {
-      const existing = await payload.find({
-        collection: 'categories',
-        where: { slug: { equals: cat.slug } },
-      })
+  const db = client.db(dbName)
+  console.log(`Using database: "${dbName}"`)
 
-      if (existing.totalDocs > 0) {
-        categorySlugToId[cat.slug] = existing.docs[0].id as string
-        console.log(`  ↩  Skipped (exists): ${cat.title}`)
-        continue
-      }
-
-      const created = await payload.create({
-        collection: 'categories',
-        data: {
-          title: cat.title,
-          slug: cat.slug,
-          generateSlug: false,
-        },
-      })
-      categorySlugToId[cat.slug] = created.id as string
-      console.log(`  ✅ Created: ${cat.title}`)
-    } catch (err) {
-      console.error(`  ❌ Failed: ${cat.title}`, err)
-    }
-  }
-
-  // ─── Helper for collection items ────────────────────────────────────────────────────────
-  async function seedCollection(collectionSlug: any, items: any[], name: string) {
-    console.log(`\n📄 Seeding ${name}...`)
-    for (const item of items) {
-      try {
-        const existing = await payload.find({
-          collection: collectionSlug,
-          where: { slug: { equals: item.slug } },
-        })
-
-        const categoryIds = (item.categories || []).map((s: string) => categorySlugToId[s]).filter(Boolean)
-        
-        let dataToCreate: any = {
-            title: item.title,
-            slug: item.slug,
-            generateSlug: false,
-            categories: categoryIds,
-            content: toRichText(item.content),
-            meta: {
-              title: item.meta?.title ?? item.title,
-              description: item.meta?.description ?? '',
-            },
-            _status: 'published',
-            publishedAt: new Date().toISOString(),
-        }
-        
-        if (item.location) {
-            dataToCreate.location = item.location
-        }
-        
-        if (item.heroImage && mediaSlugToId[item.heroImage]) {
-            dataToCreate.heroImage = mediaSlugToId[item.heroImage]
-        }
-        
-        if (item.meta?.image && mediaSlugToId[item.meta.image]) {
-            dataToCreate.meta.image = mediaSlugToId[item.meta.image]
-        }
-
-        if (existing.totalDocs > 0) {
-          await payload.update({
-            collection: collectionSlug,
-            id: existing.docs[0].id,
-            data: dataToCreate,
-          })
-          console.log(`  🔄 Updated: ${item.title}`)
-        } else {
-          await payload.create({
-            collection: collectionSlug,
-            data: dataToCreate,
-          })
-          console.log(`  ✅ Created: ${item.title}`)
-        }
-      } catch (err) {
-        console.error(`  ❌ Failed: ${item.title}`, err)
-      }
-    }
-  }
-
-  await seedCollection('hotels', data.hotels, 'hotels')
-  await seedCollection('villas-and-estates', data.villasAndEstates, 'villas & estates')
-  await seedCollection('experiences', data.experiences, 'experiences')
-  await seedCollection('journeys', data.journeys, 'journeys')
-  await seedCollection('posts', data.posts, 'blog posts')
-
-  // ─── 7. Seed Pages ──────────────────────────────────────────────────────────
-  console.log('\n📄 Seeding Pages...')
-  const pagesToSeed = [
-    { title: 'Home', slug: 'home', relationTo: 'posts' },
-    { title: 'Hotels', slug: 'hotels', relationTo: 'hotels' },
-    { title: 'Villas & Estates', slug: 'villas-and-estates', relationTo: 'villas-and-estates' },
-    { title: 'Experiences', slug: 'experiences', relationTo: 'experiences' },
+  const deleteOrder = [
+    'journeys',
+    'experiences',
+    'villas-and-estates',
+    'hotels',
+    'media',
+    'categories',
   ]
 
-  for (const p of pagesToSeed) {
-    try {
-      const existing = await payload.find({
-        collection: 'pages',
-        where: { slug: { equals: p.slug } },
+  console.log('\nDeleting existing docs...')
+  for (const col of deleteOrder) {
+    const result = await db.collection(col).deleteMany({})
+    console.log(`  Deleted ${result.deletedCount} docs from [${col}]`)
+  }
+
+  console.log('\nInserting categories...')
+  const categoryMap = new Map<string, ObjectId>()
+  for (const cat of seedData.categories as SeedDoc[]) {
+    const _id = new ObjectId()
+    await db
+      .collection('categories')
+      .insertOne({ _id, title: cat.title, slug: cat.slug, updatedAt: now, createdAt: now })
+    categoryMap.set(cat.slug, _id)
+    console.log(`  + ${cat.title}`)
+  }
+
+  console.log('\nInserting media...')
+  const mediaMap = new Map<string, ObjectId>()
+  for (const m of seedData.media as SeedDoc[]) {
+    const _id = new ObjectId()
+    await db
+      .collection('media')
+      .insertOne({
+        _id,
+        alt: m.alt,
+        url: m.url,
+        filename: m.filename,
+        updatedAt: now,
+        createdAt: now,
       })
+    mediaMap.set(m.filename, _id)
+    console.log(`  + ${m.filename}`)
+  }
 
-      let pageData: any = {
-        title: p.title,
-        slug: p.slug,
-        generateSlug: false,
-        _status: 'published',
-        publishedAt: new Date().toISOString(),
-        hero: {
-          type: 'none',
-        },
-        layout: [
-          {
-            blockType: 'archive',
-            introContent: toRichText(`Discover our ${p.title.toLowerCase()} collection.`),
-            populateBy: 'collection',
-            relationTo: p.relationTo,
-            limit: 20,
-            layout: 'Grid',
-          },
-        ],
-      }
+  const mapDoc = (doc: SeedDoc) => ({
+    title: doc.title,
+    location: doc.location,
+    slug: doc.slug,
+    content: doc.content ?? null,
+    categories: Array.isArray(doc.categories)
+      ? doc.categories.map((s: string) => categoryMap.get(s)).filter(isDefined)
+      : [],
+    heroImage: doc.heroImage ? (mediaMap.get(doc.heroImage) ?? null) : null,
+    logoImage: doc.logoImage ? (mediaMap.get(doc.logoImage) ?? null) : null,
+    meta: {
+      title: doc.meta?.title ?? null,
+      description: doc.meta?.description ?? null,
+      image: doc.meta?.image ? (mediaMap.get(doc.meta.image) ?? null) : null,
+    },
+    publishedAt: doc.publishedAt ?? now,
+    _status: doc._status ?? 'published',
+    updatedAt: now,
+    createdAt: now,
+  })
 
-      if (existing.totalDocs > 0) {
-        await payload.update({
-          collection: 'pages',
-          id: existing.docs[0].id,
-          data: pageData,
-        })
-        console.log(` Updated Page: ${p.title}`)
-      } else {
-        await payload.create({
-          collection: 'pages',
-          data: pageData,
-        })
-        console.log(` Created Page: ${p.title}`)
-      }
-    } catch (err) {
-      console.error(` Failed Page: ${p.title}`, err)
+  const insertDocs = async (slug: string, docs: SeedDoc[]) => {
+    const map = new Map<string, ObjectId>()
+    console.log(`\nInserting ${slug}...`)
+    for (const doc of docs) {
+      const _id = new ObjectId()
+      await db.collection(slug).insertOne({ _id, ...mapDoc(doc) })
+      map.set(doc.slug, _id)
+      console.log(`  + ${doc.title}`)
+    }
+    return map
+  }
+
+  const hotelMap = await insertDocs('hotels', seedData.hotels)
+  const villaMap = await insertDocs('villas-and-estates', seedData['villas-and-estates'])
+  const expMap = await insertDocs('experiences', seedData.experiences)
+  const journeyMap = await insertDocs('journeys', seedData.journeys)
+
+  const applyRelations = async (
+    slug: string,
+    docs: SeedDoc[],
+    selfMap: Map<string, ObjectId>,
+    field: string,
+  ) => {
+    for (const doc of docs) {
+      const docId = selfMap.get(doc.slug)
+      if (!docId) continue
+      const related = Array.isArray(doc[field])
+        ? doc[field].map((s: string) => selfMap.get(s)).filter(isDefined)
+        : []
+      if (!related.length) continue
+      await db.collection(slug).updateOne({ _id: docId }, { $set: { [field]: related } })
+      console.log(`  ~ relationships: ${doc.slug}`)
     }
   }
 
-  console.log('\n Seed complete!')
-  process.exit(0)
+  console.log('\nApplying relationships...')
+  await applyRelations('hotels', seedData.hotels, hotelMap, 'relatedHotels')
+  await applyRelations(
+    'villas-and-estates',
+    seedData['villas-and-estates'],
+    villaMap,
+    'relatedVillasAndEstates',
+  )
+  await applyRelations('experiences', seedData.experiences, expMap, 'relatedExperiences')
+  await applyRelations('journeys', seedData.journeys, journeyMap, 'relatedJourneys')
+
+  await client.close()
+  console.log('\nSeed complete.')
 }
 
 main().catch((err) => {
-  console.error('Seed failed:', err)
+  console.error('\nSeed failed:', err)
   process.exit(1)
 })

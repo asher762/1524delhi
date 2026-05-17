@@ -14,6 +14,8 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { InfoBlock } from '../../blocks/InfoBlock/config'
+import { Content } from '../../blocks/Content/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -90,7 +92,7 @@ export const Posts: CollectionConfig<'posts'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, CardsBlock, MediaBlock] }),
+                    BlocksFeature({ blocks: [Banner, CardsBlock, MediaBlock, InfoBlock, Content] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
