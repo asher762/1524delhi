@@ -60,10 +60,10 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <CollectionHero doc={doc as any} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
+      <div className="pt-8">
         <div className="container">
           {doc.content && (
-            <RichText className="max-w-[48rem] mx-auto" data={doc.content} enableGutter={false} />
+            <RichText data={doc.content} enableGutter={false} />
           )}
           {relatedDocs && relatedDocs.length > 0 && (
             <RelatedDocs
