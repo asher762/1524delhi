@@ -11,6 +11,7 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { RichTextBlock } from '../../blocks/RichTextBlock/config'
+import { CarouselBlock } from '../../blocks/CarouselBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidateJourney } from './hooks/revalidateJourney'
 
@@ -88,7 +89,7 @@ export const Journeys: CollectionConfig<'journeys'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [RichTextBlock, CallToAction, CardsBlock, Content, MediaBlock, Archive, FormBlock, InfoBlock, Banner],
+              blocks: [RichTextBlock, CallToAction, CardsBlock, Content, MediaBlock, Archive, FormBlock, InfoBlock, Banner, CarouselBlock],
               required: true,
               admin: {
                 initCollapsed: true,

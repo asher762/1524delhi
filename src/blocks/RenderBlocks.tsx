@@ -11,6 +11,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { InfoBlockComponent } from '@/blocks/InfoBlock/Component'
 import { RichTextBlockComponent } from '@/blocks/RichTextBlock/Component'
 import { BannerBlock } from '@/blocks/Banner/Component'
+import { CarouselBlock } from '@/blocks/CarouselBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -22,6 +23,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   infoBlock: InfoBlockComponent,
   richTextBlock: RichTextBlockComponent,
+  carouselBlock: CarouselBlock,
 }
 
 export const RenderBlocks: React.FC<{

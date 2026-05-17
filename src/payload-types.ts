@@ -263,6 +263,7 @@ export interface Page {
     | FormBlock
     | InfoBlock
     | RichTextBlock
+    | CarouselBlock
   )[];
   meta?: {
     title?: string | null;
@@ -733,6 +734,7 @@ export interface Hotel {
     | FormBlock
     | InfoBlock
     | BannerBlock
+    | CarouselBlock
   )[];
   relatedHotels?: (string | Hotel)[] | null;
   categories?: (string | Category)[] | null;
@@ -1051,6 +1053,79 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  /**
+   * Cards shows 3 slides at a time. Full Width shows one large slide with an image background.
+   */
+  carouselType: 'cards' | 'fullWidth';
+  /**
+   * Optional heading shown above the carousel.
+   */
+  title?: string | null;
+  /**
+   * Add one entry per slide. Aim for 3+ slides for the best experience.
+   */
+  slides?:
+    | {
+        /**
+         * Full Width: used as a full-bleed background. Cards: displayed at the top of the card.
+         */
+        image: string | Media;
+        /**
+         * Keep under 60 characters.
+         */
+        title?: string | null;
+        /**
+         * Cards layout: keep under ~120 characters. Full Width: keep under ~250 characters for best readability.
+         */
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  autoplay?: boolean | null;
+  autoplaySpeed?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carouselBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "villas-and-estates".
  */
 export interface VillasAndEstate {
@@ -1069,6 +1144,7 @@ export interface VillasAndEstate {
     | FormBlock
     | InfoBlock
     | BannerBlock
+    | CarouselBlock
   )[];
   relatedVillasAndEstates?: (string | VillasAndEstate)[] | null;
   categories?: (string | Category)[] | null;
@@ -1110,6 +1186,7 @@ export interface Experience {
     | FormBlock
     | InfoBlock
     | BannerBlock
+    | CarouselBlock
   )[];
   relatedExperiences?: (string | Experience)[] | null;
   categories?: (string | Category)[] | null;
@@ -1151,6 +1228,7 @@ export interface Journey {
     | FormBlock
     | InfoBlock
     | BannerBlock
+    | CarouselBlock
   )[];
   relatedJourneys?: (string | Journey)[] | null;
   categories?: (string | Category)[] | null;
@@ -1554,6 +1632,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
         richTextBlock?: T | RichTextBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
       };
   meta?:
     | T
@@ -1704,6 +1783,37 @@ export interface InfoBlockSelect<T extends boolean = true> {
  */
 export interface RichTextBlockSelect<T extends boolean = true> {
   richText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  carouselType?: T;
+  title?: T;
+  slides?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        content?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  autoplay?: T;
+  autoplaySpeed?: T;
   id?: T;
   blockName?: T;
 }
@@ -1896,6 +2006,7 @@ export interface HotelsSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
       };
   relatedHotels?: T;
   categories?: T;
@@ -1944,6 +2055,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
       };
   relatedVillasAndEstates?: T;
   categories?: T;
@@ -1982,6 +2094,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
       };
   relatedExperiences?: T;
   categories?: T;
@@ -2020,6 +2133,7 @@ export interface JourneysSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
       };
   relatedJourneys?: T;
   categories?: T;
