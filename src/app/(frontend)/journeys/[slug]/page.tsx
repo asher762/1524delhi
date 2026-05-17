@@ -6,8 +6,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
 
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { CollectionHero } from '@/heros/CollectionHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -61,10 +61,8 @@ export default async function Post({ params: paramsPromise }: Args) {
       <CollectionHero doc={doc as any} />
 
       <div className="pt-8">
+        {doc.layout && <RenderBlocks blocks={doc.layout as any} />}
         <div className="container">
-          {doc.content && (
-            <RichText data={doc.content} enableGutter={false} />
-          )}
           {relatedDocs && relatedDocs.length > 0 && (
             <RelatedDocs
               className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"

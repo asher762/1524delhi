@@ -181,8 +181,8 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
   )
 }
 
-export function CardsBlock(props: CardsBlockProps & { disableInnerContainer?: boolean }) {
-  const { header, cards, disableInnerContainer } = props
+export function CardsBlock(props: CardsBlockProps) {
+  const { header, cards } = props
   const [selectedCard, setSelectedCard] = useState<Card | null>(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -198,7 +198,7 @@ export function CardsBlock(props: CardsBlockProps & { disableInnerContainer?: bo
   }
 
   return (
-    <div className={cn('w-full', !disableInnerContainer && 'container')}>
+    <div className="container my-16">
       {/* Optional header */}
       {header && typeof header === 'object' && (
         <div className="text-center mb-10 [&_h2]:text-3xl [&_h3]:text-2xl [&_h2]:font-serif [&_h3]:font-serif mx-10">

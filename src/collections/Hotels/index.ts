@@ -1,14 +1,5 @@
 import type { CollectionConfig } from 'payload'
 
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
@@ -16,6 +7,10 @@ import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { InfoBlock } from '../../blocks/InfoBlock/config'
 import { Content } from '../../blocks/Content/config'
+import { CallToAction } from '../../blocks/CallToAction/config'
+import { Archive } from '../../blocks/ArchiveBlock/config'
+import { FormBlock } from '../../blocks/Form/config'
+import { RichTextBlock } from '../../blocks/RichTextBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidateHotel } from './hooks/revalidateHotel'
 
@@ -91,22 +86,13 @@ export const Hotels: CollectionConfig<'hotels'> = {
               relationTo: 'media',
             },
             {
-              name: 'content',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, CardsBlock, MediaBlock, InfoBlock, Content] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
-              }),
-              label: false,
+              name: 'layout',
+              type: 'blocks',
+              blocks: [RichTextBlock, CallToAction, CardsBlock, Content, MediaBlock, Archive, FormBlock, InfoBlock, Banner],
               required: true,
+              admin: {
+                initCollapsed: true,
+              },
             },
           ],
           label: 'Content',

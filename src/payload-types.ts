@@ -254,7 +254,16 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | CardsBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | InfoBlock)[];
+  layout: (
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | RichTextBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -714,21 +723,17 @@ export interface Hotel {
   location: string;
   logoImage?: (string | null) | Media;
   heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+  )[];
   relatedHotels?: (string | Hotel)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -751,15 +756,10 @@ export interface Hotel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "villas-and-estates".
+ * via the `definition` "RichTextBlock".
  */
-export interface VillasAndEstate {
-  id: string;
-  title: string;
-  location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
-  content: {
+export interface RichTextBlock {
+  richText: {
     root: {
       type: string;
       children: {
@@ -774,115 +774,9 @@ export interface VillasAndEstate {
     };
     [k: string]: unknown;
   };
-  relatedVillasAndEstates?: (string | VillasAndEstate)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experiences".
- */
-export interface Experience {
-  id: string;
-  title: string;
-  location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  relatedExperiences?: (string | Experience)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "journeys".
- */
-export interface Journey {
-  id: string;
-  title: string;
-  location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedJourneys?: (string | Journey)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1129,6 +1023,154 @@ export interface InfoBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'infoBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BannerBlock".
+ */
+export interface BannerBlock {
+  style: 'info' | 'warning' | 'error' | 'success';
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "villas-and-estates".
+ */
+export interface VillasAndEstate {
+  id: string;
+  title: string;
+  location: string;
+  logoImage?: (string | null) | Media;
+  heroImage?: (string | null) | Media;
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+  )[];
+  relatedVillasAndEstates?: (string | VillasAndEstate)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences".
+ */
+export interface Experience {
+  id: string;
+  title: string;
+  location: string;
+  logoImage?: (string | null) | Media;
+  heroImage?: (string | null) | Media;
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+  )[];
+  relatedExperiences?: (string | Experience)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "journeys".
+ */
+export interface Journey {
+  id: string;
+  title: string;
+  location: string;
+  logoImage?: (string | null) | Media;
+  heroImage?: (string | null) | Media;
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+  )[];
+  relatedJourneys?: (string | Journey)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1511,6 +1553,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        richTextBlock?: T | RichTextBlockSelect<T>;
       };
   meta?:
     | T
@@ -1652,6 +1695,15 @@ export interface InfoBlockSelect<T extends boolean = true> {
         label?: T;
         appearance?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  richText?: T;
   id?: T;
   blockName?: T;
 }
@@ -1832,7 +1884,19 @@ export interface HotelsSelect<T extends boolean = true> {
   location?: T;
   logoImage?: T;
   heroImage?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+      };
   relatedHotels?: T;
   categories?: T;
   meta?:
@@ -1851,6 +1915,16 @@ export interface HotelsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BannerBlock_select".
+ */
+export interface BannerBlockSelect<T extends boolean = true> {
+  style?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "villas-and-estates_select".
  */
 export interface VillasAndEstatesSelect<T extends boolean = true> {
@@ -1858,7 +1932,19 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
   location?: T;
   logoImage?: T;
   heroImage?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+      };
   relatedVillasAndEstates?: T;
   categories?: T;
   meta?:
@@ -1884,7 +1970,19 @@ export interface ExperiencesSelect<T extends boolean = true> {
   location?: T;
   logoImage?: T;
   heroImage?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+      };
   relatedExperiences?: T;
   categories?: T;
   meta?:
@@ -1910,7 +2008,19 @@ export interface JourneysSelect<T extends boolean = true> {
   location?: T;
   logoImage?: T;
   heroImage?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+      };
   relatedJourneys?: T;
   categories?: T;
   meta?:
@@ -2334,31 +2444,6 @@ export interface TaskSchedulePublish {
     user?: (string | null) | User;
   };
   output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlock".
- */
-export interface BannerBlock {
-  style: 'info' | 'warning' | 'error' | 'success';
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'banner';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

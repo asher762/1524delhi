@@ -9,15 +9,19 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { InfoBlockComponent } from '@/blocks/InfoBlock/Component'
+import { RichTextBlockComponent } from '@/blocks/RichTextBlock/Component'
+import { BannerBlock } from '@/blocks/Banner/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
+  banner: BannerBlock,
   cardsBlock: CardsBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   infoBlock: InfoBlockComponent,
+  richTextBlock: RichTextBlockComponent,
 }
 
 export const RenderBlocks: React.FC<{
