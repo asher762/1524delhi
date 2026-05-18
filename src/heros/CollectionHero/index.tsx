@@ -57,7 +57,7 @@ export const CollectionHero: React.FC<{
       {/* ── Hero image ── */}
       {heroImage && typeof heroImage !== 'string' && (
         <div className="container">
-          <div className="relative w-full aspect-video md:aspect-3/2 overflow-hidden">
+          <div className="relative w-full aspect-video md:aspect-3/2 overflow-hidden rounded-2xl">
             <Media fill priority imgClassName="object-cover object-center" resource={heroImage} />
           </div>
         </div>
