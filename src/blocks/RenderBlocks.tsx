@@ -43,8 +43,10 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const id = block.blockName ? block.blockName.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, '-').toLowerCase() : undefined
+
               return (
-                <div className="w-full my-12 md:my-16 lg:my-24" key={index}>
+                <div className="w-full my-12 md:my-16 lg:my-24" key={index} id={id}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

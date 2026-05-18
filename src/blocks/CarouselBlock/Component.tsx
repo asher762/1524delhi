@@ -16,7 +16,7 @@ type Slide = NonNullable<CarouselBlockProps['slides']>[number]
 
 // ─── Full Width Slide ─────────────────────────────────────────────────────────
 
-function FullWidthSlide({ slide }: { slide: Slide }) {
+function FullWidthSlide({ slide, sectionTitle }: { slide: Slide, sectionTitle?: string | null }) {
   const imageUrl = typeof slide.image === 'object' && slide.image ? (slide.image.url ?? '') : ''
   const imageAlt = typeof slide.image === 'object' && slide.image ? (slide.image.alt ?? '') : ''
 
@@ -25,12 +25,17 @@ function FullWidthSlide({ slide }: { slide: Slide }) {
       {imageUrl && (
         <Image src={imageUrl} alt={imageAlt} fill className="object-cover" priority />
       )}
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Centered content */}
-      <div className="absolute inset-0 flex items-end justify-center pb-16 px-6">
+      <div className="absolute inset-0 flex items-center justify-center p-6">
         <div className="max-w-2xl w-full text-center text-white">
+          {sectionTitle && (
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6 drop-shadow-sm text-white/90">
+              {sectionTitle}
+            </h2>
+          )}
           {slide.title && (
             <h3 className="font-serif text-3xl md:text-4xl font-semibold mb-3 drop-shadow-sm">
               {slide.title}
@@ -194,12 +199,11 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   if (isFullWidth) {
     return (
       <div className="w-full">
-        <SectionTitle title={title} mb="mb-6" />
         <div className="relative group overflow-hidden">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {slides.map((slide, i) => (
-                <FullWidthSlide key={i} slide={slide} />
+                <FullWidthSlide key={i} slide={slide} sectionTitle={title} />
               ))}
             </div>
           </div>

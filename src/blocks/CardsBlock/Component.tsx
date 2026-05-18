@@ -12,12 +12,12 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer'
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import type { CardsBlock as CardsBlockProps } from '@/payload-types'
 import { X } from 'lucide-react'
 import { cn } from '@/utilities/ui'
@@ -77,7 +77,7 @@ function CardThumbnail({ card, onClick }: CardCarouselProps) {
 
         {/* Description preview */}
         {card.description && typeof card.description === 'object' && (
-          <div className="line-clamp-2 text-sm text-white/80 [&_*]:!text-white/80 [&_*]:!mb-0 [&_h2]:text-sm [&_h3]:text-sm [&_h4]:text-sm mt-2">
+          <div className="line-clamp-2 text-sm text-white/80 **:text-white/80! **:mb-0! [&_h2]:text-sm [&_h3]:text-sm [&_h4]:text-sm mt-2">
             <RichText data={card.description as any} enableGutter={false} enableProse={false} />
           </div>
         )}
@@ -108,36 +108,35 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
   const images =
     card.media
       ?.map((m) => m.image)
-      .filter((img): img is Media => typeof img === 'object' && img !== null) ?? []
+      .filter((img): img is Media => typeof img === 'object' && img !== null && !!img.url) ?? []
 
   return (
-    <Drawer
+    <Dialog
       open={open}
       onOpenChange={(o) => {
         if (!o) onClose()
       }}
     >
-      <DrawerContent className="max-h-[92dvh] overflow-y-auto outline-none">
-        {/* Visually-hidden DrawerTitle required by Radix for screen-reader accessibility */}
-        <DrawerTitle className="sr-only">Card Details</DrawerTitle>
-        {/* Drag handle is built into DrawerContent */}
-        <DrawerHeader className="relative pb-2">
-          <DrawerClose
-            className="absolute right-4 top-4 rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors z-10"
+      <DialogContent>
+        {/* Visually-hidden title for screen-reader accessibility */}
+        <DialogTitle className="sr-only">Card Details</DialogTitle>
+
+        <DialogHeader className="relative">
+          <DialogClose
+            className="absolute right-0 top-0 rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors z-10"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
-          </DrawerClose>
+          </DialogClose>
 
-          {/* Visible plain text title */}
           {card.title && typeof card.title === 'string' && (
             <div className="pr-10">
               <h2 className="text-2xl font-serif">{card.title}</h2>
             </div>
           )}
-        </DrawerHeader>
+        </DialogHeader>
 
-        <div className="px-4 pb-8 space-y-6">
+        <div className="px-6 pb-6 space-y-6">
           {/* Image carousel */}
           {images.length > 0 && (
             <div className="relative">
@@ -146,15 +145,13 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
                   {images.map((img, idx) => (
                     <CarouselItem key={idx} className="basis-full sm:basis-[85%]">
                       <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                        {img.url && (
-                          <Image
-                            src={img.url}
-                            alt={img.alt || `Image ${idx + 1}`}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 80vw"
-                          />
-                        )}
+                        <Image
+                          src={img.url!}
+                          alt={img.alt || `Image ${idx + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 80vw"
+                        />
                       </div>
                     </CarouselItem>
                   ))}
@@ -176,8 +173,8 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
             </div>
           )}
         </div>
-      </DrawerContent>
-    </Drawer>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -201,7 +198,7 @@ export function CardsBlock(props: CardsBlockProps) {
     <div className="container my-16">
       {/* Optional header */}
       {header && typeof header === 'object' && (
-        <div className="text-center mb-10 [&_h2]:text-3xl [&_h3]:text-2xl [&_h2]:font-serif [&_h3]:font-serif mx-10">
+        <div className="text-center mb-10 [&_h1]:!text-center [&_h2]:!text-center [&_h3]:!text-center [&_h2]:text-4xl [&_h3]:text-3xl mx-10">
           <RichText data={header as any} enableGutter={false} enableProse={false} />
         </div>
       )}

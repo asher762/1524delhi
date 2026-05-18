@@ -12,6 +12,7 @@ import { CollectionHero } from '@/heros/CollectionHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { BlockBreadcrumbs } from '@/components/BlockBreadcrumbs'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -57,6 +58,8 @@ export default async function Post({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
+
+      <BlockBreadcrumbs blocks={doc.layout as any} />
 
       <CollectionHero doc={doc as any} />
 
