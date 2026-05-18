@@ -16,15 +16,13 @@ type Slide = NonNullable<CarouselBlockProps['slides']>[number]
 
 // ─── Full Width Slide ─────────────────────────────────────────────────────────
 
-function FullWidthSlide({ slide, sectionTitle }: { slide: Slide, sectionTitle?: string | null }) {
+function FullWidthSlide({ slide, sectionTitle }: { slide: Slide; sectionTitle?: string | null }) {
   const imageUrl = typeof slide.image === 'object' && slide.image ? (slide.image.url ?? '') : ''
   const imageAlt = typeof slide.image === 'object' && slide.image ? (slide.image.alt ?? '') : ''
 
   return (
     <div className="relative flex-[0_0_100%] min-w-0 h-[520px] md:h-[640px]">
-      {imageUrl && (
-        <Image src={imageUrl} alt={imageAlt} fill className="object-cover" priority />
-      )}
+      {imageUrl && <Image src={imageUrl} alt={imageAlt} fill className="object-cover" priority />}
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -90,7 +88,7 @@ function CardSlide({ slide }: { slide: Slide }) {
           )}
           {slide.content && (
             <div className="text-muted-foreground text-sm leading-relaxed flex-1 line-clamp-4 [&_p]:mb-0">
-              <RichText data={slide.content as any} enableProse={false} />
+              <RichText data={slide.content as any} enableProse={false} enableGutter={false} />
             </div>
           )}
           {slide.enableLink && slide.link && (
@@ -112,7 +110,12 @@ function CardSlide({ slide }: { slide: Slide }) {
 function SectionTitle({ title, mb = 'mb-8' }: { title?: string | null; mb?: string }) {
   if (!title) return null
   return (
-    <h2 className={cn('font-serif text-2xl md:text-3xl font-semibold text-center text-foreground', mb)}>
+    <h2
+      className={cn(
+        'font-serif text-2xl md:text-3xl font-semibold text-center text-foreground',
+        mb,
+      )}
+    >
       {title}
     </h2>
   )
@@ -141,8 +144,12 @@ function Dots({
           className={cn(
             'h-1.5 rounded-full transition-all duration-300',
             light
-              ? i === selectedIndex ? 'w-8 bg-white' : 'w-2 bg-white/50'
-              : i === selectedIndex ? 'w-8 bg-foreground' : 'w-2 bg-foreground/25',
+              ? i === selectedIndex
+                ? 'w-8 bg-white'
+                : 'w-2 bg-white/50'
+              : i === selectedIndex
+                ? 'w-8 bg-foreground'
+                : 'w-2 bg-foreground/25',
           )}
         />
       ))}
@@ -163,9 +170,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
   const plugins = React.useMemo(
     () =>
-      autoplay
-        ? [Autoplay({ delay: (autoplaySpeed ?? 5) * 1000, stopOnInteraction: true })]
-        : [],
+      autoplay ? [Autoplay({ delay: (autoplaySpeed ?? 5) * 1000, stopOnInteraction: true })] : [],
     [autoplay, autoplaySpeed],
   )
 
@@ -245,7 +250,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
       <div className="relative group">
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex -ml-4 py-2">
+          <div className="flex -ml-4 py-2 px-5">
             {slides.map((slide, i) => (
               <CardSlide key={i} slide={slide} />
             ))}
@@ -256,14 +261,14 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
         <button
           onClick={scrollPrev}
           aria-label="Previous"
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-background border border-border shadow-md rounded-full p-2 hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
+          className="absolute left-5 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-background border border-border shadow-md rounded-full p-2 hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
         >
           <ChevronLeft className="w-5 h-5 text-foreground" />
         </button>
         <button
           onClick={scrollNext}
           aria-label="Next"
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-background border border-border shadow-md rounded-full p-2 hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
+          className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-background border border-border shadow-md rounded-full p-2 hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
         >
           <ChevronRight className="w-5 h-5 text-foreground" />
         </button>
