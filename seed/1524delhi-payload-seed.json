@@ -1,0 +1,1274 @@
+{
+  "categories": [
+    {
+      "title": "Corporate Retreats",
+      "slug": "corporate-retreats"
+    },
+    {
+      "title": "Leisure & Lifestyle",
+      "slug": "leisure-lifestyle"
+    },
+    {
+      "title": "Seaside",
+      "slug": "seaside"
+    },
+    {
+      "title": "Wellness",
+      "slug": "wellness"
+    },
+    {
+      "title": "Yoga Retreats",
+      "slug": "yoga-retreats"
+    },
+    {
+      "title": "Art & Culture",
+      "slug": "art-culture"
+    },
+    {
+      "title": "Boutique",
+      "slug": "boutique"
+    },
+    {
+      "title": "Eco-Conscious",
+      "slug": "eco-conscious"
+    },
+    {
+      "title": "Getaways",
+      "slug": "getaways"
+    },
+    {
+      "title": "River Cruise",
+      "slug": "river-cruise"
+    },
+    {
+      "title": "Sailing",
+      "slug": "sailing"
+    },
+    {
+      "title": "Safari",
+      "slug": "safari"
+    },
+    {
+      "title": "Wildlife",
+      "slug": "wildlife"
+    },
+    {
+      "title": "Palaces",
+      "slug": "palaces"
+    },
+    {
+      "title": "Mountain Retreats",
+      "slug": "mountain-retreats"
+    },
+    {
+      "title": "Fashion & Collectables",
+      "slug": "fashion-collectables"
+    },
+    {
+      "title": "Sporting",
+      "slug": "sporting"
+    },
+    {
+      "title": "Recovery & Healing",
+      "slug": "recovery-healing"
+    },
+    {
+      "title": "Temples",
+      "slug": "temples"
+    },
+    {
+      "title": "Horseback Holidays",
+      "slug": "horseback-holidays"
+    },
+    {
+      "title": "Road Trips",
+      "slug": "road-trips"
+    }
+  ],
+  "media": [
+    {
+      "alt": "Pelangi Beach Resort & Spa beachfront view",
+      "filename": "pelangi-beach-resort-hero.jpg",
+      "url": "/media/pelangi-beach-resort-hero.jpg"
+    },
+    {
+      "alt": "Pelangi Beach Resort & Spa logo",
+      "filename": "pelangi-beach-resort-logo.png",
+      "url": "/media/pelangi-beach-resort-logo.png"
+    },
+    {
+      "alt": "The Danna Langkawi Resort & Beach Villas exterior",
+      "filename": "danna-langkawi-hero.jpg",
+      "url": "/media/danna-langkawi-hero.jpg"
+    },
+    {
+      "alt": "Antara River Cruises on the Ganges",
+      "filename": "antara-river-cruises-hero.jpg",
+      "url": "/media/antara-river-cruises-hero.jpg"
+    },
+    {
+      "alt": "Diphlu River Lodge in Kaziranga National Park",
+      "filename": "diphlu-river-lodge-hero.jpg",
+      "url": "/media/diphlu-river-lodge-hero.jpg"
+    },
+    {
+      "alt": "Lahe Life Houseboat Cruise on the Brahmaputra River",
+      "filename": "lahe-life-houseboat-hero.jpg",
+      "url": "/media/lahe-life-houseboat-hero.jpg"
+    },
+    {
+      "alt": "The Nautilus resort in Baa Atoll Maldives",
+      "filename": "the-nautilus-hero.jpg",
+      "url": "/media/the-nautilus-hero.jpg"
+    },
+    {
+      "alt": "The Strand Yangon hotel facade",
+      "filename": "the-strand-yangon-hero.jpg",
+      "url": "/media/the-strand-yangon-hero.jpg"
+    },
+    {
+      "alt": "The Blackbuck Lodge in Velavadar",
+      "filename": "the-blackbuck-lodge-hero.jpg",
+      "url": "/media/the-blackbuck-lodge-hero.jpg"
+    },
+    {
+      "alt": "Ananda in the Himalayas wellness resort",
+      "filename": "ananda-himalayas-hero.jpg",
+      "url": "/media/ananda-himalayas-hero.jpg"
+    },
+    {
+      "alt": "Ahilya by the Sea villa in Goa",
+      "filename": "ahilya-by-the-sea-hero.jpg",
+      "url": "/media/ahilya-by-the-sea-hero.jpg"
+    },
+    {
+      "alt": "Ahilya Fort palace hotel in Maheshwar",
+      "filename": "ahilya-fort-hero.jpg",
+      "url": "/media/ahilya-fort-hero.jpg"
+    },
+    {
+      "alt": "Villa in the Woods at RAAS Devanya",
+      "filename": "raas-devanya-villa-hero.jpg",
+      "url": "/media/raas-devanya-villa-hero.jpg"
+    },
+    {
+      "alt": "Jungle House in Shimla surrounded by pines",
+      "filename": "jungle-house-simla-hero.jpg",
+      "url": "/media/jungle-house-simla-hero.jpg"
+    },
+    {
+      "alt": "Artisans of Bengal journey through Kolkata",
+      "filename": "artisans-of-bengal-hero.jpg",
+      "url": "/media/artisans-of-bengal-hero.jpg"
+    },
+    {
+      "alt": "Europe on the Ganges journey in Kolkata",
+      "filename": "europe-on-the-ganges-hero.jpg",
+      "url": "/media/europe-on-the-ganges-hero.jpg"
+    },
+    {
+      "alt": "Cruising in Bhitarkanika with Antara River Cruises",
+      "filename": "cruising-bhitarkanika-hero.jpg",
+      "url": "/media/cruising-bhitarkanika-hero.jpg"
+    },
+    {
+      "alt": "Brahmaputra Vignettes river journey",
+      "filename": "brahmaputra-vignettes-hero.jpg",
+      "url": "/media/brahmaputra-vignettes-hero.jpg"
+    },
+    {
+      "alt": "Mandawa Horse Safaris in Rajasthan",
+      "filename": "mandawa-horse-safaris-hero.jpg",
+      "url": "/media/mandawa-horse-safaris-hero.jpg"
+    },
+    {
+      "alt": "1524 Delhi homepage hero image",
+      "filename": "home-hero.jpg",
+      "url": "/media/home-hero.jpg"
+    },
+    {
+      "alt": "Our Story team photo",
+      "filename": "our-story-hero.jpg",
+      "url": "/media/our-story-hero.jpg"
+    }
+  ],
+  "hotels": [
+    {
+      "title": "Pelangi Beach Resort & Spa",
+      "location": "Langkawi, Kedah, Malaysia",
+      "slug": "pelangi-beach-resort-spa",
+      "heroImage": "pelangi-beach-resort-hero.jpg",
+      "logoImage": "pelangi-beach-resort-logo.png",
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Pelangi Beach Resort & Spa, Langkawi is a timeless tropical island sanctuary nestled between award winning landscape gardens and the famed Cenang beach, designed based on the concept of Malay Village."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The 355 rooms housed in 51 individual wooden chalets arranged in a series of clusters with individual verandahs, showcase different themes which vary from swimming pool to landscaped courtyard, lake and seaview."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Discover a world of possibilities in a wide variety of experiences be it leisure and free, vibrant and outdoors, indulgent and rejuvenating, culturally enlightening or meetings with incentives."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "seaside",
+        "leisure-lifestyle",
+        "getaways"
+      ],
+      "relatedHotels": [
+        "the-danna-langkawi-resort-beach-villas",
+        "the-nautilus"
+      ],
+      "meta": {
+        "title": "Pelangi Beach Resort & Spa | Langkawi, Malaysia",
+        "description": "A tropical island sanctuary on Cenang beach featuring wooden chalets, spa, and Malay Village-inspired architecture.",
+        "image": "pelangi-beach-resort-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "The Danna Langkawi Resort & Beach Villas",
+      "location": "Langkawi, Kedah, Malaysia",
+      "slug": "the-danna-langkawi-resort-beach-villas",
+      "heroImage": "danna-langkawi-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The Danna Langkawi Resort & Beach Villas offers colonial-inspired luxury on the shores of Langkawi, blending classic elegance with modern comfort."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Guests enjoy beachfront villas, curated dining experiences and access to the island's rainforest and marine attractions."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "seaside",
+        "boutique",
+        "getaways"
+      ],
+      "relatedHotels": [
+        "pelangi-beach-resort-spa"
+      ],
+      "meta": {
+        "title": "The Danna Langkawi Resort & Beach Villas",
+        "description": "Colonial-inspired luxury resort and beach villas in Langkawi, Kedah, Malaysia.",
+        "image": "danna-langkawi-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Antara River Cruises",
+      "location": "Kolkata | Varanasi | Orissa, India",
+      "slug": "antara-river-cruises",
+      "heroImage": "antara-river-cruises-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Antara River Cruises takes travellers along India's storied rivers, from Kolkata to Varanasi and Orissa, revealing riverside temples, villages and heritage."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Each sailing combines boutique-style cabins with immersive cultural excursions along the water."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "river-cruise",
+        "art-culture",
+        "boutique"
+      ],
+      "relatedHotels": [],
+      "meta": {
+        "title": "Antara River Cruises | India",
+        "description": "Boutique river cruises across Kolkata, Varanasi and Orissa exploring India's riverside heritage.",
+        "image": "antara-river-cruises-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Diphlu River Lodge",
+      "location": "Kaziranga National Park, Assam, India",
+      "slug": "diphlu-river-lodge",
+      "heroImage": "diphlu-river-lodge-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Diphlu River Lodge sits on the banks of the Diphlu River bordering Kaziranga National Park, home to the one-horned rhinoceros."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Eco-friendly cottages and guided safaris make it an ideal base for wildlife enthusiasts."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "safari",
+        "wildlife",
+        "eco-conscious"
+      ],
+      "relatedHotels": [
+        "the-blackbuck-lodge",
+        "lahe-life-houseboat-cruise-on-the-brahmaputra-river"
+      ],
+      "meta": {
+        "title": "Diphlu River Lodge | Kaziranga, Assam",
+        "description": "Eco-friendly riverside lodge bordering Kaziranga National Park, Assam, India.",
+        "image": "diphlu-river-lodge-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Lah\u00e9 Life Houseboat Cruise on the Brahmaputra River",
+      "location": "Guwahati, Assam, India",
+      "slug": "lahe-life-houseboat-cruise-on-the-brahmaputra-river",
+      "heroImage": "lahe-life-houseboat-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Lah\u00e9 Life offers a houseboat cruise experience on the mighty Brahmaputra River departing from Guwahati."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Guests drift past river islands and villages while enjoying comfortable onboard accommodation."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "river-cruise",
+        "wildlife",
+        "eco-conscious"
+      ],
+      "relatedHotels": [
+        "diphlu-river-lodge"
+      ],
+      "meta": {
+        "title": "Lah\u00e9 Life Houseboat Cruise | Brahmaputra, Assam",
+        "description": "A houseboat cruise on the Brahmaputra River departing from Guwahati, Assam.",
+        "image": "lahe-life-houseboat-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "The Nautilus",
+      "location": "Thiladhoo Island, Baa Atoll, Maldives",
+      "slug": "the-nautilus",
+      "heroImage": "the-nautilus-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The Nautilus is an exclusive barefoot-luxury retreat on Thiladhoo Island in the Baa Atoll, Maldives, with just a handful of houses set directly on the beach."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "There are no set menus or schedules, only tailored moments of relaxation by the Indian Ocean."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "seaside",
+        "wellness",
+        "getaways"
+      ],
+      "relatedHotels": [
+        "pelangi-beach-resort-spa"
+      ],
+      "meta": {
+        "title": "The Nautilus | Baa Atoll, Maldives",
+        "description": "An exclusive barefoot-luxury island retreat in the Baa Atoll, Maldives.",
+        "image": "the-nautilus-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "The Strand Yangon",
+      "location": "Yangon, Myanmar",
+      "slug": "the-strand-yangon",
+      "heroImage": "the-strand-yangon-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The Strand Yangon is a historic colonial-era hotel in the heart of Myanmar's former capital, renowned for its all-suite accommodation and heritage charm."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "It remains a landmark for travellers exploring Yangon's culture and architecture."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "art-culture",
+        "boutique",
+        "palaces"
+      ],
+      "relatedHotels": [],
+      "meta": {
+        "title": "The Strand Yangon | Myanmar",
+        "description": "A historic colonial-era all-suite hotel in Yangon, Myanmar.",
+        "image": "the-strand-yangon-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "The Blackbuck Lodge",
+      "location": "Velavadar, Gujarat, India",
+      "slug": "the-blackbuck-lodge",
+      "heroImage": "the-blackbuck-lodge-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The Blackbuck Lodge sits at the edge of Velavadar National Park, Gujarat, offering guided safaris to spot blackbuck antelope and other grassland wildlife."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The lodge combines rustic comfort with an intimate wildlife experience."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "safari",
+        "wildlife",
+        "eco-conscious"
+      ],
+      "relatedHotels": [
+        "diphlu-river-lodge"
+      ],
+      "meta": {
+        "title": "The Blackbuck Lodge | Velavadar, Gujarat",
+        "description": "A safari lodge on the edge of Velavadar National Park, Gujarat, India.",
+        "image": "the-blackbuck-lodge-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Ananda in the Himalayas",
+      "location": "Rishikesh, Uttarakhand, India",
+      "slug": "ananda-in-the-himalayas",
+      "heroImage": "ananda-himalayas-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Ananda in the Himalayas is a renowned wellness retreat set within a Maharaja's palace estate overlooking Rishikesh and the Ganges valley."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The resort blends Ayurveda, yoga and international wellness practices for holistic rejuvenation."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "wellness",
+        "yoga-retreats",
+        "mountain-retreats"
+      ],
+      "relatedHotels": [],
+      "meta": {
+        "title": "Ananda in the Himalayas | Rishikesh",
+        "description": "A palace-estate wellness retreat overlooking Rishikesh and the Ganges valley.",
+        "image": "ananda-himalayas-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Ahilya by the Sea",
+      "location": "Goa, India",
+      "slug": "ahilya-by-the-sea",
+      "heroImage": "ahilya-by-the-sea-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Tucked away in a quiet corner of Dolphin Bay, Ahilya by the Sea is one of Goa's few properties directly on the ocean, built as a family home by the granddaughter of painter Antonio Xavier Trinidade."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The property's nine rooms are spread across three Portuguese-Balinese style villas made of hand-hewn local laterite rock, each boasting sea views."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "seaside",
+        "boutique",
+        "wellness"
+      ],
+      "relatedHotels": [
+        "ahilya-fort"
+      ],
+      "meta": {
+        "title": "Ahilya by the Sea | Goa, India",
+        "description": "An oceanfront boutique hotel in Dolphin Bay, Goa, built as a family home in Portuguese-Balinese style.",
+        "image": "ahilya-by-the-sea-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Ahilya Fort",
+      "location": "Maheshwar, Madhya Pradesh, India",
+      "slug": "ahilya-fort",
+      "heroImage": "ahilya-fort-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Ahilya Fort is an 18th-century riverside fort palace in Maheshwar overlooking the Narmada River, once home to the Holkar royal family."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The heritage property offers an intimate palace stay steeped in history and artisanal Maheshwari textile traditions."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "palaces",
+        "art-culture",
+        "boutique"
+      ],
+      "relatedHotels": [
+        "ahilya-by-the-sea"
+      ],
+      "meta": {
+        "title": "Ahilya Fort | Maheshwar, Madhya Pradesh",
+        "description": "An 18th-century riverside fort palace on the Narmada River in Maheshwar.",
+        "image": "ahilya-fort-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    }
+  ],
+  "villas-and-estates": [
+    {
+      "title": "Villa in the Woods at RAAS Dev\u0101nya",
+      "location": "Matial, Uttarakhand, India",
+      "slug": "villa-in-the-woods-at-raas-devanya",
+      "heroImage": "raas-devanya-villa-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Villa in the Woods at RAAS Dev\u0101nya is a secluded mountain retreat in Matial, Uttarakhand, surrounded by pine forests and Himalayan views."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The villa offers a private escape for guests seeking solitude and nature."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "mountain-retreats",
+        "getaways"
+      ],
+      "relatedVillasAndEstates": [
+        "jungle-house-simla"
+      ],
+      "meta": {
+        "title": "Villa in the Woods at RAAS Dev\u0101nya | Uttarakhand",
+        "description": "A secluded mountain villa retreat in Matial, Uttarakhand, surrounded by pine forests.",
+        "image": "raas-devanya-villa-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Jungle House, Simla",
+      "location": "Shimla, Himachal Pradesh, India",
+      "slug": "jungle-house-simla",
+      "heroImage": "jungle-house-simla-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Jungle House in Shimla is a private estate nestled among deodar forests in the hills of Himachal Pradesh."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "It offers guests an intimate mountain hideaway with colonial-era charm."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "mountain-retreats",
+        "getaways"
+      ],
+      "relatedVillasAndEstates": [
+        "villa-in-the-woods-at-raas-devanya"
+      ],
+      "meta": {
+        "title": "Jungle House, Simla | Himachal Pradesh",
+        "description": "A private forest estate near Shimla, Himachal Pradesh, offering a colonial-era mountain hideaway.",
+        "image": "jungle-house-simla-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Ahilya by the Sea",
+      "location": "Goa, India",
+      "slug": "ahilya-by-the-sea-villa",
+      "heroImage": "ahilya-by-the-sea-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Ahilya by the Sea is also listed among 1524 Delhi's villas and estates collection, offering three independent villas on Goa's Dolphin Bay coastline."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Each villa features hand-hewn laterite rock architecture and sweeping sea views."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "seaside",
+        "boutique"
+      ],
+      "relatedVillasAndEstates": [],
+      "meta": {
+        "title": "Ahilya by the Sea | Goa Villas & Estates",
+        "description": "An oceanfront villa estate in Dolphin Bay, Goa, spread across three independent villas.",
+        "image": "ahilya-by-the-sea-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    }
+  ],
+  "experiences": [],
+  "journeys": [
+    {
+      "title": "Artisans of Bengal",
+      "location": "Kolkata, Bandel, Kalna, Nabadwip, Mayapur, Guptipara, India",
+      "slug": "artisans-of-bengal",
+      "heroImage": "artisans-of-bengal-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Artisans of Bengal is a five-day journey through Kolkata and the riverside towns of Bandel, Kalna, Nabadwip, Mayapur and Guptipara."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Travellers encounter traditional craftsmanship, temples and Bengal's rich cultural heritage along the way."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "art-culture",
+        "river-cruise",
+        "temples"
+      ],
+      "relatedJourneys": [
+        "europe-on-the-ganges-kolkata"
+      ],
+      "meta": {
+        "title": "Artisans of Bengal | 5-Day Journey",
+        "description": "A five-day cultural journey through Kolkata and Bengal's riverside artisan towns.",
+        "image": "artisans-of-bengal-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Europe on the Ganges, Kolkata",
+      "location": "Kolkata, Kalna, Shantipura, Bandel, Serampore, India",
+      "slug": "europe-on-the-ganges-kolkata",
+      "heroImage": "europe-on-the-ganges-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Europe on the Ganges is a four-day journey tracing European colonial influences along the Hooghly river from Kolkata through Kalna, Shantipura, Bandel and Serampore."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The route reveals Danish, Dutch, French and Portuguese heritage sites along the riverbanks."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "art-culture",
+        "river-cruise"
+      ],
+      "relatedJourneys": [
+        "artisans-of-bengal"
+      ],
+      "meta": {
+        "title": "Europe on the Ganges, Kolkata | 4-Day Journey",
+        "description": "A four-day journey exploring European colonial heritage along the Hooghly river near Kolkata.",
+        "image": "europe-on-the-ganges-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Cruising In Bhitarkanika with Antara River Cruises",
+      "location": "Gupti, Dangamal, Habali Kathi, Odisha, India",
+      "slug": "odisha",
+      "heroImage": "cruising-bhitarkanika-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "This four-day journey with Antara River Cruises explores the mangrove creeks of Bhitarkanika in Odisha, visiting Gupti, Dangamal and Habali Kathi."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Guests spot crocodiles, migratory birds and mangrove wildlife along the waterways."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "river-cruise",
+        "wildlife",
+        "eco-conscious"
+      ],
+      "relatedJourneys": [
+        "brahmaputra-vignettes"
+      ],
+      "meta": {
+        "title": "Cruising In Bhitarkanika | Odisha, 4-Day Journey",
+        "description": "A four-day mangrove cruise through Bhitarkanika, Odisha with Antara River Cruises.",
+        "image": "cruising-bhitarkanika-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Brahmaputra Vignettes",
+      "location": "Guwahati, Tezpur, Silghat, Kaziranga, Assam, India",
+      "slug": "brahmaputra-vignettes",
+      "heroImage": "brahmaputra-vignettes-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Brahmaputra Vignettes is a seven-day journey along the Brahmaputra River, from Guwahati through Tezpur, Silghat and Kaziranga and back."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "The route combines river cruising with wildlife safaris in Kaziranga National Park."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "river-cruise",
+        "wildlife",
+        "safari"
+      ],
+      "relatedJourneys": [
+        "odisha"
+      ],
+      "meta": {
+        "title": "Brahmaputra Vignettes | 7-Day Journey",
+        "description": "A seven-day river journey along the Brahmaputra through Assam, including Kaziranga National Park.",
+        "image": "brahmaputra-vignettes-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Mandawa Horse Safaris",
+      "location": "Mandawa, Mahansar, Alsisar, Nawalgarh, Rajasthan, India",
+      "slug": "mandawa-horse-safaris",
+      "heroImage": "mandawa-horse-safaris-hero.jpg",
+      "logoImage": null,
+      "content": {
+        "root": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Mandawa Horse Safaris is a six-day equestrian journey through the painted havelis of Shekhawati, visiting Mandawa, Mahansar, Alsisar and Nawalgarh."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Riders traverse desert villages and historic frescoed towns on horseback."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "categories": [
+        "horseback-holidays",
+        "road-trips",
+        "art-culture"
+      ],
+      "relatedJourneys": [],
+      "meta": {
+        "title": "Mandawa Horse Safaris | 6-Day Journey",
+        "description": "A six-day horseback journey through the painted havelis of Shekhawati, Rajasthan.",
+        "image": "mandawa-horse-safaris-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Home",
+      "slug": "home",
+      "hero": {
+        "type": "highImpact",
+        "slides": [
+          {
+            "media": "home-hero.jpg",
+            "richText": {
+              "root": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "text": "Pelangi Beach Resort & Spa"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "text": "Where a lifetime of memories begin."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": [
+              {
+                "link": {
+                  "type": "custom",
+                  "url": "/hotels/pelangi-beach-resort-spa/",
+                  "label": "See Details"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "layout": [
+        {
+          "blockType": "content",
+          "richText": {
+            "root": {
+              "type": "root",
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "Explore our Hotel Collection, Unique Experiences and Bespoke Journeys curated for discerning travellers."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "meta": {
+        "title": "1524 Delhi | Luxury Hotels, Villas, Experiences & Journeys",
+        "description": "1524 Delhi curates exceptional boutique hotels, villas, unique experiences and bespoke journeys across India and Asia.",
+        "image": "home-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Our Story",
+      "slug": "our-story",
+      "hero": {
+        "type": "lowImpact",
+        "richText": {
+          "root": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "1524 Delhi is a boutique Luxury Lifestyle Services and Marketing firm."
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "We provide a comprehensive range of Sales and Marketing representation services in India to luxury hotel companies and independent hotels, and offer a curated collection of exceptional boutique hotels, wellness resorts, safari lodges, villas, journeys and experiences."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "links": [],
+        "media": "our-story-hero.jpg"
+      },
+      "layout": [
+        {
+          "blockType": "content",
+          "richText": {
+            "root": {
+              "type": "root",
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "Founded in 2017 by Aakriti Batra and Karan Singh, 1524 Delhi bridges exceptional hotels and experiences with discerning travellers across India and South East Asia."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "The founders bring over 50 years of combined experience in luxury hotels, operations and sales, including leadership roles at The Oberoi Group, American Express and Mandarin Oriental Hotel Group."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "meta": {
+        "title": "Our Story | 1524 Delhi",
+        "description": "Learn about 1524 Delhi, a boutique luxury lifestyle services and marketing firm founded in 2017.",
+        "image": "our-story-hero.jpg"
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    },
+    {
+      "title": "Reservations",
+      "slug": "reservations",
+      "hero": {
+        "type": "none"
+      },
+      "layout": [
+        {
+          "blockType": "content",
+          "richText": {
+            "root": {
+              "type": "root",
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "Enquire for bookings across our hotels, villas, experiences and journeys. Our team will get back to you with tailored recommendations."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "meta": {
+        "title": "Reservations | 1524 Delhi",
+        "description": "Enquire for bookings and reservations across 1524 Delhi's collection of hotels, villas, experiences and journeys.",
+        "image": null
+      },
+      "publishedAt": "2026-01-15T00:00:00.000Z",
+      "_status": "published"
+    }
+  ]
+}

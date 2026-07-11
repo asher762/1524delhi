@@ -114,7 +114,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {
@@ -164,7 +164,7 @@ export interface UserAuthOperations {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
@@ -193,11 +193,11 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: string | Page;
+                        value: number | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: string | Post;
+                        value: number | Post;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -209,7 +209,7 @@ export interface Page {
                 id?: string | null;
               }[]
             | null;
-          media: string | Media;
+          media: number | Media;
           id?: string | null;
         }[]
       | null;
@@ -236,11 +236,11 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: string | Page;
+                  value: number | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: string | Post;
+                  value: number | Post;
                 } | null);
             url?: string | null;
             label: string;
@@ -252,7 +252,7 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    media?: (string | null) | Media;
+    media?: (number | null) | Media;
   };
   layout: (
     | CallToActionBlock
@@ -264,13 +264,14 @@ export interface Page {
     | InfoBlock
     | RichTextBlock
     | CarouselBlock
+    | RelatedSocialLinksBlock
   )[];
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -288,9 +289,9 @@ export interface Page {
  * via the `definition` "posts".
  */
 export interface Post {
-  id: string;
+  id: number;
   title: string;
-  heroImage?: (string | null) | Media;
+  heroImage?: (number | null) | Media;
   content: {
     root: {
       type: string;
@@ -306,18 +307,18 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
-  categories?: (string | Category)[] | null;
+  relatedPosts?: (number | Post)[] | null;
+  categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (string | User)[] | null;
+  authors?: (number | User)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -338,7 +339,7 @@ export interface Post {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt?: string | null;
   caption?: {
     root: {
@@ -355,7 +356,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
-  folder?: (string | null) | FolderInterface;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -431,18 +432,18 @@ export interface Media {
  * via the `definition` "payload-folders".
  */
 export interface FolderInterface {
-  id: string;
+  id: number;
   name: string;
-  folder?: (string | null) | FolderInterface;
+  folder?: (number | null) | FolderInterface;
   documentsAndFolders?: {
     docs?: (
       | {
           relationTo?: 'payload-folders';
-          value: string | FolderInterface;
+          value: number | FolderInterface;
         }
       | {
           relationTo?: 'media';
-          value: string | Media;
+          value: number | Media;
         }
     )[];
     hasNextPage?: boolean;
@@ -457,17 +458,17 @@ export interface FolderInterface {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: string;
+  id: number;
   title: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
   slug: string;
-  parent?: (string | null) | Category;
+  parent?: (number | null) | Category;
   breadcrumbs?:
     | {
-        doc?: (string | null) | Category;
+        doc?: (number | null) | Category;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -481,8 +482,13 @@ export interface Category {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   name?: string | null;
+  role: 'admin' | 'villa-owner';
+  /**
+   * Villas this owner is allowed to manage availability for.
+   */
+  managedVillas?: (number | VillasAndEstate)[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -501,6 +507,88 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "villas-and-estates".
+ */
+export interface VillasAndEstate {
+  id: number;
+  title: string;
+  /**
+   * The user account that manages this villa.
+   */
+  owner?: (number | null) | User;
+  location: string;
+  logoImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+    | CarouselBlock
+    | AvailabilityBlock
+  )[];
+  relatedVillasAndEstates?: (number | VillasAndEstate)[] | null;
+  categories?: (number | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * Mark date ranges when this villa is not available for booking.
+   */
+  unavailableDates?:
+    | {
+        startDate: string;
+        endDate: string;
+        reason?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -530,11 +618,11 @@ export interface CallToActionBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -575,7 +663,7 @@ export interface CardsBlock {
         title: string;
         media?:
           | {
-              image: string | Media;
+              image: number | Media;
               id?: string | null;
             }[]
           | null;
@@ -631,11 +719,11 @@ export interface ContentBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -656,7 +744,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  media: string | Media;
+  media: number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -684,29 +772,29 @@ export interface ArchiveBlock {
   layout?: ('Grid' | 'FullScreenCarousel' | 'CardsCarousel' | 'List') | null;
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: ('posts' | 'hotels' | 'villas-and-estates' | 'experiences' | 'journeys') | null;
-  categories?: (string | Category)[] | null;
+  categories?: (number | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
     | (
         | {
             relationTo: 'posts';
-            value: string | Post;
+            value: number | Post;
           }
         | {
             relationTo: 'hotels';
-            value: string | Hotel;
+            value: number | Hotel;
           }
         | {
             relationTo: 'villas-and-estates';
-            value: string | VillasAndEstate;
+            value: number | VillasAndEstate;
           }
         | {
             relationTo: 'experiences';
-            value: string | Experience;
+            value: number | Experience;
           }
         | {
             relationTo: 'journeys';
-            value: string | Journey;
+            value: number | Journey;
           }
       )[]
     | null;
@@ -719,11 +807,11 @@ export interface ArchiveBlock {
  * via the `definition` "hotels".
  */
 export interface Hotel {
-  id: string;
+  id: number;
   title: string;
   location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
+  logoImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
   layout: (
     | RichTextBlock
     | CallToActionBlock
@@ -736,14 +824,14 @@ export interface Hotel {
     | BannerBlock
     | CarouselBlock
   )[];
-  relatedHotels?: (string | Hotel)[] | null;
-  categories?: (string | Category)[] | null;
+  relatedHotels?: (number | Hotel)[] | null;
+  categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -758,34 +846,10 @@ export interface Hotel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichTextBlock".
- */
-export interface RichTextBlock {
-  richText: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'richTextBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  form: string | Form;
+  form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -811,7 +875,7 @@ export interface FormBlock {
  * via the `definition` "forms".
  */
 export interface Form {
-  id: string;
+  id: number;
   title: string;
   fields?:
     | (
@@ -1000,7 +1064,7 @@ export interface InfoBlock {
     };
     [k: string]: unknown;
   } | null;
-  media: string | Media;
+  media: number | Media;
   reverse?: boolean | null;
   enableLink?: boolean | null;
   link?: {
@@ -1009,11 +1073,11 @@ export interface InfoBlock {
     reference?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null);
     url?: string | null;
     label: string;
@@ -1072,7 +1136,7 @@ export interface CarouselBlock {
         /**
          * Full Width: used as a full-bleed background. Cards: displayed at the top of the card.
          */
-        image: string | Media;
+        image: number | Media;
         /**
          * Keep under 60 characters.
          */
@@ -1102,11 +1166,11 @@ export interface CarouselBlock {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -1126,56 +1190,14 @@ export interface CarouselBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "villas-and-estates".
- */
-export interface VillasAndEstate {
-  id: string;
-  title: string;
-  location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
-  layout: (
-    | RichTextBlock
-    | CallToActionBlock
-    | CardsBlock
-    | ContentBlock
-    | MediaBlock
-    | ArchiveBlock
-    | FormBlock
-    | InfoBlock
-    | BannerBlock
-    | CarouselBlock
-  )[];
-  relatedVillasAndEstates?: (string | VillasAndEstate)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences".
  */
 export interface Experience {
-  id: string;
+  id: number;
   title: string;
   location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
+  logoImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
   layout: (
     | RichTextBlock
     | CallToActionBlock
@@ -1188,14 +1210,14 @@ export interface Experience {
     | BannerBlock
     | CarouselBlock
   )[];
-  relatedExperiences?: (string | Experience)[] | null;
-  categories?: (string | Category)[] | null;
+  relatedExperiences?: (number | Experience)[] | null;
+  categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -1213,11 +1235,11 @@ export interface Experience {
  * via the `definition` "journeys".
  */
 export interface Journey {
-  id: string;
+  id: number;
   title: string;
   location: string;
-  logoImage?: (string | null) | Media;
-  heroImage?: (string | null) | Media;
+  logoImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
   layout: (
     | RichTextBlock
     | CallToActionBlock
@@ -1230,14 +1252,14 @@ export interface Journey {
     | BannerBlock
     | CarouselBlock
   )[];
-  relatedJourneys?: (string | Journey)[] | null;
-  categories?: (string | Category)[] | null;
+  relatedJourneys?: (number | Journey)[] | null;
+  categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -1252,10 +1274,41 @@ export interface Journey {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AvailabilityBlock".
+ */
+export interface AvailabilityBlock {
+  heading: string;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'availabilityBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RelatedSocialLinksBlock".
+ */
+export interface RelatedSocialLinksBlock {
+  title?: string | null;
+  links?:
+    | {
+        /**
+         * Paste the full URL to the Instagram or Facebook post.
+         */
+        url: string;
+        platform: 'instagram' | 'facebook';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'relatedSocialLinks';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: string;
+  id: number;
   /**
    * You will need to rebuild the website when changing this field.
    */
@@ -1265,27 +1318,27 @@ export interface Redirect {
     reference?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null)
       | ({
           relationTo: 'hotels';
-          value: string | Hotel;
+          value: number | Hotel;
         } | null)
       | ({
           relationTo: 'villas-and-estates';
-          value: string | VillasAndEstate;
+          value: number | VillasAndEstate;
         } | null)
       | ({
           relationTo: 'experiences';
-          value: string | Experience;
+          value: number | Experience;
         } | null)
       | ({
           relationTo: 'journeys';
-          value: string | Journey;
+          value: number | Journey;
         } | null);
     url?: string | null;
   };
@@ -1297,8 +1350,8 @@ export interface Redirect {
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
-  id: string;
-  form: string | Form;
+  id: number;
+  form: number | Form;
   submissionData?:
     | {
         field: string;
@@ -1316,35 +1369,35 @@ export interface FormSubmission {
  * via the `definition` "search".
  */
 export interface Search {
-  id: string;
+  id: number;
   title?: string | null;
   priority?: number | null;
   doc:
     | {
         relationTo: 'posts';
-        value: string | Post;
+        value: number | Post;
       }
     | {
         relationTo: 'hotels';
-        value: string | Hotel;
+        value: number | Hotel;
       }
     | {
         relationTo: 'villas-and-estates';
-        value: string | VillasAndEstate;
+        value: number | VillasAndEstate;
       }
     | {
         relationTo: 'experiences';
-        value: string | Experience;
+        value: number | Experience;
       }
     | {
         relationTo: 'journeys';
-        value: string | Journey;
+        value: number | Journey;
       };
   slug?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   categories?:
     | {
@@ -1362,7 +1415,7 @@ export interface Search {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -1379,7 +1432,7 @@ export interface PayloadKv {
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
-  id: string;
+  id: number;
   /**
    * Input data provided to the job
    */
@@ -1471,68 +1524,68 @@ export interface PayloadJob {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'pages';
-        value: string | Page;
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'posts';
-        value: string | Post;
+        value: number | Post;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'categories';
-        value: string | Category;
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'hotels';
-        value: string | Hotel;
+        value: number | Hotel;
       } | null)
     | ({
         relationTo: 'villas-and-estates';
-        value: string | VillasAndEstate;
+        value: number | VillasAndEstate;
       } | null)
     | ({
         relationTo: 'experiences';
-        value: string | Experience;
+        value: number | Experience;
       } | null)
     | ({
         relationTo: 'journeys';
-        value: string | Journey;
+        value: number | Journey;
       } | null)
     | ({
         relationTo: 'redirects';
-        value: string | Redirect;
+        value: number | Redirect;
       } | null)
     | ({
         relationTo: 'forms';
-        value: string | Form;
+        value: number | Form;
       } | null)
     | ({
         relationTo: 'form-submissions';
-        value: string | FormSubmission;
+        value: number | FormSubmission;
       } | null)
     | ({
         relationTo: 'search';
-        value: string | Search;
+        value: number | Search;
       } | null)
     | ({
         relationTo: 'payload-folders';
-        value: string | FolderInterface;
+        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -1542,10 +1595,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -1565,7 +1618,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -1633,6 +1686,7 @@ export interface PagesSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         richTextBlock?: T | RichTextBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
+        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   meta?:
     | T
@@ -1819,6 +1873,22 @@ export interface CarouselBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RelatedSocialLinksBlock_select".
+ */
+export interface RelatedSocialLinksBlockSelect<T extends boolean = true> {
+  title?: T;
+  links?:
+    | T
+    | {
+        url?: T;
+        platform?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1968,6 +2038,8 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
+  managedVillas?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -2040,6 +2112,7 @@ export interface BannerBlockSelect<T extends boolean = true> {
  */
 export interface VillasAndEstatesSelect<T extends boolean = true> {
   title?: T;
+  owner?: T;
   location?: T;
   logoImage?: T;
   heroImage?: T;
@@ -2056,6 +2129,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
+        availabilityBlock?: T | AvailabilityBlockSelect<T>;
       };
   relatedVillasAndEstates?: T;
   categories?: T;
@@ -2066,12 +2140,30 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  unavailableDates?:
+    | T
+    | {
+        startDate?: T;
+        endDate?: T;
+        reason?: T;
+        id?: T;
+      };
   publishedAt?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AvailabilityBlock_select".
+ */
+export interface AvailabilityBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2431,7 +2523,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "header".
  */
 export interface Header {
-  id: string;
+  id: number;
   navItems?:
     | {
         link: {
@@ -2440,11 +2532,11 @@ export interface Header {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: string | Page;
+                value: number | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: string | Post;
+                value: number | Post;
               } | null);
           url?: string | null;
           label: string;
@@ -2460,7 +2552,7 @@ export interface Header {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string;
+  id: number;
   /**
    * e.g. mailto:hello@1524delhi.com or /contact
    */
@@ -2532,30 +2624,30 @@ export interface TaskSchedulePublish {
     doc?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null)
       | ({
           relationTo: 'hotels';
-          value: string | Hotel;
+          value: number | Hotel;
         } | null)
       | ({
           relationTo: 'villas-and-estates';
-          value: string | VillasAndEstate;
+          value: number | VillasAndEstate;
         } | null)
       | ({
           relationTo: 'experiences';
-          value: string | Experience;
+          value: number | Experience;
         } | null)
       | ({
           relationTo: 'journeys';
-          value: string | Journey;
+          value: number | Journey;
         } | null);
     global?: string | null;
-    user?: (string | null) | User;
+    user?: (number | null) | User;
   };
   output?: unknown;
 }

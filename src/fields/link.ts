@@ -35,6 +35,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           {
             name: 'type',
             type: 'radio',
+            dbName: 'linkType',
             admin: {
               layout: 'horizontal',
               width: '50%',
@@ -127,6 +128,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     linkResult.fields.push({
       name: 'appearance',
       type: 'select',
+      dbName: 'linkAppearance',
       admin: {
         description: 'Choose how the link should be rendered.',
       },

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import type { Page } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 
@@ -10,6 +10,7 @@ type Props = {
 
 export const BlockBreadcrumbs: React.FC<Props> = ({ blocks }) => {
   const [activeId, setActiveId] = useState<string>('')
+  const isScrollingRef = useRef(false)
 
   if (!blocks || !Array.isArray(blocks)) return null
 
@@ -28,6 +29,8 @@ export const BlockBreadcrumbs: React.FC<Props> = ({ blocks }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Ignore observer updates while a click-triggered scroll is in progress
+        if (isScrollingRef.current) return
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id)
@@ -47,11 +50,17 @@ export const BlockBreadcrumbs: React.FC<Props> = ({ blocks }) => {
 
   const scrollToId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
+    setActiveId(id) // update immediately on click
+    isScrollingRef.current = true
     const el = document.getElementById(id)
     if (el) {
       const y = el.getBoundingClientRect().top + window.scrollY - 200 // offset for header
       window.scrollTo({ top: y, behavior: 'smooth' })
     }
+    // Re-enable observer updates after smooth scroll completes (~1s)
+    setTimeout(() => {
+      isScrollingRef.current = false
+    }, 1000)
   }
 
   return (
