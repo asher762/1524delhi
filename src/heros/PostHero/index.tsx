@@ -1,4 +1,3 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
 import React from 'react'
 
 import type { Post } from '@/payload-types'
@@ -50,13 +49,6 @@ export const PostHero: React.FC<{
 
                   <p>{formatAuthors(populatedAuthors)}</p>
                 </div>
-              </div>
-            )}
-            {publishedAt && (
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
-
-                <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
               </div>
             )}
           </div>

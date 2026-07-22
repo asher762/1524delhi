@@ -25,7 +25,6 @@ const blockComponents = {
   infoBlock: InfoBlockComponent,
   richTextBlock: RichTextBlockComponent,
   carouselBlock: CarouselBlock,
-  availabilityBlock: AvailabilityBlock,
   relatedSocialLinks: RelatedSocialLinksComponent,
 }
 
@@ -46,7 +45,12 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              const id = block.blockName ? block.blockName.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, '-').toLowerCase() : undefined
+              const id = block.blockName
+                ? block.blockName
+                    .replace(/([a-z])([A-Z])/g, '$1-$2')
+                    .replace(/[\s_]+/g, '-')
+                    .toLowerCase()
+                : undefined
 
               return (
                 <div className="w-full my-12 md:my-16 lg:my-24" key={index} id={id}>

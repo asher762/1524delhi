@@ -40,6 +40,18 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  // Override paragraph: if any child would render as a block-level element,
+  // use a <div> instead of <p> to prevent invalid HTML nesting hydration errors.
+  // This covers: embedded blocks, nested paragraphs, lists, headings, etc.
+  paragraph: ({ node, nodesToJSX }) => {
+    const BLOCK_CHILD_TYPES = new Set(['block', 'paragraph', 'horizontalrule', 'list', 'listitem', 'heading', 'quote', 'table'])
+    const hasBlock = node.children.some((child: any) => BLOCK_CHILD_TYPES.has(child.type))
+    const children = nodesToJSX({ nodes: node.children })
+    if (hasBlock) {
+      return <div>{children}</div>
+    }
+    return <p>{children}</p>
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (

@@ -17,6 +17,7 @@ import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { InfoBlock } from '../../blocks/InfoBlock/config'
 import { Content } from '../../blocks/Content/config'
 import { CarouselBlock } from '../../blocks/CarouselBlock/config'
+import { RelatedSocialLinks } from '../../blocks/RelatedSocialLinks/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -93,7 +94,17 @@ export const Posts: CollectionConfig<'posts'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, CardsBlock, MediaBlock, InfoBlock, Content, CarouselBlock] }),
+                    BlocksFeature({
+                      blocks: [
+                        Banner,
+                        CardsBlock,
+                        MediaBlock,
+                        InfoBlock,
+                        Content,
+                        CarouselBlock,
+                        RelatedSocialLinks,
+                      ],
+                    }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

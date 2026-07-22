@@ -40,6 +40,11 @@ export const Pages: CollectionConfig<'pages'> = {
   defaultPopulate: {
     title: true,
     slug: true,
+    meta: {
+      image: true,
+      description: true,
+      title: true,
+    },
   },
   admin: {
     group: 'Content',

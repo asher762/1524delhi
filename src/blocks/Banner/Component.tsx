@@ -1,4 +1,4 @@
-import type { BannerBlock as BannerBlockProps } from 'src/payload-types'
+import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 
 import { cn } from '@/utilities/ui'
 import React from 'react'
@@ -9,17 +9,26 @@ type Props = {
 } & BannerBlockProps
 
 export const BannerBlock: React.FC<Props> = ({ className, content, style }) => {
+  const bannerStyle = style || 'info'
+
   return (
-    <div className={cn('mx-auto my-8 w-full', className)}>
+    <div className={cn('w-full max-w-5xl mx-auto my-6 px-4 md:px-6', className)}>
       <div
-        className={cn('border py-3 px-6 flex items-center rounded', {
-          'border-border bg-card': style === 'info',
-          'border-error bg-error/30': style === 'error',
-          'border-success bg-success/30': style === 'success',
-          'border-warning bg-warning/30': style === 'warning',
-        })}
+        className={cn(
+          'relative overflow-hidden rounded-xl border border-l-4 p-5 md:p-6 transition-all duration-200 shadow-sm',
+          {
+            'border-border bg-card text-card-foreground border-l-primary': bannerStyle === 'info',
+            'border-warning bg-warning/20 text-foreground border-l-warning':
+              bannerStyle === 'warning',
+            'border-error bg-error/20 text-foreground border-l-error': bannerStyle === 'error',
+            'border-success bg-success/20 text-foreground border-l-success':
+              bannerStyle === 'success',
+          },
+        )}
       >
-        <RichText data={content} enableGutter={false} enableProse={false} />
+        <div className="flex-1 min-w-0 text-sm md:text-base leading-relaxed font-sans [&_p]:my-1.5 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_li]:my-1">
+          <RichText data={content} enableGutter={false} enableProse={false} />
+        </div>
       </div>
     </div>
   )

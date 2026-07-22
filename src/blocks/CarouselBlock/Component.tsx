@@ -40,7 +40,7 @@ function FullWidthSlide({ slide, sectionTitle }: { slide: Slide; sectionTitle?: 
             </h3>
           )}
           {slide.content && (
-            <div className="text-white/85 text-sm md:text-base leading-relaxed [&_p]:mb-0 [&_*]:text-white/85">
+            <div className="text-white/85 text-sm md:text-base leading-relaxed [&_p]:mb-0 **:text-white/85">
               <RichText data={slide.content as any} enableProse={false} />
             </div>
           )}
@@ -68,7 +68,7 @@ function CardSlide({ slide }: { slide: Slide }) {
     <div className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-4">
       <div className="bg-card border border-border rounded-lg overflow-hidden h-full flex flex-col group hover:shadow-md transition-shadow duration-300">
         {/* Image */}
-        <div className="relative aspect-[3/2] overflow-hidden">
+        <div className="relative aspect-3/2 overflow-hidden">
           {imageUrl && (
             <Image
               src={imageUrl}

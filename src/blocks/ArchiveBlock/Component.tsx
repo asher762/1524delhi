@@ -15,6 +15,7 @@ export const ArchiveBlock: React.FC<
   const {
     id,
     categories,
+    enablePagination,
     introContent,
     limit: limitFromProps,
     populateBy,
@@ -23,23 +24,29 @@ export const ArchiveBlock: React.FC<
     layout,
   } = props
 
-  const limit = limitFromProps || 3
+  const limit = limitFromProps || 12
   const targetCollection = relationTo || 'posts'
 
   let posts: any[] = []
+  let totalPages = 1
+  let totalDocs = 0
+  let page = 1
+
+  const flattenedCategories = categories?.map((category) => {
+    if (typeof category === 'object') return category.id
+    else return category
+  })
 
   if (populateBy === 'collection') {
     const payload = await getPayload({ config: configPromise })
 
-    const flattenedCategories = categories?.map((category) => {
-      if (typeof category === 'object') return category.id
-      else return category
-    })
+    const isCarousel = layout === 'FullScreenCarousel' || layout === 'CardsCarousel'
 
     const fetchedPosts = await payload.find({
       collection: targetCollection,
       depth: 1,
-      limit,
+      limit: isCarousel ? limitFromProps || 100 : limit,
+      overrideAccess: false,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {
@@ -52,6 +59,9 @@ export const ArchiveBlock: React.FC<
     })
 
     posts = fetchedPosts.docs
+    totalPages = fetchedPosts.totalPages
+    totalDocs = fetchedPosts.totalDocs
+    page = fetchedPosts.page || 1
   } else {
     if (selectedDocs?.length) {
       const filteredSelectedPosts = selectedDocs.map((post) => {
@@ -59,6 +69,8 @@ export const ArchiveBlock: React.FC<
       }) as any[]
 
       posts = filteredSelectedPosts
+      totalDocs = posts.length
+      totalPages = Math.ceil(posts.length / limit)
     }
   }
 
@@ -69,7 +81,18 @@ export const ArchiveBlock: React.FC<
           <RichText className="ml-0 mx-0!" data={introContent} enableGutter={false} />
         </div>
       )}
-      <CollectionArchive posts={posts} relationTo={targetCollection} layout={layout || 'Grid'} />
+      <CollectionArchive
+        posts={posts}
+        relationTo={targetCollection}
+        layout={layout || 'Grid'}
+        enablePagination={enablePagination ?? true}
+        limit={limit}
+        totalPages={totalPages}
+        page={page}
+        totalDocs={totalDocs}
+        categories={flattenedCategories}
+        populateBy={populateBy || 'collection'}
+      />
     </div>
   )
 }

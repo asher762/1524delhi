@@ -63,6 +63,7 @@ export const Archive: Block = {
       label: 'Collections To Show',
       options: [
         { label: 'Posts', value: 'posts' },
+        { label: 'Pages', value: 'pages' },
         { label: 'Hotels', value: 'hotels' },
         { label: 'Villas & Estates', value: 'villas-and-estates' },
         { label: 'Experiences', value: 'experiences' },
@@ -86,8 +87,19 @@ export const Archive: Block = {
         condition: (_, siblingData) => siblingData.populateBy === 'collection',
         step: 1,
       },
-      defaultValue: 10,
+      defaultValue: 12,
       label: 'Limit',
+    },
+    {
+      name: 'enablePagination',
+      type: 'checkbox',
+      admin: {
+        condition: (_, siblingData) =>
+          siblingData.populateBy === 'collection' &&
+          (siblingData.layout === 'Grid' || siblingData.layout === 'List'),
+      },
+      defaultValue: true,
+      label: 'Enable Pagination',
     },
     {
       name: 'selectedDocs',
@@ -97,7 +109,7 @@ export const Archive: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
+      relationTo: ['posts', 'pages', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
     },
   ],
   labels: {

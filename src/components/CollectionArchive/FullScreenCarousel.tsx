@@ -63,6 +63,7 @@ export const FullScreenCarousel: React.FC<{
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex">
           {posts?.map((result, index) => {
+            if (!result) return null
             const { slug, title, meta } = result
             const { description, image } = meta || {}
             const isActive = index === selectedIndex
@@ -116,10 +117,10 @@ export const FullScreenCarousel: React.FC<{
                     )}
 
                     <Link
-                      href={`/${relationTo}/${slug}`}
+                      href={relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`}
                       className="inline-block bg-white text-black px-8 py-3.5 uppercase font-semibold text-xs tracking-widest hover:bg-neutral-100 active:scale-95 transition-all duration-200 rounded-sm shadow-lg"
                     >
-                      Explore Destination
+                      See More Details
                     </Link>
                   </div>
                 </div>

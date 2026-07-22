@@ -23,7 +23,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', on
               <CMSLink
                 {...link}
                 onClick={onLinkClick}
-                className="block py-5 font-sans text-xs uppercase tracking-[0.3em] text-foreground/70 transition-colors hover:text-foreground"
+                className="block py-5 font-sans text-sm uppercase tracking-[0.3em] text-foreground/70 transition-colors hover:text-foreground"
               />
             </li>
           ))}

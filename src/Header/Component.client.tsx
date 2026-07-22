@@ -81,7 +81,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
         >
           <Logo className="text-primary-foreground" />
         </Link>
-        <div className="flex flex-1 items-center justify-between border-b border-border bg-card px-6">
+        <div className="flex flex-1 items-center justify-between border-b border-border bg-card px-10 ">
           <div className="flex items-center gap-4">
             <button
               onClick={openDrawer}
@@ -99,9 +99,12 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
           <div>
             <button
               aria-label="Search"
-              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground px-10"
             >
-              <Link href="/search">
+              <Link href="/search" className="flex gap-2">
+                <span className="text-xs uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground">
+                  Search
+                </span>
                 <Search size={17} strokeWidth={1.5} />
               </Link>
             </button>
@@ -178,9 +181,11 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
         </div>
         <div className="border-t border-border px-6 py-5">
           <button className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground">
-            <Link href="/search">
-              <Search size={15} strokeWidth={1.5} />
-              <span className="font-sans text-[10px] uppercase tracking-[0.35em]">Search</span>
+            <Link href="/search" className="flex gap-2 ">
+              <span className="text-xs uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground">
+                Search
+              </span>
+              <Search size={17} strokeWidth={1.5} />
             </Link>
           </button>
         </div>

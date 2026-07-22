@@ -23,7 +23,7 @@ export const ListView: React.FC<{
 
           const { slug, title, meta, categories } = result
           const { description, image: metaImage } = meta || {}
-          const href = `/${relationTo}/${slug}`
+          const href = relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`
 
           const categoryLabel =
             Array.isArray(categories) && categories.length > 0

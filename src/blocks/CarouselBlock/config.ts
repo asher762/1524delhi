@@ -26,8 +26,7 @@ export const CarouselBlock: Block = {
       required: true,
       admin: {
         layout: 'horizontal',
-        description:
-          'Cards shows 3 slides at a time. Full Width shows one large slide with an image background.',
+        description: 'Cards Slides Layout.',
       },
     },
     {
@@ -54,8 +53,7 @@ export const CarouselBlock: Block = {
           required: true,
           label: 'Image',
           admin: {
-            description:
-              'Full Width: used as a full-bleed background. Cards: displayed at the top of the card.',
+            description: 'Add a background image for the slide.',
           },
         },
         {

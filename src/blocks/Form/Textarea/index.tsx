@@ -17,11 +17,11 @@ export const Textarea: React.FC<
 > = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>
+      <Label htmlFor={name} className="mb-2 block text-sm font-semibold tracking-wide text-foreground/90">
         {label}
 
         {required && (
-          <span className="required">
+          <span className="text-destructive ml-1 font-bold">
             * <span className="sr-only">(required)</span>
           </span>
         )}

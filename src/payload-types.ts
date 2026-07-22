@@ -67,15 +67,15 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    hotels: Hotel;
+    'villas-and-estates': VillasAndEstate;
+    experiences: Experience;
+    journeys: Journey;
     pages: Page;
     posts: Post;
     media: Media;
     categories: Category;
     users: User;
-    hotels: Hotel;
-    'villas-and-estates': VillasAndEstate;
-    experiences: Experience;
-    journeys: Journey;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -93,15 +93,15 @@ export interface Config {
     };
   };
   collectionsSelect: {
+    hotels: HotelsSelect<false> | HotelsSelect<true>;
+    'villas-and-estates': VillasAndEstatesSelect<false> | VillasAndEstatesSelect<true>;
+    experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
+    journeys: JourneysSelect<false> | JourneysSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    hotels: HotelsSelect<false> | HotelsSelect<true>;
-    'villas-and-estates': VillasAndEstatesSelect<false> | VillasAndEstatesSelect<true>;
-    experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
-    journeys: JourneysSelect<false> | JourneysSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -158,6 +158,240 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hotels".
+ */
+export interface Hotel {
+  id: number;
+  title: string;
+  location: string;
+  logoImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  layout: (
+    | RichTextBlock
+    | CallToActionBlock
+    | CardsBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | InfoBlock
+    | BannerBlock
+    | CarouselBlock
+    | RelatedSocialLinksBlock
+  )[];
+  relatedHotels?: (number | Hotel)[] | null;
+  categories?: (number | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt?: string | null;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders".
+ */
+export interface FolderInterface {
+  id: number;
+  name: string;
+  folder?: (number | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+          relationTo?: 'payload-folders';
+          value: number | FolderInterface;
+        }
+      | {
+          relationTo?: 'media';
+          value: number | Media;
+        }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  folderType?: 'media'[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -336,125 +570,6 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt?: string | null;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  folder?: (number | null) | FolderInterface;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    square?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xlarge?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-folders".
- */
-export interface FolderInterface {
-  id: number;
-  name: string;
-  folder?: (number | null) | FolderInterface;
-  documentsAndFolders?: {
-    docs?: (
-      | {
-          relationTo?: 'payload-folders';
-          value: number | FolderInterface;
-        }
-      | {
-          relationTo?: 'media';
-          value: number | Media;
-        }
-    )[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  folderType?: 'media'[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -484,11 +599,6 @@ export interface Category {
 export interface User {
   id: number;
   name?: string | null;
-  role: 'admin' | 'villa-owner';
-  /**
-   * Villas this owner is allowed to manage availability for.
-   */
-  managedVillas?: (number | VillasAndEstate)[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -507,136 +617,6 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "villas-and-estates".
- */
-export interface VillasAndEstate {
-  id: number;
-  title: string;
-  /**
-   * The user account that manages this villa.
-   */
-  owner?: (number | null) | User;
-  location: string;
-  logoImage?: (number | null) | Media;
-  heroImage?: (number | null) | Media;
-  layout: (
-    | RichTextBlock
-    | CallToActionBlock
-    | CardsBlock
-    | ContentBlock
-    | MediaBlock
-    | ArchiveBlock
-    | FormBlock
-    | InfoBlock
-    | BannerBlock
-    | CarouselBlock
-    | AvailabilityBlock
-  )[];
-  relatedVillasAndEstates?: (number | VillasAndEstate)[] | null;
-  categories?: (number | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  /**
-   * Mark date ranges when this villa is not available for booking.
-   */
-  unavailableDates?:
-    | {
-        startDate: string;
-        endDate: string;
-        reason?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  publishedAt?: string | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichTextBlock".
- */
-export interface RichTextBlock {
-  richText: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'richTextBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock".
- */
-export interface CallToActionBlock {
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  links?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -771,14 +751,19 @@ export interface ArchiveBlock {
   } | null;
   layout?: ('Grid' | 'FullScreenCarousel' | 'CardsCarousel' | 'List') | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationTo?: ('posts' | 'hotels' | 'villas-and-estates' | 'experiences' | 'journeys') | null;
+  relationTo?: ('posts' | 'pages' | 'hotels' | 'villas-and-estates' | 'experiences' | 'journeys') | null;
   categories?: (number | Category)[] | null;
   limit?: number | null;
+  enablePagination?: boolean | null;
   selectedDocs?:
     | (
         | {
             relationTo: 'posts';
             value: number | Post;
+          }
+        | {
+            relationTo: 'pages';
+            value: number | Page;
           }
         | {
             relationTo: 'hotels';
@@ -804,9 +789,9 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hotels".
+ * via the `definition` "villas-and-estates".
  */
-export interface Hotel {
+export interface VillasAndEstate {
   id: number;
   title: string;
   location: string;
@@ -823,8 +808,9 @@ export interface Hotel {
     | InfoBlock
     | BannerBlock
     | CarouselBlock
+    | RelatedSocialLinksBlock
   )[];
-  relatedHotels?: (number | Hotel)[] | null;
+  relatedVillasAndEstates?: (number | VillasAndEstate)[] | null;
   categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
@@ -1121,7 +1107,7 @@ export interface BannerBlock {
  */
 export interface CarouselBlock {
   /**
-   * Cards shows 3 slides at a time. Full Width shows one large slide with an image background.
+   * Cards Slides Layout.
    */
   carouselType: 'cards' | 'fullWidth';
   /**
@@ -1134,7 +1120,7 @@ export interface CarouselBlock {
   slides?:
     | {
         /**
-         * Full Width: used as a full-bleed background. Cards: displayed at the top of the card.
+         * Add a background image for the slide.
          */
         image: number | Media;
         /**
@@ -1190,6 +1176,26 @@ export interface CarouselBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RelatedSocialLinksBlock".
+ */
+export interface RelatedSocialLinksBlock {
+  title?: string | null;
+  links?:
+    | {
+        /**
+         * Paste the full URL to the Instagram or Facebook post.
+         */
+        url: string;
+        platform: 'instagram' | 'facebook';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'relatedSocialLinks';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences".
  */
 export interface Experience {
@@ -1209,6 +1215,7 @@ export interface Experience {
     | InfoBlock
     | BannerBlock
     | CarouselBlock
+    | RelatedSocialLinksBlock
   )[];
   relatedExperiences?: (number | Experience)[] | null;
   categories?: (number | Category)[] | null;
@@ -1251,6 +1258,7 @@ export interface Journey {
     | InfoBlock
     | BannerBlock
     | CarouselBlock
+    | RelatedSocialLinksBlock
   )[];
   relatedJourneys?: (number | Journey)[] | null;
   categories?: (number | Category)[] | null;
@@ -1271,37 +1279,6 @@ export interface Journey {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AvailabilityBlock".
- */
-export interface AvailabilityBlock {
-  heading: string;
-  description?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'availabilityBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RelatedSocialLinksBlock".
- */
-export interface RelatedSocialLinksBlock {
-  title?: string | null;
-  links?:
-    | {
-        /**
-         * Paste the full URL to the Instagram or Facebook post.
-         */
-        url: string;
-        platform: 'instagram' | 'facebook';
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'relatedSocialLinks';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1527,6 +1504,22 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'hotels';
+        value: number | Hotel;
+      } | null)
+    | ({
+        relationTo: 'villas-and-estates';
+        value: number | VillasAndEstate;
+      } | null)
+    | ({
+        relationTo: 'experiences';
+        value: number | Experience;
+      } | null)
+    | ({
+        relationTo: 'journeys';
+        value: number | Journey;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -1545,22 +1538,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
-      } | null)
-    | ({
-        relationTo: 'hotels';
-        value: number | Hotel;
-      } | null)
-    | ({
-        relationTo: 'villas-and-estates';
-        value: number | VillasAndEstate;
-      } | null)
-    | ({
-        relationTo: 'experiences';
-        value: number | Experience;
-      } | null)
-    | ({
-        relationTo: 'journeys';
-        value: number | Journey;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1626,57 +1603,17 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
+ * via the `definition` "hotels_select".
  */
-export interface PagesSelect<T extends boolean = true> {
+export interface HotelsSelect<T extends boolean = true> {
   title?: T;
-  hero?:
-    | T
-    | {
-        type?: T;
-        slides?:
-          | T
-          | {
-              richText?: T;
-              links?:
-                | T
-                | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              media?: T;
-              id?: T;
-            };
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        media?: T;
-      };
+  location?: T;
+  logoImage?: T;
+  heroImage?: T;
   layout?:
     | T
     | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         cardsBlock?: T | CardsBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
@@ -1684,10 +1621,12 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
-        richTextBlock?: T | RichTextBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
+  relatedHotels?: T;
+  categories?: T;
   meta?:
     | T
     | {
@@ -1701,6 +1640,15 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  richText?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1794,6 +1742,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   relationTo?: T;
   categories?: T;
   limit?: T;
+  enablePagination?: T;
   selectedDocs?: T;
   id?: T;
   blockName?: T;
@@ -1833,10 +1782,11 @@ export interface InfoBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichTextBlock_select".
+ * via the `definition` "BannerBlock_select".
  */
-export interface RichTextBlockSelect<T extends boolean = true> {
-  richText?: T;
+export interface BannerBlockSelect<T extends boolean = true> {
+  style?: T;
+  content?: T;
   id?: T;
   blockName?: T;
 }
@@ -1886,6 +1836,204 @@ export interface RelatedSocialLinksBlockSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "villas-and-estates_select".
+ */
+export interface VillasAndEstatesSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  logoImage?: T;
+  heroImage?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
+        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+      };
+  relatedVillasAndEstates?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences_select".
+ */
+export interface ExperiencesSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  logoImage?: T;
+  heroImage?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
+        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+      };
+  relatedExperiences?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "journeys_select".
+ */
+export interface JourneysSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  logoImage?: T;
+  heroImage?: T;
+  layout?:
+    | T
+    | {
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
+        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+      };
+  relatedJourneys?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        slides?:
+          | T
+          | {
+              richText?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              media?: T;
+              id?: T;
+            };
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        cardsBlock?: T | CardsBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        infoBlock?: T | InfoBlockSelect<T>;
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        carouselBlock?: T | CarouselBlockSelect<T>;
+        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2038,8 +2186,6 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
-  role?: T;
-  managedVillas?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -2056,192 +2202,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hotels_select".
- */
-export interface HotelsSelect<T extends boolean = true> {
-  title?: T;
-  location?: T;
-  logoImage?: T;
-  heroImage?: T;
-  layout?:
-    | T
-    | {
-        richTextBlock?: T | RichTextBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
-        cardsBlock?: T | CardsBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-        infoBlock?: T | InfoBlockSelect<T>;
-        banner?: T | BannerBlockSelect<T>;
-        carouselBlock?: T | CarouselBlockSelect<T>;
-      };
-  relatedHotels?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  generateSlug?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlock_select".
- */
-export interface BannerBlockSelect<T extends boolean = true> {
-  style?: T;
-  content?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "villas-and-estates_select".
- */
-export interface VillasAndEstatesSelect<T extends boolean = true> {
-  title?: T;
-  owner?: T;
-  location?: T;
-  logoImage?: T;
-  heroImage?: T;
-  layout?:
-    | T
-    | {
-        richTextBlock?: T | RichTextBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
-        cardsBlock?: T | CardsBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-        infoBlock?: T | InfoBlockSelect<T>;
-        banner?: T | BannerBlockSelect<T>;
-        carouselBlock?: T | CarouselBlockSelect<T>;
-        availabilityBlock?: T | AvailabilityBlockSelect<T>;
-      };
-  relatedVillasAndEstates?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  unavailableDates?:
-    | T
-    | {
-        startDate?: T;
-        endDate?: T;
-        reason?: T;
-        id?: T;
-      };
-  publishedAt?: T;
-  generateSlug?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AvailabilityBlock_select".
- */
-export interface AvailabilityBlockSelect<T extends boolean = true> {
-  heading?: T;
-  description?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experiences_select".
- */
-export interface ExperiencesSelect<T extends boolean = true> {
-  title?: T;
-  location?: T;
-  logoImage?: T;
-  heroImage?: T;
-  layout?:
-    | T
-    | {
-        richTextBlock?: T | RichTextBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
-        cardsBlock?: T | CardsBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-        infoBlock?: T | InfoBlockSelect<T>;
-        banner?: T | BannerBlockSelect<T>;
-        carouselBlock?: T | CarouselBlockSelect<T>;
-      };
-  relatedExperiences?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  generateSlug?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "journeys_select".
- */
-export interface JourneysSelect<T extends boolean = true> {
-  title?: T;
-  location?: T;
-  logoImage?: T;
-  heroImage?: T;
-  layout?:
-    | T
-    | {
-        richTextBlock?: T | RichTextBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
-        cardsBlock?: T | CardsBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-        infoBlock?: T | InfoBlockSelect<T>;
-        banner?: T | BannerBlockSelect<T>;
-        carouselBlock?: T | CarouselBlockSelect<T>;
-      };
-  relatedJourneys?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  generateSlug?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2623,14 +2583,6 @@ export interface TaskSchedulePublish {
     locale?: string | null;
     doc?:
       | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null)
-      | ({
           relationTo: 'hotels';
           value: number | Hotel;
         } | null)
@@ -2645,6 +2597,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'journeys';
           value: number | Journey;
+        } | null)
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

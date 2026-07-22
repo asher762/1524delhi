@@ -114,20 +114,30 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem]">
+    <div className="container lg:max-w-[52rem] mx-auto my-8 px-4 md:px-6">
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
+      <div className="p-6 md:p-10 border border-border bg-card text-card-foreground rounded-2xl shadow-lg backdrop-blur-md">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
+            <div className="p-4 rounded-xl bg-success/20 border border-success text-foreground">
+              <RichText data={confirmationMessage} />
+            </div>
           )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+          {isLoading && !hasSubmitted && (
+            <div className="flex items-center justify-center py-8 text-muted-foreground font-medium">
+              <p>Loading, please wait...</p>
+            </div>
+          )}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl bg-error/20 border border-error text-foreground">
+              {`${error.status || '500'}: ${error.message || ''}`}
+            </div>
+          )}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
+              <div className="mb-8 space-y-6">
                 {formFromProps &&
                   formFromProps.fields &&
                   formFromProps.fields?.map((field, index) => {
@@ -135,7 +145,7 @@ export const FormBlock: React.FC<
                     const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
                     if (Field) {
                       return (
-                        <div className="mb-6 last:mb-0" key={index}>
+                        <div key={index}>
                           <Field
                             form={formFromProps}
                             {...field}
@@ -151,9 +161,17 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
-                {submitButtonLabel}
-              </Button>
+              <div className="pt-2">
+                <Button
+                  form={formID}
+                  type="submit"
+                  variant="default"
+                  size="lg"
+                  className="w-full md:w-auto px-8 py-3 rounded-xl font-medium shadow-md transition-all duration-200 hover:shadow-lg"
+                >
+                  {submitButtonLabel || 'Send Message'}
+                </Button>
+              </div>
             </form>
           )}
         </FormProvider>
