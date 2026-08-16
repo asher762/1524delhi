@@ -27,6 +27,24 @@ export const ArchiveBlock: React.FC<
   const limit = limitFromProps || 12
   const targetCollection = relationTo || 'posts'
 
+  // `pages` is the one selectable target without a `categories` field, so the
+  // key is added conditionally rather than blanket-selected.
+  const hasCategories = targetCollection !== 'pages'
+
+  // Card / ListView / FullScreenCarousel between them render only these
+  // fields. Without an explicit select every document came back in full —
+  // including the entire `layout` blocks tree at depth 1, for up to 100 docs.
+  const archiveSelect = {
+    title: true,
+    slug: true,
+    meta: {
+      image: true,
+      description: true,
+      title: true,
+    },
+    ...(hasCategories ? { categories: true } : {}),
+  }
+
   let posts: any[] = []
   let totalPages = 1
   let totalDocs = 0
@@ -47,6 +65,7 @@ export const ArchiveBlock: React.FC<
       depth: 1,
       limit: isCarousel ? limitFromProps || 100 : limit,
       overrideAccess: false,
+      select: archiveSelect as any,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {

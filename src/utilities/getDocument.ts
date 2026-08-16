@@ -12,6 +12,10 @@ async function getDocument(collection: Collection, slug: string, depth = 0) {
   const page = await payload.find({
     collection,
     depth,
+    // Local API defaults overrideAccess to true. This runs on the public
+    // frontend (via PayloadRedirects), so it must respect collection access —
+    // otherwise an unpublished draft can be surfaced through a redirect.
+    overrideAccess: false,
     where: {
       slug: {
         equals: slug,

@@ -17,6 +17,7 @@ import { IconBlock } from '@/blocks/Icon/config'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { sendContactNotificationEmail } from '@/hooks/sendContactNotificationEmail'
+import { isAdmin } from '@/access/isAdmin'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -162,6 +163,17 @@ export const plugins: Plugin[] = [
       },
     },
     formSubmissionOverrides: {
+      access: {
+        // Public forms must stay open to create — this matches the plugin default.
+        create: () => true,
+        // Submissions carry visitor PII (name, email, phone, enquiry details).
+        // Restricted to admins, not every logged-in editor.
+        read: isAdmin,
+        // The plugin defaults update to `() => false`, which silently made the
+        // `status` field below unsaveable for everyone.
+        update: isAdmin,
+        delete: isAdmin,
+      },
       admin: {
         group: 'Collections',
         defaultColumns: ['form', 'status', 'createdAt'],

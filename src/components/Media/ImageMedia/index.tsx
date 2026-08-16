@@ -1,21 +1,18 @@
-'use client'
-
 import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/ui'
-import NextImage from 'next/image'
 import React from 'react'
 
 import type { Props as MediaProps } from '../types'
 
-import { cssVariables } from '@/cssVariables'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { ImageWithLoader } from './ImageWithLoader'
 
-const { breakpoints } = cssVariables
-
-// A base64 encoded image to use as a placeholder while the image is loading
-const placeholderBlur =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPcVQ8AAfkBO36lz9wAAAAASUVORK5CYII='
+// Delivered quality. 100 disables almost all perceptual optimisation in the
+// AVIF/WebP encoders for no visible gain; 85 is visually indistinguishable on
+// photographic content at a fraction of the bytes. Raise to 90 or 100 here if
+// a specific asset needs it — both are allowed by `images.qualities`.
+const IMAGE_QUALITY = 85
 
 /**
  * ImageMedia
@@ -77,24 +74,26 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
 
-  // NOTE: this is used by the browser to determine which image to download at different screen sizes
-  const sizes = sizeFromProps
-    ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
-        .join(', ')
+  // NOTE: this is used by the browser to determine which image to download at
+  // different screen sizes. The previous default emitted srcset-style `w`
+  // descriptors (e.g. `(max-width: 1920px) 3840w`), which are not valid in a
+  // `sizes` attribute — every entry was discarded and the browser silently fell
+  // back to 100vw. `100vw` is now stated explicitly (identical behaviour, no
+  // longer accidental); any call site rendering into a narrower slot should
+  // pass an explicit `size`.
+  const sizes = sizeFromProps ?? '100vw'
 
   return (
-    <picture className={cn(fill && 'relative block w-full h-full', pictureClassName)}>
-      <NextImage
+    // `relative` unconditionally (not only when `fill`) so the loading
+    // spinner in ImageWithLoader has a positioning context in both modes.
+    <picture className={cn('relative', fill && 'block w-full h-full', pictureClassName)}>
+      <ImageWithLoader
         alt={alt || ''}
         className={cn(imgClassName)}
         fill={fill}
         height={!fill ? height : undefined}
-        placeholder="blur"
-        blurDataURL={placeholderBlur}
         priority={priority}
-        quality={100}
+        quality={IMAGE_QUALITY}
         loading={loading}
         sizes={sizes}
         src={src}

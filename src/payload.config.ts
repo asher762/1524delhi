@@ -1,3 +1,5 @@
+import { timingSafeEqual } from 'crypto'
+
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import sharp from 'sharp'
@@ -112,7 +114,15 @@ export default buildConfig({
         // for the Vercel Cron secret to be present as an
         // Authorization header:
         const authHeader = req.headers.get('authorization')
-        return authHeader === `Bearer ${secret}`
+        if (!authHeader) return false
+
+        // Constant-time compare so the header cannot be recovered byte-by-byte
+        // via response timing. timingSafeEqual throws on length mismatch, so
+        // the lengths are checked first.
+        const expected = Buffer.from(`Bearer ${secret}`)
+        const actual = Buffer.from(authHeader)
+        if (expected.length !== actual.length) return false
+        return timingSafeEqual(expected, actual)
       },
     },
     tasks: [],

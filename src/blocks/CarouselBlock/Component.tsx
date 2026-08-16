@@ -16,13 +16,33 @@ type Slide = NonNullable<CarouselBlockProps['slides']>[number]
 
 // ─── Full Width Slide ─────────────────────────────────────────────────────────
 
-function FullWidthSlide({ slide, sectionTitle }: { slide: Slide; sectionTitle?: string | null }) {
+function FullWidthSlide({
+  slide,
+  sectionTitle,
+  isFirst,
+}: {
+  slide: Slide
+  sectionTitle?: string | null
+  isFirst?: boolean
+}) {
   const imageUrl = typeof slide.image === 'object' && slide.image ? (slide.image.url ?? '') : ''
   const imageAlt = typeof slide.image === 'object' && slide.image ? (slide.image.alt ?? '') : ''
 
   return (
     <div className="relative flex-[0_0_100%] min-w-0 h-[520px] md:h-[640px]">
-      {imageUrl && <Image src={imageUrl} alt={imageAlt} fill className="object-cover" priority />}
+      {/* Only the first slide is preloaded. Marking every slide `priority`
+          made N full-bleed images compete for early bandwidth, which delays
+          the LCP element rather than helping it. */}
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          alt={imageAlt}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority={isFirst}
+        />
+      )}
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -74,6 +94,9 @@ function CardSlide({ slide }: { slide: Slide }) {
               src={imageUrl}
               alt={imageAlt}
               fill
+              // Slot is full width on mobile, 1/2 at sm, 1/3 at lg (see the
+              // flex basis on the wrapper above).
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           )}
@@ -208,7 +231,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {slides.map((slide, i) => (
-                <FullWidthSlide key={i} slide={slide} sectionTitle={title} />
+                <FullWidthSlide key={i} slide={slide} sectionTitle={title} isFirst={i === 0} />
               ))}
             </div>
           </div>

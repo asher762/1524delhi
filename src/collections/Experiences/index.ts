@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { isAdmin } from '../../access/isAdmin'
 import { Banner } from '../../blocks/Banner/config'
 import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -30,7 +31,7 @@ export const Experiences: CollectionConfig<'experiences'> = {
   orderable: true,
   access: {
     create: authenticated,
-    delete: authenticated,
+    delete: isAdmin,
     read: authenticatedOrPublished,
     update: authenticated,
   },

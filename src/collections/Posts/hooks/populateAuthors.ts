@@ -7,29 +7,42 @@ import { User } from '@/payload-types'
 // So we use an alternative `populatedAuthors` field to populate the user data, hidden from the admin UI
 export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: { payload } }) => {
   if (doc?.authors && doc?.authors?.length > 0) {
-    const authorDocs: User[] = []
+    const authorIDs = doc.authors
+      .map((author: User | number | string) => (typeof author === 'object' ? author?.id : author))
+      .filter(Boolean)
 
-    for (const author of doc.authors) {
-      try {
-        const authorDoc = await payload.findByID({
-          id: typeof author === 'object' ? author?.id : author,
-          collection: 'users',
-          depth: 0,
-        })
+    if (authorIDs.length === 0) return doc
 
-        if (authorDoc) {
-          authorDocs.push(authorDoc)
-        }
+    try {
+      // One query instead of a serial findByID per author. This hook runs on
+      // every post read, including list views, so the previous loop cost one
+      // round-trip per author per document.
+      const authors = await payload.find({
+        collection: 'users',
+        depth: 0,
+        limit: authorIDs.length,
+        pagination: false,
+        // Passing `req` keeps this inside the caller's transaction rather than
+        // opening a fresh one for each lookup.
+        req,
+        where: { id: { in: authorIDs } },
+      })
 
-        if (authorDocs.length > 0) {
-          doc.populatedAuthors = authorDocs.map((authorDoc) => ({
-            id: authorDoc.id,
-            name: authorDoc.name,
+      if (authors.docs.length > 0) {
+        // Preserve the author order configured on the document; `find` returns
+        // rows in database order, which need not match.
+        const byID = new Map(authors.docs.map((author) => [String(author.id), author]))
+
+        doc.populatedAuthors = authorIDs
+          .map((id: number | string) => byID.get(String(id)))
+          .filter(Boolean)
+          .map((author: User) => ({
+            id: author.id,
+            name: author.name,
           }))
-        }
-      } catch {
-        // swallow error
       }
+    } catch {
+      // swallow error
     }
   }
 

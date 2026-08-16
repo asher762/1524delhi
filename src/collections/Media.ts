@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url'
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
+import { isAdmin } from '../access/isAdmin'
 import { IconBlock } from '../blocks/Icon/config'
 
 const filename = fileURLToPath(import.meta.url)
@@ -24,7 +25,7 @@ export const Media: CollectionConfig = {
   },
   access: {
     create: authenticated,
-    delete: authenticated,
+    delete: isAdmin,
     read: anyone,
     update: authenticated,
   },
@@ -50,10 +51,31 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
+    // Only used when the Vercel Blob adapter is inactive (e.g. local dev with
+    // no BLOB_READ_WRITE_TOKEN). In deployed environments the storage adapter
+    // supersedes this and files go to Vercel Blob.
     staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
+    // Allowlist rather than accept-anything. SVG is deliberately excluded: Blob
+    // serves with the uploaded content type, so a stored SVG becomes an
+    // attacker-controlled document on a Vercel domain. Add types here (e.g.
+    // 'application/pdf') if editors need them.
+    mimeTypes: [
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/avif',
+      'image/gif',
+      'video/mp4',
+      'video/webm',
+      'video/quicktime',
+    ],
+    // NOTE: Payload 3.81 exposes no per-collection max file size (UploadConfig
+    // has no `filesize`/`limits` key). The effective ceiling here is Vercel's
+    // ~4.5MB request body limit, since clientUploads is not enabled. If that
+    // ever changes, enforce a cap via `upload.abortOnLimit`/`limitHandler` on
+    // the root config in payload.config.ts.
     imageSizes: [
       {
         name: 'thumbnail',

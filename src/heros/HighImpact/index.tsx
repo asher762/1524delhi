@@ -121,7 +121,7 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
           <div className="relative z-10 flex h-full flex-col items-center justify-center gap-5 px-6 text-center text-white">
             {slide.richText && (
               <div className="max-w-3xl">
-                <RichText data={slide.richText} enableGutter={false} />
+                <RichText className="prose-invert" data={slide.richText} enableGutter={false}/>
               </div>
             )}
             {Array.isArray(slide.links) && slide.links.length > 0 && (

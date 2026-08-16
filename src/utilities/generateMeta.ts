@@ -10,9 +10,15 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   let url = ''
 
   if (image && typeof image === 'object' && 'url' in image) {
-    const ogUrl = image.sizes?.og?.url
+    const source = image.sizes?.og?.url || image.url
 
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
+    if (source) {
+      // Storage adapters return absolute URLs (Vercel Blob serves from
+      // https://<store>.public.blob.vercel-storage.com/...). Prefixing those
+      // with the server URL produced a malformed `https://site/https://blob/...`
+      // and broke every Open Graph preview. Only relative paths need the prefix.
+      url = /^https?:\/\//i.test(source) ? source : serverUrl + source
+    }
   }
 
   return url

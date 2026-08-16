@@ -32,7 +32,7 @@ export const Card: React.FC<{
   return (
     <article
       className={cn(
-        'group relative overflow-hidden bg-card hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
+        'group relative overflow-hidden bg-background hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
         className,
       )}
       ref={card.ref}
@@ -45,9 +45,11 @@ export const Card: React.FC<{
         )}
         {metaImage && typeof metaImage !== 'string' && (
           <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
+            {/* Grid is 4/4 cols on mobile, 4/8 at sm, 4/12 at lg — so the card
+                occupies 100vw / 50vw / 33vw respectively. */}
             <Media
               resource={metaImage}
-              size="33vw"
+              size="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               fill
               imgClassName="object-cover w-full h-full"
             />

@@ -83,6 +83,10 @@ export const FullScreenCarousel: React.FC<{
                     <Media
                       resource={image}
                       fill
+                      size="100vw"
+                      // This carousel is frequently the LCP element on a
+                      // landing page; preload only the initially visible slide.
+                      priority={index === 0}
                       imgClassName="object-cover absolute inset-0 w-full h-full rounded-2xl"
                     />
                   </div>

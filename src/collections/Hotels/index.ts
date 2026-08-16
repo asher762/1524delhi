@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { isAdmin } from '../../access/isAdmin'
 import { Banner } from '../../blocks/Banner/config'
 import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -30,7 +31,9 @@ export const Hotels: CollectionConfig<'hotels'> = {
   orderable: true,
   access: {
     create: authenticated,
-    delete: authenticated,
+    // Deletion is destructive and irreversible in the admin UI — gated to
+    // admins. Create/update are unchanged so editors keep their normal workflow.
+    delete: isAdmin,
     read: authenticatedOrPublished,
     update: authenticated,
   },

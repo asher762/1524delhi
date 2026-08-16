@@ -27,7 +27,13 @@ export const CollectionHero: React.FC<{
         {/* Logo */}
         {logoImage && typeof logoImage !== 'string' && (
           <div className="relative w-38 h-24 mb-2">
-            <Media fill imgClassName="object-contain object-center" resource={logoImage} />
+            {/* Fixed 9.5rem (152px) slot — see w-38 above. */}
+            <Media
+              fill
+              size="152px"
+              imgClassName="object-contain object-center"
+              resource={logoImage}
+            />
           </div>
         )}
 
@@ -48,7 +54,14 @@ export const CollectionHero: React.FC<{
       {heroImage && typeof heroImage !== 'string' && (
         <div className="container">
           <div className="relative w-full aspect-auto md:aspect-3/2 overflow-hidden">
-            <Media fill priority imgClassName="object-cover object-center" resource={heroImage} />
+            {/* Container caps at --breakpoint-2xl (86rem) minus 2rem padding. */}
+            <Media
+              fill
+              priority
+              size="(min-width: 1376px) 1344px, 100vw"
+              imgClassName="object-cover object-center"
+              resource={heroImage}
+            />
           </div>
         </div>
       )}

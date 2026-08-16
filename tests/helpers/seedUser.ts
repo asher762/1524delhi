@@ -4,6 +4,9 @@ import config from '../../src/payload.config.js'
 export const testUser = {
   email: 'dev@payloadcms.com',
   password: 'test',
+  // roles is now a required field (RBAC) — this suite exercises the admin
+  // panel end-to-end, so the seeded user needs admin access.
+  roles: ['admin' as const],
 }
 
 /**

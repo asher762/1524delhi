@@ -47,6 +47,9 @@ export const MediaBlock: React.FC<Props> = (props) => {
           imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
           videoClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
           resource={media}
+          // Renders at container width (capped at 86rem minus 2rem padding)
+          // when gutters are on, full-bleed otherwise.
+          size={enableGutter ? '(min-width: 1376px) 1344px, 100vw' : '100vw'}
           src={staticImage}
         />
       )}

@@ -23,7 +23,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
       )}
 
       <div className="container relative z-10 flex h-full min-h-[70vh] flex-col items-center justify-end py-24 text-center text-white">
-        {richText && <RichText className="mb-8 w-full max-w-3xl mx-auto text-center" data={richText} enableGutter={false} />}
+        {richText && <RichText className="prose-invert mb-8 w-full max-w-3xl mx-auto text-center" data={richText} enableGutter={false} />}
 
         {Array.isArray(links) && links.length > 0 && (
           <ul className="flex flex-wrap items-center justify-center gap-4">
@@ -39,7 +39,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
 
         {media && typeof media === 'object' && media?.caption && (
           <div className="mt-8 max-w-3xl text-sm text-white/70 md:text-base">
-            <RichText data={media.caption} enableGutter={false} />
+            <RichText className="prose-invert" data={media.caption} enableGutter={false} />
           </div>
         )}
       </div>
