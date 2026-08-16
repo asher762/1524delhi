@@ -2,33 +2,23 @@ import React from 'react'
 
 import { Media } from '@/components/Media'
 
-type Category = any
-
 export const CollectionHero: React.FC<{
   doc: {
     title: string
     logoImage?: any
-    categories?: Category[]
     heroImage?: any
-    publishedAt?: string | null
     location?: string | null
   }
 }> = ({ doc }) => {
-  const { categories, heroImage, title, location, logoImage } = doc
+  const { heroImage, title, location, logoImage } = doc
 
-  // Build the sub-heading: location parts + categories joined with " | "
+  // Build the sub-heading from location parts
   const locationParts = location
     ? location
         .split(',')
         .map((s) => s.trim())
         .filter(Boolean)
     : []
-
-  const categoryTitles = (categories ?? [])
-    .filter((c): c is { title: string } => typeof c === 'object' && c !== null)
-    .map((c) => c.title ?? 'Untitled')
-
-  const subheadingParts = [...locationParts, ...categoryTitles]
 
   return (
     <div className="bg-background pt-24 pb-0">
@@ -46,10 +36,10 @@ export const CollectionHero: React.FC<{
           {title}
         </h1>
 
-        {/* Location / categories */}
-        {subheadingParts.length > 0 && (
+        {/* Location */}
+        {locationParts.length > 0 && (
           <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground mt-1">
-            {subheadingParts.join(' \u00a0|\u00a0 ')}
+            {locationParts.join('  |  ')}
           </p>
         )}
       </div>
@@ -57,7 +47,7 @@ export const CollectionHero: React.FC<{
       {/* ── Hero image ── */}
       {heroImage && typeof heroImage !== 'string' && (
         <div className="container">
-          <div className="relative w-full aspect-video md:aspect-3/2 overflow-hidden rounded-2xl">
+          <div className="relative w-full aspect-auto md:aspect-3/2 overflow-hidden">
             <Media fill priority imgClassName="object-cover object-center" resource={heroImage} />
           </div>
         </div>

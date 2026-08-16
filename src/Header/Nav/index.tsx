@@ -33,12 +33,12 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', on
   }
 
   return (
-    <nav className="flex items-center justify-center gap-8 xl:gap-12">
+    <nav className="flex items-center justify-center gap-12">
       {navItems.map(({ link }, i) => (
         <CMSLink
           key={i}
           {...link}
-          className="whitespace-nowrap font-sans text-[10px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
+          className="whitespace-nowrap font-sans text-[14px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
         />
       ))}
     </nav>

@@ -43,7 +43,7 @@ function CardThumbnail({ card, onClick }: CardCarouselProps) {
   return (
     <button
       onClick={onClick}
-      className="group relative w-full rounded-lg overflow-hidden bg-card hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group relative w-full overflow-hidden bg-card hover:cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label="Open card details"
     >
       {/* Image area */}

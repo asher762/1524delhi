@@ -25,6 +25,31 @@ export const Header: GlobalConfig = {
         },
       },
     },
+    {
+      name: 'cta',
+      type: 'group',
+      label: 'Call To Action Button',
+      admin: {
+        hideGutter: true,
+      },
+      fields: [
+        {
+          name: 'enableCTA',
+          type: 'checkbox',
+          label: 'Show CTA button in header',
+          defaultValue: false,
+        },
+        link({
+          disableLabel: false,
+          appearances: false,
+          overrides: {
+            admin: {
+              condition: (_, siblingData) => Boolean(siblingData?.enableCTA),
+            },
+          },
+        }),
+      ],
+    },
   ],
   hooks: {
     afterChange: [revalidateHeader],

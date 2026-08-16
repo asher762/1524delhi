@@ -19,7 +19,7 @@ export const InfoBlockComponent: React.FC<InfoBlockProps> = (props) => {
       >
         <div className="w-full lg:w-3/5 shrink-0">
           {media && typeof media === 'object' && (
-            <Media imgClassName="rounded-xl w-full h-auto object-cover" resource={media} />
+            <Media imgClassName="rounded-none w-full h-auto object-cover" resource={media} />
           )}
         </div>
         <div className="w-full lg:w-2/5 flex flex-col justify-center gap-4 lg:px-4">

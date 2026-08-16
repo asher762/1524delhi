@@ -1,6 +1,7 @@
 import type { Block, Field } from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -8,6 +9,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { IconBlock } from '@/blocks/Icon/config'
 
 const columnFields: Field[] = [
   {
@@ -41,6 +43,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          BlocksFeature({ inlineBlocks: [IconBlock] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]

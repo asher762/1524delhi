@@ -1,9 +1,10 @@
 'use client'
 import { cn } from '@/utilities/ui'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 import { Card, CardPostData } from '@/components/Card'
 import { Pagination } from '@/components/Pagination'
+import { Filter, type FilterOption } from '@/components/ui/filter'
 import { CardsCarousel } from './CardsCarousel'
 import { FullScreenCarousel } from './FullScreenCarousel'
 import { ListView } from './ListView'
@@ -19,6 +20,30 @@ export type Props = {
   totalDocs?: number
   categories?: (string | number)[]
   populateBy?: 'collection' | 'selection'
+  showCategoryFilter?: boolean
+}
+
+// Post categories can arrive either as populated relationship docs ({ id, title })
+// or, from the `search` collection, as denormalized entries ({ categoryID, title }).
+const getCategoryIdentity = (category: unknown): FilterOption | null => {
+  if (!category || typeof category !== 'object') return null
+  const { id, categoryID, title } = category as {
+    id?: unknown
+    categoryID?: unknown
+    title?: unknown
+  }
+  const identityId = categoryID ?? id
+  if (!identityId || !title) return null
+  return { value: String(identityId), label: String(title) }
+}
+
+const postMatchesCategories = (post: CardPostData, categoryIds: string[]): boolean => {
+  if (categoryIds.length === 0) return true
+  if (!Array.isArray(post?.categories)) return false
+  return post.categories.some((category: unknown) => {
+    const identity = getCategoryIdentity(category)
+    return identity ? categoryIds.includes(identity.value) : false
+  })
 }
 
 export const CollectionArchive: React.FC<Props> = (props) => {
@@ -32,46 +57,48 @@ export const CollectionArchive: React.FC<Props> = (props) => {
     page: initialPage = 1,
     categories,
     populateBy = 'collection',
+    showCategoryFilter = true,
   } = props
 
   const [displayedPosts, setDisplayedPosts] = useState<CardPostData[]>(initialPosts)
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
   const [totalPages, setTotalPages] = useState<number>(initialTotalPages)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   useEffect(() => {
     setDisplayedPosts(initialPosts)
     setCurrentPage(initialPage)
     setTotalPages(initialTotalPages)
+    setSelectedCategories([])
   }, [initialPosts, initialPage, initialTotalPages])
 
-  if (!initialPosts || initialPosts.length === 0) return null
+  const categoryOptions = useMemo<FilterOption[]>(() => {
+    const map = new Map<string, string>()
+    ;(initialPosts || []).forEach((post) => {
+      if (!Array.isArray(post?.categories)) return
+      post.categories.forEach((category: unknown) => {
+        const identity = getCategoryIdentity(category)
+        if (identity && !map.has(identity.value)) {
+          map.set(identity.value, identity.label)
+        }
+      })
+    })
+    return Array.from(map, ([value, label]) => ({ value, label }))
+  }, [initialPosts])
 
-  if (layout === 'FullScreenCarousel') {
-    return <FullScreenCarousel posts={initialPosts} relationTo={relationTo} />
-  }
-
-  if (layout === 'CardsCarousel') {
-    return <CardsCarousel posts={initialPosts} relationTo={relationTo} />
-  }
-
-  const isPaginationActive = enablePagination && totalPages > 1
-
-  const handlePageChange = async (newPage: number) => {
-    if (newPage === currentPage || isLoading) return
-
-    if (populateBy === 'selection') {
-      setCurrentPage(newPage)
-      return
-    }
-
+  const fetchPosts = async (newPage: number, categoryIds: string[]) => {
     setIsLoading(true)
     try {
       const params = new URLSearchParams()
       params.append('limit', String(limit))
       params.append('page', String(newPage))
       params.append('depth', '1')
-      if (categories && categories.length > 0) {
+      if (categoryIds.length > 0) {
+        categoryIds.forEach((catId, idx) => {
+          params.append(`where[categories][in][${idx}]`, catId)
+        })
+      } else if (categories && categories.length > 0) {
         categories.forEach((catId, idx) => {
           params.append(`where[categories][in][${idx}]`, String(catId))
         })
@@ -87,24 +114,81 @@ export const CollectionArchive: React.FC<Props> = (props) => {
         }
       }
     } catch (err) {
-      console.error('Failed to fetch paginated archive page:', err)
+      console.error('Failed to fetch archive page:', err)
     } finally {
       setIsLoading(false)
     }
   }
 
+  if (!initialPosts || initialPosts.length === 0) return null
+
+  if (layout === 'FullScreenCarousel') {
+    return <FullScreenCarousel posts={initialPosts} relationTo={relationTo} />
+  }
+
+  if (layout === 'CardsCarousel') {
+    return <CardsCarousel posts={initialPosts} relationTo={relationTo} />
+  }
+
+  const handlePageChange = async (newPage: number) => {
+    if (newPage === currentPage || isLoading) return
+
+    if (populateBy === 'selection') {
+      setCurrentPage(newPage)
+      return
+    }
+
+    await fetchPosts(newPage, selectedCategories)
+  }
+
+  const handleCategoryChange = async (categoryIds: string[]) => {
+    if (isLoading) return
+    setSelectedCategories(categoryIds)
+
+    if (populateBy === 'collection' && enablePagination) {
+      await fetchPosts(1, categoryIds)
+    } else {
+      setCurrentPage(1)
+    }
+  }
+
+  // For server-fetched pages, filtering already happened via the API request above,
+  // so this is a no-op there and only does real work for client-held post lists.
+  const categoryFilteredPosts = displayedPosts.filter((post) =>
+    postMatchesCategories(post, selectedCategories),
+  )
+
+  const effectiveTotalPages =
+    populateBy === 'selection' ? Math.max(1, Math.ceil(categoryFilteredPosts.length / limit)) : totalPages
+
+  const isPaginationActive = enablePagination && effectiveTotalPages > 1
+
   const postsToRender =
     populateBy === 'selection' && isPaginationActive
-      ? displayedPosts.slice((currentPage - 1) * limit, currentPage * limit)
-      : displayedPosts
+      ? categoryFilteredPosts.slice((currentPage - 1) * limit, currentPage * limit)
+      : categoryFilteredPosts
+
+  const filterUI = showCategoryFilter && categoryOptions.length > 1 && (
+    <div className="mb-6">
+      <Filter
+        options={categoryOptions}
+        value={selectedCategories}
+        onChange={handleCategoryChange}
+        placeholder="All categories"
+        searchPlaceholder="Search categories..."
+        clearLabel="Clear categories"
+      />
+    </div>
+  )
 
   if (layout === 'List') {
     return (
       <div className={cn('transition-opacity duration-200', isLoading && 'opacity-50 pointer-events-none')}>
+        <div className="max-w-4xl">{filterUI}</div>
         <ListView posts={postsToRender} relationTo={relationTo} />
         {isPaginationActive && (
           <div className="container">
-            <Pagination page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            <Pagination page={currentPage} totalPages={effectiveTotalPages} onPageChange={handlePageChange} />
           </div>
         )}
       </div>
@@ -114,12 +198,13 @@ export const CollectionArchive: React.FC<Props> = (props) => {
   return (
     <div className={cn('transition-opacity duration-200', isLoading && 'opacity-50 pointer-events-none')}>
       <div>
+        <div className="max-w-4xl">{filterUI}</div>
         <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-12 gap-y-4 gap-x-4 lg:gap-y-8 lg:gap-x-8 xl:gap-x-8">
           {postsToRender?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
                 <div className="col-span-4" key={index}>
-                  <Card className="h-full" doc={result} relationTo={relationTo} showCategories />
+                  <Card className="h-full" doc={result} relationTo={relationTo}/>
                 </div>
               )
             }
@@ -129,7 +214,7 @@ export const CollectionArchive: React.FC<Props> = (props) => {
       </div>
       {isPaginationActive && (
         <div className="container">
-          <Pagination page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+          <Pagination page={currentPage} totalPages={effectiveTotalPages} onPageChange={handlePageChange} />
         </div>
       )}
     </div>

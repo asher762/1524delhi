@@ -1,8 +1,7 @@
 import type { Block } from 'payload'
 
 export const RelatedSocialLinks: Block = {
-  slug: 'relatedSocialLinks',
-  dbName: 'rel_soc_links',
+  slug: 'socialLinks',
   interfaceName: 'RelatedSocialLinksBlock',
   labels: {
     singular: 'Related Social Links Block',

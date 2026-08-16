@@ -1,6 +1,7 @@
 'use client'
 
 import { useHeaderTheme } from '@/providers/HeaderTheme'
+import { useEnquiry } from '@/providers/Enquiry'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -9,12 +10,14 @@ import type { Header } from '@/payload-types'
 import logoWhite from './../../public/logo/white_logo_transparent.svg'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
+import { HeaderCTAButton } from './CTAButton'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { cn } from '@/utilities/ui'
 import Image from 'next/image'
 
 export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
+  const { setEnquiry } = useEnquiry()
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -24,6 +27,9 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   useEffect(() => {
     setHeaderTheme(null)
+    // Cleared first on every navigation; a collection detail page's own PageClient
+    // (mounted after this, further down the tree) re-sets it if it has one.
+    setEnquiry({})
     setDrawerOpen(false)
   }, [pathname])
 
@@ -53,6 +59,9 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
           heroVisible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
         )}
       >
+        <div className="absolute right-8 top-7 flex h-14 items-center">
+          <HeaderCTAButton data={data} theme="dark" />
+        </div>
         <Link href="/" className="mb-6 block transition-opacity hover:opacity-80">
           <Image
             src={logoWhite}
@@ -96,10 +105,11 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
               Menu
             </span>
           </div>
-          <div>
+          <div className="flex items-center gap-8">
+            <HeaderCTAButton data={data} theme="dark" className='mx-4'/>
             <button
               aria-label="Search"
-              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground px-10"
+              className="flex h-9 w-9 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
             >
               <Link href="/search" className="flex gap-2">
                 <span className="text-xs uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground">
@@ -126,20 +136,27 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
             <Logo className="h-8 w-auto" />
           )}
         </Link>
-        <button
-          onClick={openDrawer}
-          aria-label="Open menu"
-          aria-expanded={drawerOpen}
-          aria-controls="nav-drawer"
-          className={cn(
-            'flex h-9 w-9 items-center justify-center transition-colors',
-            heroVisible
-              ? 'text-white/80 hover:text-white'
-              : 'text-foreground/60 hover:text-foreground',
-          )}
-        >
-          <Menu size={22} strokeWidth={1.5} />
-        </button>
+        <div className="flex items-center gap-5">
+          <HeaderCTAButton
+            data={data}
+            theme={heroVisible ? 'light' : 'dark'}
+            className="px-3 py-2 text-[9px] sm:px-4 sm:py-2 sm:text-[10px]"
+          />
+          <button
+            onClick={openDrawer}
+            aria-label="Open menu"
+            aria-expanded={drawerOpen}
+            aria-controls="nav-drawer"
+            className={cn(
+              'flex h-9 w-9 items-center justify-center transition-colors',
+              heroVisible
+                ? 'text-white/80 hover:text-white'
+                : 'text-foreground/60 hover:text-foreground',
+            )}
+          >
+            <Menu size={22} strokeWidth={1.5} />
+          </button>
+        </div>
       </header>
 
       {/* Backdrop */}

@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -8,6 +9,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '../../fields/linkGroup'
+import { IconBlock } from '../Icon/config'
 
 export const CallToAction: Block = {
   slug: 'cta',
@@ -21,6 +23,7 @@ export const CallToAction: Block = {
           return [
             ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            BlocksFeature({ inlineBlocks: [IconBlock] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
           ]

@@ -1,7 +1,14 @@
 import React from 'react'
 import type { Page } from '@/payload-types'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from '@/components/ui/carousel'
 
-type Props = Extract<Page['layout'][0], { blockType: 'relatedSocialLinks' }>
+type Props = Extract<Page['layout'][0], { blockType: 'socialLinks' }>
 
 /** Extracts the shortcode from Instagram post/reel/tv URLs */
 function getInstagramEmbedUrl(url: string): string | null {
@@ -25,33 +32,55 @@ export const RelatedSocialLinksComponent: React.FC<
   return (
     <div className="container my-16" id={`block-${id}`}>
       {title && <h2 className="text-3xl font-bold mb-8 text-center">{title}</h2>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start justify-items-center">
-        {links?.map((link, index) => {
-          if (!link.url) return null
+      <Carousel
+        opts={{
+          align: 'start',
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+          {links?.map((link, index) => {
+            if (!link.url) return null
 
-          const embedUrl =
-            link.platform === 'instagram'
-              ? getInstagramEmbedUrl(link.url)
-              : getFacebookEmbedUrl(link.url)
+            const embedUrl =
+              link.platform === 'instagram'
+                ? getInstagramEmbedUrl(link.url)
+                : getFacebookEmbedUrl(link.url)
 
-          if (!embedUrl) return null
+            if (!embedUrl) return null
 
-          return (
-            <div key={index} className="w-full flex justify-center">
-              <iframe
-                src={embedUrl}
-                width="400"
-                height="500"
-                style={{ border: 'none', overflow: 'hidden' }}
-                scrolling="no"
-                frameBorder={0}
-                allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              />
-            </div>
-          )
-        })}
-      </div>
+            return (
+              <CarouselItem
+                key={index}
+                className="flex justify-center basis-full sm:basis-1/2 lg:basis-1/3"
+              >
+                <div className="relative w-full max-w-[400px] mx-auto aspect-[400/600]">
+                  <iframe
+                    src={embedUrl}
+                    className="absolute inset-0 h-full w-full"
+                    style={{ border: 'none', overflow: 'hidden' }}
+                    scrolling="no"
+                    frameBorder={0}
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  />
+                </div>
+              </CarouselItem>
+            )
+          })}
+        </CarouselContent>
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <CarouselPrevious
+            variant="ghost"
+            className="static top-auto left-auto right-auto translate-x-0 translate-y-0 rotate-0 rounded-full"
+          />
+          <CarouselNext
+            variant="ghost"
+            className="static top-auto left-auto right-auto translate-x-0 translate-y-0 rotate-0 rounded-full"
+          />
+        </div>
+      </Carousel>
     </div>
   )
 }

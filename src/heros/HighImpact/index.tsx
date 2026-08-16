@@ -105,7 +105,13 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
           {/* Background image */}
           {slide.media && typeof slide.media === 'object' && (
             <div className="absolute inset-0">
-              <Media fill imgClassName="object-cover" priority={i === 0} resource={slide.media} />
+              <Media
+                fill
+                imgClassName="object-cover"
+                videoClassName="absolute inset-0 h-full w-full object-cover"
+                priority={i === 0}
+                resource={slide.media}
+              />
               {/* Dark overlay */}
               <div className="absolute inset-0 bg-black/35" />
             </div>
@@ -119,10 +125,10 @@ export const HighImpactHero: React.FC<Props> = ({ slides, richText, links, media
               </div>
             )}
             {Array.isArray(slide.links) && slide.links.length > 0 && (
-              <ul className="flex flex-wrap justify-center gap-4 tracking-widest">
+              <ul className="flex flex-wrap justify-center gap-4">
                 {slide.links.map(({ link }, j) => (
                   <li key={j}>
-                    <CMSLink {...link} className="" />
+                    <CMSLink {...link} appearance="link" className="text-white" />
                   </li>
                 ))}
               </ul>

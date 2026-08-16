@@ -10,8 +10,8 @@ const config = {
         DEFAULT: {
           css: [
             {
-              '--tw-prose-body': 'var(--text)',
-              '--tw-prose-headings': 'var(--text)',
+              '--tw-prose-body': 'var(--foreground)',
+              '--tw-prose-headings': 'var(--foreground)',
               h1: {
                 fontSize: '3rem',
                 fontWeight: '200',
@@ -31,6 +31,7 @@ const config = {
               },
               h4: {
                 fontSize: '1.1rem',
+                fontWeight: '400',
                 marginBottom: '0.5em',
               },
             },
@@ -52,6 +53,7 @@ const config = {
               },
               h4: {
                 fontSize: '1.25rem',
+                fontWeight: '400',
               },
             },
           ],

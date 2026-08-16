@@ -18,6 +18,7 @@ import { InfoBlock } from '../../blocks/InfoBlock/config'
 import { Content } from '../../blocks/Content/config'
 import { CarouselBlock } from '../../blocks/CarouselBlock/config'
 import { RelatedSocialLinks } from '../../blocks/RelatedSocialLinks/config'
+import { IconBlock } from '../../blocks/Icon/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -104,6 +105,7 @@ export const Posts: CollectionConfig<'posts'> = {
                         CarouselBlock,
                         RelatedSocialLinks,
                       ],
+                      inlineBlocks: [IconBlock],
                     }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),

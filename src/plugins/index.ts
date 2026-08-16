@@ -4,12 +4,19 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-import { Plugin } from 'payload'
+import { Block, Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+import { IconBlock } from '@/blocks/Icon/config'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
+import { sendContactNotificationEmail } from '@/hooks/sendContactNotificationEmail'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -22,6 +29,55 @@ const generateURL: GenerateURL<any> = ({ doc }) => {
   const url = getServerSideURL()
 
   return doc?.slug ? `${url}/${doc.slug}` : url
+}
+
+// Replaces the form-builder plugin's built-in State/Country fields, which this site
+// never used. Fetches its own section + item options live client-side (see
+// src/blocks/Form/CollectionEnquiry) instead of storing them in the admin schema.
+const collectionEnquiryBlock: Block = {
+  slug: 'collectionEnquiry',
+  labels: {
+    singular: 'Collection Enquiry',
+    plural: 'Collection Enquiry Fields',
+  },
+  fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          label: 'Name (lowercase, no special characters)',
+          required: true,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Label',
+          localized: true,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'width',
+          type: 'number',
+          label: 'Field Width (percentage)',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'required',
+          type: 'checkbox',
+          label: 'Required',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+  ],
 }
 
 export const plugins: Plugin[] = [
@@ -60,35 +116,77 @@ export const plugins: Plugin[] = [
   }),
   formBuilderPlugin({
     fields: {
+      state: false,
+      country: false,
       payment: false,
+      // The plugin's FieldsConfig type only documents Partial<Field> here, but the
+      // runtime (generateFormCollection) accepts a full Block to register a new field type.
+      collectionEnquiry: collectionEnquiryBlock,
     },
     formOverrides: {
       admin: {
         group: 'Collections',
       },
       fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ('name' in field && field.name === 'confirmationMessage') {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                  ]
-                },
-              }),
+        return [
+          ...defaultFields.map((field) => {
+            if ('name' in field && field.name === 'confirmationMessage') {
+              return {
+                ...field,
+                editor: lexicalEditor({
+                  features: ({ rootFeatures }) => {
+                    return [
+                      ...rootFeatures,
+                      FixedToolbarFeature(),
+                      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                      BlocksFeature({ inlineBlocks: [IconBlock] }),
+                    ]
+                  },
+                }),
+              }
             }
-          }
-          return field
-        })
+            return field
+          }),
+          {
+            name: 'sendAdminNotification',
+            type: 'checkbox',
+            label: 'Send internal notification email',
+            defaultValue: false,
+            admin: {
+              position: 'sidebar',
+              description:
+                'When enabled, each new submission of this form sends an internal alert to CONTACT_NOTIFICATION_EMAIL. The visitor never receives an email from this.',
+            },
+          },
+        ]
       },
     },
     formSubmissionOverrides: {
       admin: {
         group: 'Collections',
+        defaultColumns: ['form', 'status', 'createdAt'],
+      },
+      fields: ({ defaultFields }) => {
+        return [
+          ...defaultFields,
+          {
+            name: 'status',
+            type: 'select',
+            label: 'Status',
+            defaultValue: 'new',
+            options: [
+              { label: 'New', value: 'new' },
+              { label: 'Read', value: 'read' },
+              { label: 'Archived', value: 'archived' },
+            ],
+            admin: {
+              position: 'sidebar',
+            },
+          },
+        ]
+      },
+      hooks: {
+        afterChange: [sendContactNotificationEmail],
       },
     },
   }),

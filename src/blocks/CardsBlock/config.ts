@@ -1,11 +1,13 @@
 import type { Block } from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { IconBlock } from '../Icon/config'
 
 export const CardsBlock: Block = {
   slug: 'cardsBlock',
@@ -24,6 +26,7 @@ export const CardsBlock: Block = {
         features: ({ rootFeatures }) => [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          BlocksFeature({ inlineBlocks: [IconBlock] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ],
@@ -67,6 +70,7 @@ export const CardsBlock: Block = {
             features: ({ rootFeatures }) => [
               ...rootFeatures,
               HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
+              BlocksFeature({ inlineBlocks: [IconBlock] }),
               FixedToolbarFeature(),
               InlineToolbarFeature(),
             ],

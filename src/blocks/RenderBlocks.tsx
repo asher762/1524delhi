@@ -25,7 +25,7 @@ const blockComponents = {
   infoBlock: InfoBlockComponent,
   richTextBlock: RichTextBlockComponent,
   carouselBlock: CarouselBlock,
-  relatedSocialLinks: RelatedSocialLinksComponent,
+  socialLinks: RelatedSocialLinksComponent,
 }
 
 export const RenderBlocks: React.FC<{
@@ -53,7 +53,7 @@ export const RenderBlocks: React.FC<{
                 : undefined
 
               return (
-                <div className="w-full my-12 md:my-16 lg:my-24" key={index} id={id}>
+                <div className="w-full my-12 md:my-16 lg:my-18" key={index} id={id}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

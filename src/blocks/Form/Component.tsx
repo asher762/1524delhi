@@ -118,10 +118,10 @@ export const FormBlock: React.FC<
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
-      <div className="p-6 md:p-10 border border-border bg-card text-card-foreground rounded-2xl shadow-lg backdrop-blur-md">
+      <div className="p-6 md:p-10 border border-border bg-card text-card-foreground rounded-none shadow-lg backdrop-blur-md">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <div className="p-4 rounded-xl bg-success/20 border border-success text-foreground">
+            <div className="p-4 rounded-none bg-success/20 border border-success text-foreground">
               <RichText data={confirmationMessage} />
             </div>
           )}
@@ -131,7 +131,7 @@ export const FormBlock: React.FC<
             </div>
           )}
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-error/20 border border-error text-foreground">
+            <div className="mb-6 p-4 rounded-none bg-error/20 border border-error text-foreground">
               {`${error.status || '500'}: ${error.message || ''}`}
             </div>
           )}
@@ -167,7 +167,7 @@ export const FormBlock: React.FC<
                   type="submit"
                   variant="default"
                   size="lg"
-                  className="w-full md:w-auto px-8 py-3 rounded-xl font-medium shadow-md transition-all duration-200 hover:shadow-lg"
+                  className="w-full md:w-auto px-8 py-3 rounded-none font-medium shadow-md transition-all duration-200 hover:shadow-lg"
                 >
                   {submitButtonLabel || 'Send Message'}
                 </Button>

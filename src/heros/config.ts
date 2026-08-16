@@ -1,6 +1,7 @@
 import type { Field } from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -8,6 +9,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '@/fields/linkGroup'
+import { IconBlock } from '@/blocks/Icon/config'
 
 // Reusable per-slide fields (used inside the slides array)
 const slideFields: Field[] = [
@@ -19,6 +21,7 @@ const slideFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          BlocksFeature({ inlineBlocks: [IconBlock] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]
@@ -92,6 +95,7 @@ export const hero: Field = {
           return [
             ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            BlocksFeature({ inlineBlocks: [IconBlock] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
           ]

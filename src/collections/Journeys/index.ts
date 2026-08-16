@@ -27,6 +27,7 @@ import { slugField } from 'payload'
 
 export const Journeys: CollectionConfig<'journeys'> = {
   slug: 'journeys',
+  orderable: true,
   access: {
     create: authenticated,
     delete: authenticated,

@@ -2,6 +2,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
+  SerializedInlineBlockNode,
   SerializedLinkNode,
   type DefaultTypedEditorState,
 } from '@payloadcms/richtext-lexical'
@@ -17,16 +18,19 @@ import type {
   MediaBlock as MediaBlockProps,
   InfoBlock as InfoBlockProps,
   ContentBlock as ContentBlockProps,
+  IconBlock as IconBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { InfoBlockComponent as InfoBlock } from '@/blocks/InfoBlock/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
+import { IconBlockComponent as IconBlock } from '@/blocks/Icon/Component'
 import { cn } from '@/utilities/ui'
 
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | InfoBlockProps | ContentBlockProps>
+  | SerializedInlineBlockNode<IconBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -67,6 +71,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     infoBlock: ({ node }) => <InfoBlock {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     content: ({ node }) => <ContentBlock {...node.fields} />,
+  },
+  inlineBlocks: {
+    icon: ({ node }) => <IconBlock {...node.fields} />,
   },
 })
 

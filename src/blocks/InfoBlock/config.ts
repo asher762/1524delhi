@@ -1,11 +1,13 @@
 import type { Block } from 'payload'
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { link } from '../../fields/link'
+import { IconBlock } from '../Icon/config'
 
 export const InfoBlock: Block = {
   slug: 'infoBlock',
@@ -19,6 +21,7 @@ export const InfoBlock: Block = {
           return [
             ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+            BlocksFeature({ inlineBlocks: [IconBlock] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
           ]

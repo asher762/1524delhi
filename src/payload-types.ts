@@ -165,6 +165,7 @@ export interface UserAuthOperations {
  */
 export interface Hotel {
   id: number;
+  _order?: string | null;
   title: string;
   location: string;
   logoImage?: (number | null) | Media;
@@ -438,7 +439,7 @@ export interface Page {
                   /**
                    * Choose how the link should be rendered.
                    */
-                  appearance?: ('default' | 'outline') | null;
+                  appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
                 };
                 id?: string | null;
               }[]
@@ -481,7 +482,7 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
           };
           id?: string | null;
         }[]
@@ -710,7 +711,7 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
         };
         id?: string | null;
       }[]
@@ -793,6 +794,7 @@ export interface ArchiveBlock {
  */
 export interface VillasAndEstate {
   id: number;
+  _order?: string | null;
   title: string;
   location: string;
   logoImage?: (number | null) | Media;
@@ -882,15 +884,6 @@ export interface Form {
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'country';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
             blockType: 'email';
           }
         | {
@@ -945,15 +938,6 @@ export interface Form {
             name: string;
             label?: string | null;
             width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'state';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
             id?: string | null;
@@ -969,6 +953,15 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'textarea';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'collectionEnquiry';
           }
       )[]
     | null;
@@ -1027,6 +1020,10 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  /**
+   * When enabled, each new submission of this form sends an internal alert to CONTACT_NOTIFICATION_EMAIL. The visitor never receives an email from this.
+   */
+  sendAdminNotification?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1070,7 +1067,7 @@ export interface InfoBlock {
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'outline') | null;
+    appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1163,7 +1160,7 @@ export interface CarouselBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
         };
         id?: string | null;
       }[]
@@ -1192,7 +1189,7 @@ export interface RelatedSocialLinksBlock {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'relatedSocialLinks';
+  blockType: 'socialLinks';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1200,6 +1197,7 @@ export interface RelatedSocialLinksBlock {
  */
 export interface Experience {
   id: number;
+  _order?: string | null;
   title: string;
   location: string;
   logoImage?: (number | null) | Media;
@@ -1243,6 +1241,7 @@ export interface Experience {
  */
 export interface Journey {
   id: number;
+  _order?: string | null;
   title: string;
   location: string;
   logoImage?: (number | null) | Media;
@@ -1336,6 +1335,7 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  status?: ('new' | 'read' | 'archived') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1606,6 +1606,7 @@ export interface PayloadMigration {
  * via the `definition` "hotels_select".
  */
 export interface HotelsSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   location?: T;
   logoImage?: T;
@@ -1623,7 +1624,7 @@ export interface HotelsSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
-        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+        socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   relatedHotels?: T;
   categories?: T;
@@ -1842,6 +1843,7 @@ export interface RelatedSocialLinksBlockSelect<T extends boolean = true> {
  * via the `definition` "villas-and-estates_select".
  */
 export interface VillasAndEstatesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   location?: T;
   logoImage?: T;
@@ -1859,7 +1861,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
-        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+        socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   relatedVillasAndEstates?: T;
   categories?: T;
@@ -1882,6 +1884,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
  * via the `definition` "experiences_select".
  */
 export interface ExperiencesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   location?: T;
   logoImage?: T;
@@ -1899,7 +1902,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
-        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+        socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   relatedExperiences?: T;
   categories?: T;
@@ -1922,6 +1925,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
  * via the `definition` "journeys_select".
  */
 export interface JourneysSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   location?: T;
   logoImage?: T;
@@ -1939,7 +1943,7 @@ export interface JourneysSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
-        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+        socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   relatedJourneys?: T;
   categories?: T;
@@ -2019,7 +2023,7 @@ export interface PagesSelect<T extends boolean = true> {
         infoBlock?: T | InfoBlockSelect<T>;
         richTextBlock?: T | RichTextBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
-        relatedSocialLinks?: T | RelatedSocialLinksBlockSelect<T>;
+        socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
       };
   meta?:
     | T
@@ -2239,16 +2243,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        country?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
         email?:
           | T
           | {
@@ -2296,16 +2290,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        state?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
         text?:
           | T
           | {
@@ -2324,6 +2308,16 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        collectionEnquiry?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
               required?: T;
               id?: T;
               blockName?: T;
@@ -2349,6 +2343,7 @@ export interface FormsSelect<T extends boolean = true> {
         message?: T;
         id?: T;
       };
+  sendAdminNotification?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2365,6 +2360,7 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2504,6 +2500,24 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  cta?: {
+    enableCTA?: boolean | null;
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2543,6 +2557,20 @@ export interface HeaderSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  cta?:
+    | T
+    | {
+        enableCTA?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2610,6 +2638,70 @@ export interface TaskSchedulePublish {
     user?: (number | null) | User;
   };
   output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IconBlock".
+ */
+export interface IconBlock {
+  icon:
+    | 'Star'
+    | 'Heart'
+    | 'MapPin'
+    | 'Home'
+    | 'Building2'
+    | 'Bed'
+    | 'Bath'
+    | 'Wifi'
+    | 'Car'
+    | 'Plane'
+    | 'Ship'
+    | 'Mountain'
+    | 'TreePine'
+    | 'Palmtree'
+    | 'Waves'
+    | 'Sun'
+    | 'Moon'
+    | 'Coffee'
+    | 'UtensilsCrossed'
+    | 'Wine'
+    | 'Dumbbell'
+    | 'ParkingCircle'
+    | 'ShieldCheck'
+    | 'Sparkles'
+    | 'Users'
+    | 'Calendar'
+    | 'Clock'
+    | 'Phone'
+    | 'Mail'
+    | 'Globe'
+    | 'Camera'
+    | 'Compass'
+    | 'Award'
+    | 'Gem'
+    | 'Crown'
+    | 'Key'
+    | 'Lock'
+    | 'CheckCircle2'
+    | 'Check'
+    | 'ArrowRight'
+    | 'ChevronRight'
+    | 'Info'
+    | 'AlertCircle'
+    | 'Flame'
+    | 'Snowflake'
+    | 'Leaf'
+    | 'Umbrella'
+    | 'Bike'
+    | 'ConciergeBell'
+    | 'Luggage'
+    | 'Tv'
+    | 'AirVent'
+    | 'WashingMachine';
+  size?: ('sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'icon';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

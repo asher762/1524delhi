@@ -8,7 +8,7 @@ import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import RichText from '@/components/RichText'
 
-import type { Post } from '@/payload-types'
+import type { Category, Post } from '@/payload-types'
 
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
@@ -51,9 +51,13 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  const firstCategory = post.categories?.find(
+    (category): category is Category => typeof category === 'object',
+  )
+
   return (
     <article className="pt-16 pb-16">
-      <PageClient />
+      <PageClient title={post.title} categorySlug={firstCategory?.slug} />
 
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />

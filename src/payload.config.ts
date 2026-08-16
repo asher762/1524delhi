@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -16,6 +17,7 @@ import { Journeys } from './collections/Journeys'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
+import { newsletterSignupEndpoint } from './endpoints/newsletterSignup'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
@@ -78,9 +80,22 @@ export default buildConfig({
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
+  endpoints: [newsletterSignupEndpoint],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.MAILCHIMP_TRANSACTIONAL_FROM_EMAIL || 'noreply@1524delhi.com',
+    defaultFromName: process.env.MAILCHIMP_TRANSACTIONAL_FROM_NAME || '1524 Delhi',
+    transportOptions: {
+      host: 'smtp.mandrillapp.com',
+      port: 587,
+      auth: {
+        user: process.env.MAILCHIMP_TRANSACTIONAL_FROM_EMAIL || '1524 Delhi',
+        pass: process.env.MAILCHIMP_TRANSACTIONAL_API_KEY,
+      },
+    },
+  }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

@@ -1,10 +1,12 @@
 import type { Block } from 'payload'
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { link } from '@/fields/link'
+import { IconBlock } from '@/blocks/Icon/config'
 
 export const CarouselBlock: Block = {
   slug: 'carouselBlock',
@@ -71,6 +73,7 @@ export const CarouselBlock: Block = {
           editor: lexicalEditor({
             features: ({ rootFeatures }) => [
               ...rootFeatures,
+              BlocksFeature({ inlineBlocks: [IconBlock] }),
               FixedToolbarFeature(),
               InlineToolbarFeature(),
             ],

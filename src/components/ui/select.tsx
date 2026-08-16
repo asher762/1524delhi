@@ -26,7 +26,7 @@ const SelectTrigger: React.FC<React.ComponentProps<typeof SelectPrimitive.Trigge
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       className={cn(
-        'flex h-11 w-full items-center justify-between rounded-xl border border-input bg-background/60 px-4 py-2.5 text-base md:text-sm text-foreground transition-all duration-200 shadow-xs focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground',
+        'flex h-11 w-full items-center justify-between rounded-none border border-input bg-background/60 px-4 py-2.5 text-base md:text-sm text-foreground transition-all duration-200 shadow-xs focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground',
         className,
       )}
       {...props}
