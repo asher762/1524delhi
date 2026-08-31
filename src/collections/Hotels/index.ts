@@ -41,6 +41,7 @@ export const Hotels: CollectionConfig<'hotels'> = {
     title: true,
     slug: true,
     categories: true,
+    country: true,
     meta: {
       image: true,
       description: true,
@@ -75,6 +76,12 @@ export const Hotels: CollectionConfig<'hotels'> = {
       name: 'location',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'country',
+      type: 'relationship',
+      relationTo: 'countries',
+      hasMany: true,
     },
     {
       name: 'logoImage',

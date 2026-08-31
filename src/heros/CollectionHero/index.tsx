@@ -8,9 +8,10 @@ export const CollectionHero: React.FC<{
     logoImage?: any
     heroImage?: any
     location?: string | null
+    country?: (number | { title?: string | null } | null)[] | null
   }
 }> = ({ doc }) => {
-  const { heroImage, title, location, logoImage } = doc
+  const { heroImage, title, location, logoImage, country } = doc
 
   // Build the sub-heading from location parts
   const locationParts = location
@@ -19,6 +20,15 @@ export const CollectionHero: React.FC<{
         .map((s) => s.trim())
         .filter(Boolean)
     : []
+
+  // Append the related country name(s) after the location parts
+  const countryNames = Array.isArray(country)
+    ? country
+        .map((c) => (c && typeof c === 'object' ? c.title : null))
+        .filter((title): title is string => Boolean(title))
+    : []
+
+  const subHeadingParts = [...locationParts, ...countryNames]
 
   return (
     <div className="bg-background pt-24 pb-0">
@@ -38,14 +48,14 @@ export const CollectionHero: React.FC<{
         )}
 
         {/* Title */}
-        <h1 className="font-serif text-3xl md:text-5xl lg:text-[3.25rem] leading-tight tracking-tight text-foreground max-w-3xl">
+        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-foreground max-w-3xl">
           {title}
         </h1>
 
         {/* Location */}
-        {locationParts.length > 0 && (
+        {subHeadingParts.length > 0 && (
           <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground mt-1">
-            {locationParts.join('  |  ')}
+            {subHeadingParts.join('  ,  ')}
           </p>
         )}
       </div>

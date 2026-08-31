@@ -8,9 +8,11 @@ import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
+import { Countries } from './collections/Countries'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Newsletters } from './collections/Newsletters'
 import { Users } from './collections/Users'
 import { Hotels } from './collections/Hotels'
 import { VillasAndEstates } from './collections/VillasAndEstates'
@@ -20,6 +22,8 @@ import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { newsletterSignupEndpoint } from './endpoints/newsletterSignup'
+import { mailchimpCampaignsEndpoint } from './endpoints/mailchimpCampaigns'
+import { mailchimpCampaignContentEndpoint } from './endpoints/mailchimpCampaignContent'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
@@ -76,13 +80,15 @@ export default buildConfig({
     Journeys,
     Pages,
     Posts,
+    Newsletters,
     Media,
     Categories,
+    Countries,
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
-  endpoints: [newsletterSignupEndpoint],
+  endpoints: [newsletterSignupEndpoint, mailchimpCampaignsEndpoint, mailchimpCampaignContentEndpoint],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,

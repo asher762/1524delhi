@@ -22,7 +22,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
         </div>
       )}
 
-      <div className="container relative z-10 flex h-full min-h-[70vh] flex-col items-center justify-end py-24 text-center text-white">
+      <div className="container relative z-10 flex h-full min-h-[70vh] flex-col items-center justify-end py-24 text-center text-white mt-20">
         {richText && <RichText className="prose-invert mb-8 w-full max-w-3xl mx-auto text-center" data={richText} enableGutter={false} />}
 
         {Array.isArray(links) && links.length > 0 && (

@@ -21,9 +21,10 @@ export const ListView: React.FC<{
         {posts.map((result, index) => {
           if (!result) return null
 
-          const { slug, title, meta, categories } = result
-          const { description, image: metaImage } = meta || {}
+          const { slug, title, meta, categories, thumbnailUrl, previewText } = result
+          const { description = previewText, image: metaImage = thumbnailUrl } = meta || {}
           const href = relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`
+          const isExternalImageUrl = typeof metaImage === 'string' && /^https?:\/\//.test(metaImage)
 
           const categoryLabel =
             Array.isArray(categories) && categories.length > 0
@@ -41,7 +42,15 @@ export const ListView: React.FC<{
               >
                 {/* Thumbnail */}
                 <div className="relative shrink-0 w-24 sm:w-36 md:w-40 aspect-video overflow-hidden bg-muted self-stretch">
-                  {metaImage && typeof metaImage !== 'string' ? (
+                  {metaImage && isExternalImageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- external, unoptimizable source (e.g. Mailchimp's CDN)
+                    <img
+                      alt={title || ''}
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      src={metaImage}
+                    />
+                  ) : metaImage && typeof metaImage !== 'string' ? (
                     <Media
                       resource={metaImage}
                       size="(max-width: 640px) 96px, (max-width: 768px) 144px, 160px"

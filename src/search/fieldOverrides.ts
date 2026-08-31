@@ -58,4 +58,26 @@ export const searchFields: Field[] = [
       },
     ],
   },
+  {
+    label: 'Countries',
+    name: 'country',
+    type: 'array',
+    admin: {
+      readOnly: true,
+    },
+    fields: [
+      {
+        name: 'relationTo',
+        type: 'text',
+      },
+      {
+        name: 'countryID',
+        type: 'text',
+      },
+      {
+        name: 'title',
+        type: 'text',
+      },
+    ],
+  },
 ]

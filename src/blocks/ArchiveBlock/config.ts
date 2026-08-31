@@ -71,6 +71,7 @@ export const Archive: Block = {
         { label: 'Villas & Estates', value: 'villas-and-estates' },
         { label: 'Experiences', value: 'experiences' },
         { label: 'Journeys', value: 'journeys' },
+        { label: 'Newsletters', value: 'newsletters' },
       ],
     },
     {
@@ -82,6 +83,16 @@ export const Archive: Block = {
       hasMany: true,
       label: 'Categories To Show',
       relationTo: 'categories',
+    },
+    {
+      name: 'country',
+      type: 'relationship',
+      admin: {
+        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+      },
+      hasMany: true,
+      label: 'Countries To Show',
+      relationTo: 'countries',
     },
     {
       name: 'limit',
@@ -112,7 +123,15 @@ export const Archive: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['posts', 'pages', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
+      relationTo: [
+        'posts',
+        'pages',
+        'hotels',
+        'villas-and-estates',
+        'experiences',
+        'journeys',
+        'newsletters',
+      ],
     },
   ],
   labels: {

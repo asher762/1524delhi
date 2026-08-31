@@ -75,13 +75,6 @@ function CardThumbnail({ card, onClick }: CardCarouselProps) {
           <h3 className="text-xl font-bold leading-tight mb-0">{card.title}</h3>
         )}
 
-        {/* Description preview */}
-        {card.description && typeof card.description === 'object' && (
-          <div className="line-clamp-2 text-sm text-white/80 **:text-white/80! **:mb-0! [&_h2]:text-sm [&_h3]:text-sm [&_h4]:text-sm mt-2">
-            <RichText data={card.description as any} enableGutter={false} enableProse={false} />
-          </div>
-        )}
-
         {/* Read more indicator */}
         {((card.media && card.media.length > 1) || card.description) && (
           <span className="mt-3 text-xs font-semibold uppercase tracking-wider text-white flex items-center group-hover:text-white/80 transition-colors">
@@ -123,7 +116,7 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
 
         <DialogHeader className="relative">
           <DialogClose
-            className="absolute right-0 top-0 rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors z-10"
+            className="absolute right-0 top-0 rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors z-10 m-2"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
@@ -131,7 +124,7 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
 
           {card.title && typeof card.title === 'string' && (
             <div className="pr-10">
-              <h2 className="text-2xl font-serif">{card.title}</h2>
+              <h2 className="text-5xl font-serif py-8">{card.title}</h2>
             </div>
           )}
         </DialogHeader>
@@ -144,7 +137,7 @@ function CardDrawer({ card, open, onClose }: CardDrawerProps) {
                 <CarouselContent>
                   {images.map((img, idx) => (
                     <CarouselItem key={idx} className="basis-full sm:basis-[85%]">
-                      <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-none">
                         <Image
                           src={img.url!}
                           alt={img.alt || `Image ${idx + 1}`}
@@ -198,8 +191,8 @@ export function CardsBlock(props: CardsBlockProps) {
     <div className="container my-16">
       {/* Optional header */}
       {header && typeof header === 'object' && (
-        <div className="text-center mb-10 [&_h1]:!text-center [&_h2]:!text-center [&_h3]:!text-center [&_h2]:text-4xl [&_h3]:text-3xl mx-10">
-          <RichText data={header as any} enableGutter={false} enableProse={false} />
+        <div className="mx-auto mb-10 max-w-3xl text-center [&_h1]:!text-center [&_h2]:!text-center [&_h3]:!text-center [&_h4]:!text-center [&_p]:!text-center">
+          <RichText data={header as any} enableGutter={false} />
         </div>
       )}
 
@@ -225,8 +218,8 @@ export function CardsBlock(props: CardsBlockProps) {
             </CarouselContent>
             {cards.length > 1 && (
               <>
-                <CarouselPrevious className="-left-4" />
-                <CarouselNext className="-right-4" />
+                <CarouselPrevious className="-left-15" />
+                <CarouselNext className="-right-15" />
               </>
             )}
           </Carousel>

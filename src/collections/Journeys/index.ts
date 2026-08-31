@@ -39,6 +39,7 @@ export const Journeys: CollectionConfig<'journeys'> = {
     title: true,
     slug: true,
     categories: true,
+    country: true,
     meta: {
       image: true,
       description: true,
@@ -73,6 +74,12 @@ export const Journeys: CollectionConfig<'journeys'> = {
       name: 'location',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'country',
+      type: 'relationship',
+      relationTo: 'countries',
+      hasMany: true,
     },
     {
       name: 'logoImage',

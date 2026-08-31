@@ -83,7 +83,15 @@ const collectionEnquiryBlock: Block = {
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
-    collections: ['pages', 'posts', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
+    collections: [
+      'pages',
+      'posts',
+      'hotels',
+      'villas-and-estates',
+      'experiences',
+      'journeys',
+      'newsletters',
+    ],
     overrides: {
       admin: {
         group: 'Collections',
@@ -203,7 +211,7 @@ export const plugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts', 'hotels', 'villas-and-estates', 'experiences', 'journeys'],
+    collections: ['posts', 'hotels', 'villas-and-estates', 'experiences', 'journeys', 'newsletters'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       admin: {

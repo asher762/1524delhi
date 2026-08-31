@@ -34,7 +34,7 @@ export const PostHero: React.FC<{
           </div>
 
           <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
+            <h1 className="mb-6 text-4xl md:text-6xl lg:text-7xl">{title}</h1>
           </div>
         </div>
       </div>

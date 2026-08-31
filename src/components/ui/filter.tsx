@@ -55,7 +55,7 @@ export const Filter: React.FC<FilterProps> = ({
   useEffect(() => {
     if (!open) return
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setOpen(false)
       }
@@ -65,9 +65,11 @@ export const Filter: React.FC<FilterProps> = ({
     }
 
     document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
     document.addEventListener('keydown', handleEscape)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
       document.removeEventListener('keydown', handleEscape)
     }
   }, [open])
@@ -97,7 +99,7 @@ export const Filter: React.FC<FilterProps> = ({
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
         aria-haspopup="listbox"
-        className="flex h-11 w-full items-center justify-between gap-2 rounded-xl border border-input bg-background/60 px-4 py-2.5 text-base md:text-sm text-foreground transition-all duration-200 shadow-xs focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+        className="flex h-11 w-full items-center justify-between gap-2 rounded-none border border-input bg-background/60 px-4 py-2.5 text-base md:text-sm text-foreground transition-all duration-200 shadow-xs focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
       >
         <span className={cn('truncate', selectedLabels.length === 0 && 'text-muted-foreground')}>
           {buttonLabel}
@@ -117,7 +119,7 @@ export const Filter: React.FC<FilterProps> = ({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-2 w-full min-w-56 overflow-hidden rounded-xl border border-input bg-popover text-popover-foreground shadow-md">
+        <div className="absolute z-50 mt-2 w-full min-w-56 overflow-hidden rounded-none border border-input bg-popover text-popover-foreground shadow-md">
           <div className="relative border-b border-input">
             <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input

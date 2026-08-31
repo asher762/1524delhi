@@ -42,6 +42,23 @@ function useCarousel() {
   return context
 }
 
+// Let taps/clicks that start inside an embedded iframe (e.g. an Instagram or
+// Facebook embed) reach the iframe instead of being captured as a swipe
+// gesture, which otherwise makes content inside the iframe unclickable.
+function shouldWatchDrag(
+  userWatchDrag: NonNullable<CarouselOptions>["watchDrag"],
+  emblaApi: NonNullable<CarouselApi>,
+  event: TouchEvent | MouseEvent
+): boolean {
+  if (event.target instanceof Element && event.target.closest("iframe")) {
+    return false
+  }
+  if (typeof userWatchDrag === "function") {
+    return userWatchDrag(emblaApi, event) !== false
+  }
+  return userWatchDrag !== false
+}
+
 function Carousel({
   orientation = "horizontal",
   opts,
@@ -55,6 +72,8 @@ function Carousel({
     {
       ...opts,
       axis: orientation === "horizontal" ? "x" : "y",
+      watchDrag: (emblaApi, event) =>
+        shouldWatchDrag(opts?.watchDrag, emblaApi, event),
     },
     plugins
   )
@@ -120,7 +139,7 @@ function Carousel({
     >
       <div
         onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
+        className={cn("relative select-none", className)}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"

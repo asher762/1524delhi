@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
-import { Playfair_Display, Jost } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Literata } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -15,15 +16,27 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
+const boska = localFont({
+  src: [
+    {
+      path: '../../fonts/Boska-Variable.woff2',
+      weight: '200 900',
+      style: 'normal',
+    },
+    {
+      path: '../../fonts/Boska-VariableItalic.woff2',
+      weight: '200 900',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-boska',
   display: 'swap',
 })
 
-const jost = Jost({
+const literata = Literata({
   subsets: ['latin'],
-  variable: '--font-jost',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-literata',
   display: 'swap',
 })
 
@@ -31,7 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(playfair.variable, jost.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(boska.variable, literata.variable)} lang="en" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

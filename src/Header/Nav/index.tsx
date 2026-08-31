@@ -23,7 +23,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', on
               <CMSLink
                 {...link}
                 onClick={onLinkClick}
-                className="block py-5 font-sans text-sm uppercase tracking-[0.3em] text-foreground/70 transition-colors hover:text-foreground"
+                className="block py-5 font-mono uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:text-foreground"
               />
             </li>
           ))}
@@ -38,7 +38,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, variant = 'hero', on
         <CMSLink
           key={i}
           {...link}
-          className="whitespace-nowrap font-sans text-[14px] uppercase tracking-[0.32em] text-white/80 transition-colors hover:text-white"
+          className="whitespace-nowrap font-mono text-[14px] uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white"
         />
       ))}
     </nav>

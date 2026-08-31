@@ -21,7 +21,7 @@ declare global {
       // Internal recipient for contact-form notifications
       CONTACT_NOTIFICATION_EMAIL: string
 
-      // Mailchimp Marketing — newsletter signup endpoint
+      // Mailchimp Marketing — newsletter signup endpoint + Newsletters collection campaign picker
       MAILCHIMP_MARKETING_API_KEY: string
       MAILCHIMP_MARKETING_SERVER_PREFIX: string
       MAILCHIMP_AUDIENCE_ID: string

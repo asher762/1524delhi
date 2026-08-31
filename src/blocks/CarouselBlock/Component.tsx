@@ -30,9 +30,7 @@ function FullWidthSlide({
 
   return (
     <div className="relative flex-[0_0_100%] min-w-0 h-[520px] md:h-[640px]">
-      {/* Only the first slide is preloaded. Marking every slide `priority`
-          made N full-bleed images compete for early bandwidth, which delays
-          the LCP element rather than helping it. */}
+
       {imageUrl && (
         <Image
           src={imageUrl}
@@ -43,32 +41,37 @@ function FullWidthSlide({
           priority={isFirst}
         />
       )}
+
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/45" />
 
       {/* Centered content */}
       <div className="absolute inset-0 flex items-center justify-center p-6">
         <div className="max-w-2xl w-full text-center text-white">
           {sectionTitle && (
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6 drop-shadow-sm text-white/90">
-              {sectionTitle}
-            </h2>
+            <>
+              <div className="mx-auto mb-4 h-px w-24 sm:w-24 bg-white/50" />
+              <h2 className="font-serif text-5xl font-normal mb-5 drop-shadow-sm text-white">
+                {sectionTitle}
+              </h2>
+            </>
           )}
           {slide.title && (
-            <h3 className="font-serif text-3xl md:text-4xl font-semibold mb-3 drop-shadow-sm">
+            <h3 className="uppercase text-xl md:text-xl tracking-[0.2em] font-medium text-white/90 drop-shadow-sm">
               {slide.title}
             </h3>
           )}
+          {slide.title && <div className="mx-auto mt-4 mb-6 h-px w-24 sm:w-24 bg-white/50" />}
           {slide.content && (
-            <div className="text-white/85 text-sm md:text-base leading-relaxed [&_p]:mb-0 **:text-white/85">
+            <div className="text-white/80 md:text-base leading-relaxed [&_p]:mb-0 **:text-white/80">
               <RichText data={slide.content as any} enableProse={false} />
             </div>
           )}
           {slide.enableLink && slide.link && (
-            <div className="mt-6">
+            <div className="mt-7">
               <CMSLink
                 {...slide.link}
-                className="inline-block border border-white/70 text-white hover:bg-white hover:text-foreground transition-colors px-6 py-2 text-sm tracking-wide"
+                className="inline-block border border-white/70 text-white hover:bg-white hover:text-foreground transition-colors duration-200 px-6 py-2.5 text-xs uppercase tracking-widest rounded-[var(--radius)]"
               />
             </div>
           )}
@@ -240,20 +243,20 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
           <button
             onClick={scrollPrev}
             aria-label="Previous"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/25 hover:bg-black/50 text-white rounded-full p-2.5 backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
+            className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20 active:scale-95 sm:opacity-0 sm:group-hover:opacity-100"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={scrollNext}
             aria-label="Next"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/25 hover:bg-black/50 text-white rounded-full p-2.5 backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
+            className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20 active:scale-95 sm:opacity-0 sm:group-hover:opacity-100"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
 
           {/* Dots (inside, over the image) */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <Dots
               snaps={scrollSnaps}
               selectedIndex={selectedIndex}

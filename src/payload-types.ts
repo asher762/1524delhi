@@ -73,8 +73,10 @@ export interface Config {
     journeys: Journey;
     pages: Page;
     posts: Post;
+    newsletters: Newsletter;
     media: Media;
     categories: Category;
+    countries: Country;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -99,8 +101,10 @@ export interface Config {
     journeys: JourneysSelect<false> | JourneysSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -168,6 +172,7 @@ export interface Hotel {
   _order?: string | null;
   title: string;
   location: string;
+  country?: (number | Country)[] | null;
   logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   layout: (
@@ -202,6 +207,21 @@ export interface Hotel {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -753,8 +773,11 @@ export interface ArchiveBlock {
   } | null;
   layout?: ('Grid' | 'FullScreenCarousel' | 'CardsCarousel' | 'List') | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationTo?: ('posts' | 'pages' | 'hotels' | 'villas-and-estates' | 'experiences' | 'journeys') | null;
+  relationTo?:
+    | ('posts' | 'pages' | 'hotels' | 'villas-and-estates' | 'experiences' | 'journeys' | 'newsletters')
+    | null;
   categories?: (number | Category)[] | null;
+  country?: (number | Country)[] | null;
   limit?: number | null;
   enablePagination?: boolean | null;
   selectedDocs?:
@@ -783,6 +806,10 @@ export interface ArchiveBlock {
             relationTo: 'journeys';
             value: number | Journey;
           }
+        | {
+            relationTo: 'newsletters';
+            value: number | Newsletter;
+          }
       )[]
     | null;
   id?: string | null;
@@ -798,6 +825,7 @@ export interface VillasAndEstate {
   _order?: string | null;
   title: string;
   location: string;
+  country?: (number | Country)[] | null;
   logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   layout: (
@@ -1201,6 +1229,7 @@ export interface Experience {
   _order?: string | null;
   title: string;
   location: string;
+  country?: (number | Country)[] | null;
   logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   layout: (
@@ -1245,6 +1274,7 @@ export interface Journey {
   _order?: string | null;
   title: string;
   location: string;
+  country?: (number | Country)[] | null;
   logoImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   layout: (
@@ -1271,6 +1301,31 @@ export interface Journey {
     description?: string | null;
   };
   publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: number;
+  title: string;
+  /**
+   * Pick a sent campaign from Mailchimp to publish as a newsletter.
+   */
+  mailchimpCampaignId: string;
+  mailchimpArchiveUrl?: string | null;
+  contentHtml?: string | null;
+  thumbnailUrl?: string | null;
+  previewText?: string | null;
+  sentAt?: string | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -1316,6 +1371,10 @@ export interface Redirect {
       | ({
           relationTo: 'journeys';
           value: number | Journey;
+        } | null)
+      | ({
+          relationTo: 'newsletters';
+          value: number | Newsletter;
         } | null);
     url?: string | null;
   };
@@ -1370,6 +1429,10 @@ export interface Search {
     | {
         relationTo: 'journeys';
         value: number | Journey;
+      }
+    | {
+        relationTo: 'newsletters';
+        value: number | Newsletter;
       };
   slug?: string | null;
   meta?: {
@@ -1381,6 +1444,14 @@ export interface Search {
     | {
         relationTo?: string | null;
         categoryID?: string | null;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  country?:
+    | {
+        relationTo?: string | null;
+        countryID?: string | null;
         title?: string | null;
         id?: string | null;
       }[]
@@ -1529,12 +1600,20 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'newsletters';
+        value: number | Newsletter;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: number | Country;
       } | null)
     | ({
         relationTo: 'users';
@@ -1610,6 +1689,7 @@ export interface HotelsSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
   location?: T;
+  country?: T;
   logoImage?: T;
   heroImage?: T;
   layout?:
@@ -1743,6 +1823,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   populateBy?: T;
   relationTo?: T;
   categories?: T;
+  country?: T;
   limit?: T;
   enablePagination?: T;
   selectedDocs?: T;
@@ -1847,6 +1928,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
   location?: T;
+  country?: T;
   logoImage?: T;
   heroImage?: T;
   layout?:
@@ -1888,6 +1970,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
   location?: T;
+  country?: T;
   logoImage?: T;
   heroImage?: T;
   layout?:
@@ -1929,6 +2012,7 @@ export interface JourneysSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
   location?: T;
+  country?: T;
   logoImage?: T;
   heroImage?: T;
   layout?:
@@ -2073,6 +2157,24 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  title?: T;
+  mailchimpCampaignId?: T;
+  mailchimpArchiveUrl?: T;
+  contentHtml?: T;
+  thumbnailUrl?: T;
+  previewText?: T;
+  sentAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -2182,6 +2284,17 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2387,6 +2500,14 @@ export interface SearchSelect<T extends boolean = true> {
     | {
         relationTo?: T;
         categoryID?: T;
+        title?: T;
+        id?: T;
+      };
+  country?:
+    | T
+    | {
+        relationTo?: T;
+        countryID?: T;
         title?: T;
         id?: T;
       };
@@ -2635,6 +2756,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
+        } | null)
+      | ({
+          relationTo: 'newsletters';
+          value: number | Newsletter;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

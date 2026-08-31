@@ -21,13 +21,14 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
-  const { description, image: metaImage } = meta || {}
+  const { slug, categories, meta, title, thumbnailUrl, previewText } = doc || {}
+  const { description = previewText, image: metaImage = thumbnailUrl } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`
+  const isExternalImageUrl = typeof metaImage === 'string' && /^https?:\/\//.test(metaImage)
 
   return (
     <article
@@ -43,7 +44,18 @@ export const Card: React.FC<{
             No image
           </div>
         )}
-        {metaImage && typeof metaImage !== 'string' && (
+        {metaImage && isExternalImageUrl && (
+          <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
+            {/* eslint-disable-next-line @next/next/no-img-element -- external, unoptimizable source (e.g. Mailchimp's CDN) */}
+            <img
+              alt={titleToUse || ''}
+              className="object-cover w-full h-full"
+              loading="lazy"
+              src={metaImage}
+            />
+          </div>
+        )}
+        {metaImage && !isExternalImageUrl && typeof metaImage !== 'string' && (
           <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
             {/* Grid is 4/4 cols on mobile, 4/8 at sm, 4/12 at lg — so the card
                 occupies 100vw / 50vw / 33vw respectively. */}

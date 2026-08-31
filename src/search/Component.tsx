@@ -8,11 +8,13 @@ import { useRouter } from 'next/navigation'
 
 type SearchProps = {
   categories?: FilterOption[]
+  countries?: FilterOption[]
 }
 
-export const Search: React.FC<SearchProps> = ({ categories = [] }) => {
+export const Search: React.FC<SearchProps> = ({ categories = [], countries = [] }) => {
   const [value, setValue] = useState('')
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([])
   const router = useRouter()
 
   const debouncedValue = useDebounce(value)
@@ -21,9 +23,10 @@ export const Search: React.FC<SearchProps> = ({ categories = [] }) => {
     const params = new URLSearchParams()
     if (debouncedValue) params.set('q', debouncedValue)
     if (selectedCategories.length > 0) params.set('category', selectedCategories.join(','))
+    if (selectedCountries.length > 0) params.set('country', selectedCountries.join(','))
     const queryString = params.toString()
     router.push(`/search${queryString ? `?${queryString}` : ''}`)
-  }, [debouncedValue, selectedCategories, router])
+  }, [debouncedValue, selectedCategories, selectedCountries, router])
 
   return (
     <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-center">
@@ -55,6 +58,17 @@ export const Search: React.FC<SearchProps> = ({ categories = [] }) => {
           placeholder="All categories"
           searchPlaceholder="Search categories..."
           clearLabel="Clear categories"
+          className="sm:w-56"
+        />
+      )}
+      {countries.length > 0 && (
+        <Filter
+          options={countries}
+          value={selectedCountries}
+          onChange={setSelectedCountries}
+          placeholder="All countries"
+          searchPlaceholder="Search countries..."
+          clearLabel="Clear countries"
           className="sm:w-56"
         />
       )}

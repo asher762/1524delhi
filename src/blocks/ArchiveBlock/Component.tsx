@@ -1,7 +1,7 @@
 import type { Post, ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
 
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import { getPayload, type Where } from 'payload'
 import React from 'react'
 import RichText from '@/components/RichText'
 
@@ -15,6 +15,7 @@ export const ArchiveBlock: React.FC<
   const {
     id,
     categories,
+    country,
     enablePagination,
     introContent,
     limit: limitFromProps,
@@ -27,23 +28,32 @@ export const ArchiveBlock: React.FC<
   const limit = limitFromProps || 12
   const targetCollection = relationTo || 'posts'
 
-  // `pages` is the one selectable target without a `categories` field, so the
-  // key is added conditionally rather than blanket-selected.
-  const hasCategories = targetCollection !== 'pages'
+  // `pages` and `newsletters` are the selectable targets without a
+  // `categories` field, so the key is added conditionally rather than
+  // blanket-selected.
+  const hasCategories = targetCollection !== 'pages' && targetCollection !== 'newsletters'
 
   // Card / ListView / FullScreenCarousel between them render only these
   // fields. Without an explicit select every document came back in full —
   // including the entire `layout` blocks tree at depth 1, for up to 100 docs.
-  const archiveSelect = {
-    title: true,
-    slug: true,
-    meta: {
-      image: true,
-      description: true,
-      title: true,
-    },
-    ...(hasCategories ? { categories: true } : {}),
-  }
+  const archiveSelect =
+    targetCollection === 'newsletters'
+      ? {
+          title: true,
+          slug: true,
+          thumbnailUrl: true,
+          previewText: true,
+        }
+      : {
+          title: true,
+          slug: true,
+          meta: {
+            image: true,
+            description: true,
+            title: true,
+          },
+          ...(hasCategories ? { categories: true, country: true } : {}),
+        }
 
   let posts: any[] = []
   let totalPages = 1
@@ -55,10 +65,23 @@ export const ArchiveBlock: React.FC<
     else return category
   })
 
+  const flattenedCountries = country?.map((each) => {
+    if (typeof each === 'object') return each.id
+    else return each
+  })
+
   if (populateBy === 'collection') {
     const payload = await getPayload({ config: configPromise })
 
     const isCarousel = layout === 'FullScreenCarousel' || layout === 'CardsCarousel'
+
+    const whereConditions: Where[] = []
+    if (flattenedCategories && flattenedCategories.length > 0) {
+      whereConditions.push({ categories: { in: flattenedCategories } })
+    }
+    if (flattenedCountries && flattenedCountries.length > 0) {
+      whereConditions.push({ country: { in: flattenedCountries } })
+    }
 
     const fetchedPosts = await payload.find({
       collection: targetCollection,
@@ -66,15 +89,7 @@ export const ArchiveBlock: React.FC<
       limit: isCarousel ? limitFromProps || 100 : limit,
       overrideAccess: false,
       select: archiveSelect as any,
-      ...(flattenedCategories && flattenedCategories.length > 0
-        ? {
-            where: {
-              categories: {
-                in: flattenedCategories,
-              },
-            },
-          }
-        : {}),
+      ...(whereConditions.length > 0 ? { where: { and: whereConditions } } : {}),
     })
 
     posts = fetchedPosts.docs
@@ -110,6 +125,7 @@ export const ArchiveBlock: React.FC<
         page={page}
         totalDocs={totalDocs}
         categories={flattenedCategories}
+        countries={flattenedCountries}
         populateBy={populateBy || 'collection'}
       />
     </div>

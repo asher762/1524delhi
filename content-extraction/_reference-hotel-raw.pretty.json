@@ -1,0 +1,2783 @@
+{
+  "docs": [
+    {
+      "id": 42,
+      "_order": "a0",
+      "title": "The Danna Langkawi Resort & Beach Villas",
+      "location": "Langkawi,  Kedah",
+      "country": [
+        1
+      ],
+      "logoImage": 79,
+      "heroImage": 80,
+      "layout": [
+        {
+          "id": "6a8c446edd258f92dc1bf51a",
+          "richText": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "paragraph",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Showcasing Langkawi’s stunning scenic beauty, the award-winning Danna Langkawi Resort & Beach Villas welcomes you with genuine island hospitality while delighting you at every turn. Take your time to explore this luxury beachfront resort which features exclusive private pool villas, colonial oceanfront rooms and suites that boast views ranging from tropical mountains, ocean, marina and courtyard – featuring bespoke Jo Loves by Jo Malone CBE bath amenities. Indulge in eclectic and intimate seaside dining, keep up with your wellness regime at the Techno gym fitness centre or rejuvenate over therapeutic treatments at The Spa for balance of body, mind and soul. Located in Telaga Harbour Park, this Mediterranean-inspired beach resort is easily accessible to many of Langkawi’s famous attractions and outdoor activities. It takes approximately 15 minutes from the Langkawi International Airport and 25 minutes from Pantai Cenang to The Danna Langkawi Resort & Beach Villas.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "blockName": "The Danna Langkawi Resort",
+          "blockType": "richTextBlock"
+        },
+        {
+          "id": "6a8c44b8dd258f92dc1bf51c",
+          "richText": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "tag": "h2",
+                  "type": "heading",
+                  "format": "start",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Highlights",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "type": "paragraph",
+                  "format": "start",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "•   Luxurious beachfront resort and pool villas",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    },
+                    {
+                      "type": "linebreak",
+                      "version": 1
+                    },
+                    {
+                      "mode": "normal",
+                      "text": "•   Eclectic dining with spectacular views",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    },
+                    {
+                      "type": "linebreak",
+                      "version": 1
+                    },
+                    {
+                      "mode": "normal",
+                      "text": "•   Convenient location near key attractions",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "media": 80,
+          "reverse": false,
+          "enableLink": null,
+          "blockName": "Highlights",
+          "blockType": "infoBlock",
+          "link": {
+            "type": "reference",
+            "newTab": null,
+            "url": null,
+            "label": null,
+            "appearance": "default"
+          }
+        },
+        {
+          "id": "6a8c4506dd258f92dc1bf51e",
+          "richText": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "tag": "h2",
+                  "type": "heading",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Location",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "tag": "h3",
+                  "type": "heading",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Langkawi | Kedah, Malaysia",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "type": "paragraph",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "The Danna Langkawi Resort & Beach Villas is situated in the beautiful Telaga Harbour Park, Langkawi, offering easy access to nearby attractions, beaches, and cultural sites.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                },
+                {
+                  "type": "paragraph",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "media": 80,
+          "reverse": true,
+          "enableLink": null,
+          "blockName": "Location",
+          "blockType": "infoBlock",
+          "link": {
+            "type": "reference",
+            "newTab": null,
+            "url": null,
+            "label": null,
+            "appearance": "default"
+          }
+        },
+        {
+          "id": "6a8c454add258f92dc1bf520",
+          "blockName": null,
+          "columns": [
+            {
+              "id": "6a8c454ddd258f92dc1bf522",
+              "size": "half",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "type": "heading",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "How to get there",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c4bd697a5373efd40e16f",
+              "size": "half",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "inlineBlock",
+                          "fields": {
+                            "id": "6a8c459417403372a8a06e3e",
+                            "icon": "Plane",
+                            "size": "md",
+                            "blockType": "icon"
+                          },
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "     15 minutes by car from Langkawi International Airport",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "inlineBlock",
+                          "fields": {
+                            "id": "6a8c459e17403372a8a06e3f",
+                            "icon": "MapPin",
+                            "size": "md",
+                            "blockType": "icon"
+                          },
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "     Nearest railway station is inn Alor Star, and requires a ferry ride to Langkawi",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "inlineBlock",
+                          "fields": {
+                            "id": "6a8c45c417403372a8a06e40",
+                            "icon": "Car",
+                            "size": "md",
+                            "blockType": "icon"
+                          },
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "     Drive towards Langkawi Cable Car, the resort is 25 minutes away from Cenang Beach",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            }
+          ],
+          "blockType": "content"
+        },
+        {
+          "id": "6a8c4cdf97a5373efd40e171",
+          "header": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "tag": "h2",
+                  "type": "heading",
+                  "format": "start",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Accommodation",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "type": "paragraph",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                },
+                {
+                  "type": "paragraph",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "The Danna Langkawi offers a choices of luxurious accommodations including private pool villas, colonial-style rooms, and bespoke suites, perfect for both couples and families.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "blockName": "Accommodation",
+          "cards": [
+            {
+              "id": "6a8c518b97a5373efd40e173",
+              "title": "Merchant King Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Merchant King Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Lavish in the Merchant King room, featuring a king bed, private balcony with breathtaking mountain or courtyard views and an opulent marble bathroom. Enjoy premium amenities and bespoke service.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c53af97a5373efd40e175",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c53d197a5373efd40e177",
+              "title": "Merchant Twin Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Merchant Twin Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Relax in the Merchant Twin room, offering two plush beds, a private balcony, and an elegant marble bathroom with serene mountain or courtyard views. Delight in luxury amenities and attentive service.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c53ea97a5373efd40e179",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c53f697a5373efd40e17b",
+              "title": "Grand Marina View Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Grand Marina View Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience grandeur in the Grand Marina View room with a spacious balcony, oversized daybed, and stunning marina views. Revel in sophisticated furnishings, exclusive amenities, and exceptional service.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c540a97a5373efd40e17d",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c541e97a5373efd40e17f",
+              "title": "Viceroy King Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Viceroy King Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Indulge in the Viceroy King Seaview room with a private balcony overlooking the Andaman Sea. Bask in luxurious comfort, mesmerizing sea views, and top-tier amenities for a perfect escape.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c543397a5373efd40e181",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c544597a5373efd40e183",
+              "title": "Viceroy Twin Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Viceroy Twin Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Unwind in the Viceroy Twin room, featuring two plush beds, a private balcony, and spectacular Andaman Sea views. Enjoy refined decor, modern amenities, and exceptional service.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c545597a5373efd40e185",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c545d97a5373efd40e187",
+              "title": "Grand Viceroy Sea View",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Grand Viceroy Sea View",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Unwind in the Viceroy Twin room, featuring two plush beds, a private balcony, and spectacular Andaman Sea views. Enjoy refined decor, modern amenities, and exceptional service.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": []
+            },
+            {
+              "id": "6a8c547097a5373efd40e189",
+              "title": "Grand Corner Duchess Sea View",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Grand Corner Duchess Sea View",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience unparalleled comfort in the Countess Sea View Suite, complete with a separate lounge, private balcony, and indoor jacuzzi. Revel in stunning sea views and a truly indulgent stay.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c548397a5373efd40e18b",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c549897a5373efd40e18d",
+              "title": "Merchant 2-Bedroom Suite (King & Twin)",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Merchant 2-Bedroom Suite (King & Twin)",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Embrace serenity in the Merchant 2-Bedroom Suite with a kitchenette, ample space, and thoughtful amenities. Ideal for families or friends, with exclusive privileges for a memorable stay. Available in a configuration of two King Bedrooms or 1 King and 1 twin .",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": []
+            },
+            {
+              "id": "6a8c54a797a5373efd40e18f",
+              "title": "Merchant 2-Bedroom Suite (2 King)",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Merchant 2-Bedroom Suite (2 King)",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Embrace serenity in the Merchant 2-Bedroom Suite with a kitchenette, ample space, and thoughtful amenities. Ideal for families or friends, with exclusive privileges for a memorable stay.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": []
+            },
+            {
+              "id": "6a8c54bc97a5373efd40e191",
+              "title": "Grand Merchant 2-Bedroom Suite",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Grand Merchant 2-Bedroom Suite",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience ultimate luxury in the Grand Merchant 2-Bedroom Suite with a connecting living room, kitchenette, and dining table. Perfect for families or friends, blending sophistication with comfort.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c54e197a5373efd40e193",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c54ea97a5373efd40e195",
+              "title": "Merchant 3-Bedroom Suite",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Merchant 3-Bedroom Suite",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Discover the pinnacle of luxury in the Merchant 3-Bedroom Suite, featuring a spacious living area, kitchenette, and exquisite amenities. Ideal for families and small groups seeking a stylish retreat.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c551397a5373efd40e199",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c551197a5373efd40e197",
+              "title": "Marina 4-Bay Suite",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Marina 4-Bay Suite",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience unparalleled opulence in the Marina 4-Bay Suite with two bedrooms, a separate lounge, dining area, and a private infinity pool. Enjoy breathtaking Marina and Andaman Sea views, plus a sauna and personal treadmill.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c554397a5373efd40e19f",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c552e97a5373efd40e19b",
+              "title": "Princess Beach Villa",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Princess Beach Villa",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Indulge in the Princess Beach Villa, a beachfront sanctuary with a private pool, expansive living area, and standalone bathtub overlooking a beautifully curated garden, ensuring total privacy.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c554197a5373efd40e19d",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c555797a5373efd40e1a1",
+              "title": "Empress Beach Villa",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Empress Beach Villa",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience the Empress Beach Villa, a luxurious two-bedroom beachfront retreat with a private lap pool and elegant kitchenette. Perfect for families and friends, offering refined luxury and stunning ocean views.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c556597a5373efd40e1a3",
+                  "image": 80
+                }
+              ]
+            }
+          ],
+          "blockType": "cardsBlock"
+        },
+        {
+          "id": "6a8c558597a5373efd40e1a5",
+          "carouselType": "fullWidth",
+          "title": "Features",
+          "autoplay": false,
+          "autoplaySpeed": 5,
+          "blockName": "Features",
+          "slides": [
+            {
+              "id": "6a8c55a497a5373efd40e1a7",
+              "image": 80,
+              "title": "Discover the best spa in Langkawi",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Discover a sanctuary of peace and rejuvenation at Danna Langkaw",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c560797a5373efd40e1a9",
+              "image": 80,
+              "title": "Jo Loves by Jo Malone CBE Bath Amenities",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Elevate your bath ritual with the exquisite Jo Loves by Jo Malone",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c564797a5373efd40e1ab",
+              "image": 80,
+              "title": "Private Beachfront Villas in Langkawi",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Discover ultimate serenity at our beachfront villas in Langkawi",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c569d97a5373efd40e1ad",
+              "image": 80,
+              "title": "Indulge in Revamped Suites in Langkawi",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Spacious Colonial-Mediterranean inspired suites",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c56b097a5373efd40e1af",
+              "image": 80,
+              "title": "The Gym",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Elevate Your Fitness at Danna Langkawi",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c570a97a5373efd40e1b1",
+              "image": 80,
+              "title": "The Infinity Pool",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "The lush greenery and tranquil waters are reasons enough for you to dive into The Danna Langkawi’s spectacular Infinity Pool",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            }
+          ],
+          "blockType": "carouselBlock"
+        },
+        {
+          "id": "6a8c5ae297a5373efd40e1b3",
+          "blockName": "",
+          "columns": [
+            {
+              "id": "6a8c5aec97a5373efd40e1b5",
+              "size": "half",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "start",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "•   Bespoke Jo Loves by Jo Malone CBE Bath Amenities",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Four-poster king beds with pillow-top mattress",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Separate rainfall shower and a soaking tub",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Minibar",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Oversized feather pillow and duvet",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Coffee and tea making facilities",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Nespresso Coffee Machine",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Premium TWG Teas",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   In-room safe",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c5aee97a5373efd40e1b7",
+              "size": "half",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "start",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "•   WiFi",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Non-smoking accommodation",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Inter-connecting room available",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Curated pillow menu",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   55 Smart TV with Netflix and YouTube Access",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   USB Ports in the rooms",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   24 hours room service",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            }
+          ],
+          "blockType": "content"
+        },
+        {
+          "id": "6a8c5b6d97a5373efd40e1b9",
+          "carouselType": "fullWidth",
+          "title": "Your Dream Wedding in Langkawi",
+          "autoplay": false,
+          "autoplaySpeed": 5,
+          "blockName": "Your Dream Wedding",
+          "slides": [
+            {
+              "id": "6a8c5b9997a5373efd40e1bb",
+              "image": 80,
+              "title": "Straits & Co Wedding",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c5bdd97a5373efd40e1bd",
+              "image": 80,
+              "title": "Beachfront Wedding",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c5bf397a5373efd40e1bf",
+              "image": 80,
+              "title": "Courtyard Wedding",
+              "content": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c5c0397a5373efd40e1c1",
+              "image": 80,
+              "title": "Sunset Wedding",
+              "content": null,
+              "enableLink": false,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            }
+          ],
+          "blockType": "carouselBlock"
+        },
+        {
+          "id": "6a8c5c7297a5373efd40e1c3",
+          "blockName": null,
+          "columns": [
+            {
+              "id": "6a8c5c7597a5373efd40e1c5",
+              "size": "oneThird",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Get married on the ocean’s edge accompanied by the sound of the waves and gentle sea breeze. At The Danna Langkawi, rejoice in that special moment while exchanging your vows on a secluded wedding venue by the beach with close family and friends followed by a party under the stars. With our dedicated wedding team assisting you every step of the way, nothing is impossible in creating that ultimate beach wedding in a perfect location in Langkawi, Malaysia!",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c5c7697a5373efd40e1c7",
+              "size": "oneThird",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "start",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "•   Indulgence Breakfast in the room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Romantic Room Décor",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Luxurious Transport",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Floral Fantasy",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Elegant Chair Decorations",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            },
+            {
+              "id": "6a8c7afc3731395c81c0463e",
+              "size": "oneThird",
+              "richText": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "•   Bridal Elegance",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Intimate Candlelight Dinner",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Aisle of Dreams",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Designed Wedding Cake",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "•   Ceremonial Celebrant",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "enableLink": null,
+              "link": {
+                "type": "reference",
+                "newTab": null,
+                "url": null,
+                "label": null,
+                "appearance": "default"
+              }
+            }
+          ],
+          "blockType": "content"
+        },
+        {
+          "id": "6a8c5cd397a5373efd40e1c9",
+          "header": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "tag": "h2",
+                  "type": "heading",
+                  "format": "start",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Dining",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "type": "paragraph",
+                  "format": "start",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "The Danna Langkawi houses a variety of restaurants and lounges offering local and international specialties. From casual to elegant dining, romantic dinner by the beach or an intimate family gathering, you will discover your perfect place to eat while you're in Langkawi.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "blockName": "Dining",
+          "cards": [
+            {
+              "id": "6a8c5cf997a5373efd40e1cb",
+              "title": "Terrace Italian Restaurant",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Experience a touch of Italy at the Terrace as it showcases classic Italian dishes within a modern dining setting. Feast on favourites like fresh seafood and homemade pasta paired with an excellent selection of wines and cocktails. Open for lunch and dinner, you have a choice of enjoying your meal alfresco overlooking our infinity pool or within the more relaxed indoor seating.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5d1197a5373efd40e1d5",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c5cfa97a5373efd40e1cd",
+              "title": "Planter’s Breakfast Buffet, Asian & European Cuisine",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Planter’s Breakfast Buffet, Asian & European Cuisine",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Discover the culinary delights at Planter’s Restaurant, your all-day dining destination in Langkawi. Start your mornings with a vibrant bubbly buffet breakfast, followed by an enticing à la carte lunch menu featuring a global selection and locally inspired specialties like rendang, satay, and more. As night falls, immerse yourself in the rich flavors of Malaysia with our scrumptious Heritage Buffet dinner, offering a captivating array of traditional Malaysian dishes. Planter’s is where exceptional dining meets unforgettable experiences.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5dcf97a5373efd40e1e1",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c5d0097a5373efd40e1cf",
+              "title": "Straits & Co Authentic Peranakan Restaurant",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Straits & Co Authentic Peranakan Restaurant",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Savor the essence of Malaysian heritage at Straits & Co, The Danna Langkawi’s authentic Peranakan restaurant. Enjoy a memorable dinner showcasing vibrant Peranakan flavors in a relaxed ambiance.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "Peranakan culture, rooted in the 14th-century migration of Chinese settlers to Southeast Asia, is known for its unique blend of Sino-Malay influences. This heritage shines through in colorful attire, intricate Nyonya dishes, and traditional music, offering a dining experience rich in history and flavor.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5dc697a5373efd40e1df",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c5d0097a5373efd40e1d1",
+              "title": "STC Café & Deli",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "STC Café & Deli",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Escape to STC Café & Deli, where afternoons from 11am to 6pm are made for indulgence. Unwind with a perfectly brewed coffee or tea, and savor a selection of seasonal desserts and pastries crafted with the finest ingredients. Enjoy our Signature Afternoon Tea, complete with homemade scones in a cozy, inviting ambiance designed for leisurely moments.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5dbe97a5373efd40e1dd",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c5d0197a5373efd40e1d3",
+              "title": "Churchill Cigar Room",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Churchill Cigar Room",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "With its elegant leather and wood decor furnished with bold tones, the Churchill Room offers cigar connoisseurs a refined retreat. Known as one of the best ventilated cigar lounges in the country, you can enjoy specially curated pairings of alcoholic and non-alcoholic beverages with a selection of cigars that includes the room’s namesake's favourite brand - Romeo y Julieta",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "type": "linebreak",
+                          "version": 1
+                        },
+                        {
+                          "mode": "normal",
+                          "text": "*Enjoy the finer things in life with Curated Pairing Experience which pairs a chosen cigar with a high-end single malt whisky, aged rum, premium brandy or non-alcoholic beverage.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5db697a5373efd40e1db",
+                  "image": 80
+                }
+              ]
+            },
+            {
+              "id": "6a8c5d6797a5373efd40e1d7",
+              "title": "Verandah Classic Bar & Lounge",
+              "description": {
+                "root": {
+                  "type": "root",
+                  "format": "",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "type": "heading",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Verandah Classic Bar & Lounge",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null
+                    },
+                    {
+                      "type": "paragraph",
+                      "format": "left",
+                      "indent": 0,
+                      "version": 1,
+                      "children": [
+                        {
+                          "mode": "normal",
+                          "text": "Step back in time to the glamorous days of the 1920s at The Verandah Lounge. Known as one of Langkawi’s classiest lounges, you’ll be greeted with a visually stunning display of soaring high ceilings, magnificent chandeliers and towering pillars. This hidden gem is effortlessly stylish where you can unwind on plush sofas and indulge in nibbles and cocktails.",
+                          "type": "text",
+                          "style": "",
+                          "detail": 0,
+                          "format": 0,
+                          "version": 1
+                        }
+                      ],
+                      "direction": null,
+                      "textStyle": "",
+                      "textFormat": 0
+                    }
+                  ],
+                  "direction": null
+                }
+              },
+              "media": [
+                {
+                  "id": "6a8c5dad97a5373efd40e1d9",
+                  "image": 80
+                }
+              ]
+            }
+          ],
+          "blockType": "cardsBlock"
+        },
+        {
+          "id": "6a8c5e8897a5373efd40e1ed",
+          "richText": {
+            "root": {
+              "type": "root",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "tag": "h3",
+                  "type": "heading",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "Activities",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null
+                },
+                {
+                  "type": "paragraph",
+                  "format": "left",
+                  "indent": 0,
+                  "version": 1,
+                  "children": [
+                    {
+                      "mode": "normal",
+                      "text": "•   Beachfront relaxation and water sports.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    },
+                    {
+                      "type": "linebreak",
+                      "version": 1
+                    },
+                    {
+                      "mode": "normal",
+                      "text": "•   Island hopping tours to nearby attractions.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    },
+                    {
+                      "type": "linebreak",
+                      "version": 1
+                    },
+                    {
+                      "mode": "normal",
+                      "text": "•   Explore Langkawi's natural parks and trails.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    },
+                    {
+                      "type": "linebreak",
+                      "version": 1
+                    },
+                    {
+                      "mode": "normal",
+                      "text": "•   Enjoy cultural experiences at nearby landmarks.",
+                      "type": "text",
+                      "style": "",
+                      "detail": 0,
+                      "format": 0,
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "textStyle": "",
+                  "textFormat": 0
+                }
+              ],
+              "direction": null
+            }
+          },
+          "media": 80,
+          "reverse": false,
+          "enableLink": null,
+          "blockName": "Activities",
+          "blockType": "infoBlock",
+          "link": {
+            "type": "reference",
+            "newTab": null,
+            "url": null,
+            "label": null,
+            "appearance": "default"
+          }
+        }
+      ],
+      "relatedHotels": [],
+      "categories": [],
+      "meta": {
+        "title": "The Danna Langkawi Resort & Beach Villas | 1524 Delhi",
+        "image": 80,
+        "description": null
+      },
+      "publishedAt": "2026-08-24T13:23:42.210Z",
+      "generateSlug": false,
+      "slug": "the-danna-langkawi-resort--beach-villas",
+      "updatedAt": "2026-08-24T17:10:37.006Z",
+      "createdAt": "2026-08-23T18:33:41.276Z",
+      "_status": "published"
+    }
+  ],
+  "hasNextPage": false,
+  "hasPrevPage": false,
+  "limit": 10,
+  "nextPage": null,
+  "page": 1,
+  "pagingCounter": 1,
+  "prevPage": null,
+  "totalDocs": 1,
+  "totalPages": 1
+}

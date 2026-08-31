@@ -1,7 +1,8 @@
 import { createHash } from 'crypto'
 
 import type { Endpoint } from 'payload'
-import mailchimp from '@mailchimp/mailchimp_marketing'
+
+import { getMailchimpClient } from '@/utilities/mailchimp'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -19,18 +20,6 @@ function isRateLimited(key: string): boolean {
   recent.push(now)
   requestTimestamps.set(key, recent)
   return recent.length > RATE_LIMIT_MAX_REQUESTS
-}
-
-let mailchimpConfigured = false
-function getMailchimpClient() {
-  if (!mailchimpConfigured) {
-    mailchimp.setConfig({
-      apiKey: process.env.MAILCHIMP_MARKETING_API_KEY,
-      server: process.env.MAILCHIMP_MARKETING_SERVER_PREFIX,
-    })
-    mailchimpConfigured = true
-  }
-  return mailchimp
 }
 
 // Cached lookup of which merge fields actually exist on the audience, so we only

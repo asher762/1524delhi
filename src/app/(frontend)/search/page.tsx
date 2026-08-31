@@ -13,11 +13,13 @@ type Args = {
   searchParams: Promise<{
     q: string
     category?: string
+    country?: string
   }>
 }
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
-  const { q: query, category } = await searchParamsPromise
+  const { q: query, category, country } = await searchParamsPromise
   const categoryIds = category ? category.split(',').filter(Boolean) : []
+  const countryIds = country ? country.split(',').filter(Boolean) : []
   const payload = await getPayload({ config: configPromise })
 
   const andConditions: Where[] = []
@@ -34,8 +36,11 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   if (categoryIds.length > 0) {
     andConditions.push({ 'categories.categoryID': { in: categoryIds } })
   }
+  if (countryIds.length > 0) {
+    andConditions.push({ 'country.countryID': { in: countryIds } })
+  }
 
-  const [posts, categoriesResult] = await Promise.all([
+  const [posts, categoriesResult, countriesResult] = await Promise.all([
     payload.find({
       collection: 'search',
       depth: 1,
@@ -44,6 +49,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
         title: true,
         slug: true,
         categories: true,
+        country: true,
         meta: true,
       },
       // pagination: false reduces overhead if you don't need totalDocs
@@ -58,9 +64,22 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
         title: true,
       },
     }),
+    payload.find({
+      collection: 'countries',
+      depth: 0,
+      limit: 100,
+      select: {
+        title: true,
+      },
+    }),
   ])
 
   const categoryOptions = categoriesResult.docs.map((doc) => ({
+    value: String(doc.id),
+    label: doc.title,
+  }))
+
+  const countryOptions = countriesResult.docs.map((doc) => ({
     value: String(doc.id),
     label: doc.title,
   }))
@@ -70,16 +89,20 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">Search</h1>
+          <h1 className="mb-8 lg:mb-16 text-6xl mt-24">Search</h1>
 
           <div className="max-w-200 mx-auto">
-            <Search categories={categoryOptions} />
+            <Search categories={categoryOptions} countries={countryOptions} />
           </div>
         </div>
       </div>
 
       {posts.totalDocs > 0 ? (
-        <CollectionArchive posts={posts.docs as CardPostData[]} showCategoryFilter={false} />
+        <CollectionArchive
+          posts={posts.docs as CardPostData[]}
+          showCategoryFilter={false}
+          showCountryFilter={false}
+        />
       ) : (
         <div className="container">No results found.</div>
       )}

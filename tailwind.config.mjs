@@ -3,8 +3,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        sans: ['var(--font-jost)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-boska)', 'Georgia', 'serif'],
+        sans: ['var(--font-literata)', 'system-ui', 'sans-serif'],
       },
       typography: () => ({
         DEFAULT: {
@@ -13,27 +13,27 @@ const config = {
               '--tw-prose-body': 'var(--foreground)',
               '--tw-prose-headings': 'var(--foreground)',
               h1: {
-                fontSize: '3rem',
-                fontWeight: '200',
-                marginBottom: '0.5em',
-                lineHeight: '1.1',
+                fontWeight: '400',
+                marginBottom: '0.25em',
+                marginTop: '0.5em',
               },
               h2: {
-                fontSize: '1.75rem',
                 fontWeight: '400',
-                marginBottom: '0.5em',
-                lineHeight: '1.2',
+                marginBottom: '0.25em',
+                marginTop: '0.5em'
               },
               h3: {
-                fontSize: '1.25rem',
+                fontWeight: '500',
                 marginBottom: '0.5em',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.025em',
               },
               h4: {
-                fontSize: '1.1rem',
-                fontWeight: '400',
-                marginBottom: '0.5em',
+                fontWeight: '600',
               },
+              p: {
+                fontSize: '1.10rem',
+                fontWeight: '200',
+            },
             },
           ],
         },
@@ -41,19 +41,16 @@ const config = {
           css: [
             {
               h1: {
-                fontSize: '3rem',
-                marginBottom: '0.5em',
+                fontSize: '4.5rem',
               },
               h2: {
-                fontSize: '2.5rem',
-                marginBottom: '0.5em',
+                fontSize: '3.5rem',
               },
               h3: {
-                fontSize: '1.75rem',
+                fontSize: '2rem',
               },
               h4: {
-                fontSize: '1.25rem',
-                fontWeight: '400',
+                fontSize: '1.5rem',
               },
             },
           ],
