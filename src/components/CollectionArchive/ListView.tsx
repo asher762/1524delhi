@@ -23,7 +23,14 @@ export const ListView: React.FC<{
 
           const { slug, title, meta, categories, thumbnailUrl, previewText } = result
           const { description = previewText, image: metaImage = thumbnailUrl } = meta || {}
-          const href = relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`
+          // `result.doc` is the polymorphic relationship the `search` collection stores
+          // (search results can come from hotels, experiences, journeys, etc.), used
+          // as a fallback when the caller doesn't already know a single relationTo.
+          const resolvedRelationTo = relationTo || result?.doc?.relationTo
+          const href =
+            resolvedRelationTo === 'pages' || !resolvedRelationTo
+              ? `/${slug}`
+              : `/${resolvedRelationTo}/${slug}`
           const isExternalImageUrl = typeof metaImage === 'string' && /^https?:\/\//.test(metaImage)
 
           const categoryLabel =

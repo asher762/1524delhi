@@ -48,6 +48,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       select: {
         title: true,
         slug: true,
+        doc: true,
         categories: true,
         country: true,
         meta: true,

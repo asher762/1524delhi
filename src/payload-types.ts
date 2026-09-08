@@ -2824,7 +2824,8 @@ export interface IconBlock {
     | 'Luggage'
     | 'Tv'
     | 'AirVent'
-    | 'WashingMachine';
+    | 'WashingMachine'
+    | 'Train';
   size?: ('sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;

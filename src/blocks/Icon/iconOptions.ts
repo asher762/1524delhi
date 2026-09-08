@@ -54,6 +54,7 @@ export const iconOptions = [
   'Tv',
   'AirVent',
   'WashingMachine',
+  'Train',
 ] as const
 
 export type IconName = (typeof iconOptions)[number]

@@ -24,10 +24,16 @@ export const Card: React.FC<{
   const { slug, categories, meta, title, thumbnailUrl, previewText } = doc || {}
   const { description = previewText, image: metaImage = thumbnailUrl } = meta || {}
 
+  // `doc?.doc` is the polymorphic relationship the `search` collection stores
+  // (search results can come from hotels, experiences, journeys, etc.), used
+  // as a fallback when the caller doesn't already know a single relationTo.
+  const resolvedRelationTo = relationTo || doc?.doc?.relationTo
+
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
-  const href = relationTo === 'pages' ? `/${slug}` : `/${relationTo}/${slug}`
+  const href =
+    resolvedRelationTo === 'pages' || !resolvedRelationTo ? `/${slug}` : `/${resolvedRelationTo}/${slug}`
   const isExternalImageUrl = typeof metaImage === 'string' && /^https?:\/\//.test(metaImage)
 
   return (

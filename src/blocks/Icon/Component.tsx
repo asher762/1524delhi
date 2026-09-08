@@ -53,6 +53,7 @@ import {
   Tv,
   AirVent,
   WashingMachine,
+  Train,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -114,6 +115,7 @@ const icons: Record<IconName, LucideIcon> = {
   Tv,
   AirVent,
   WashingMachine,
+  Train,
 }
 
 const sizeClasses = {
