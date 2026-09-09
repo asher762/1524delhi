@@ -6,7 +6,6 @@ import {
   Drawer,
   DrawerToggler,
   FieldLabel,
-  Pill,
   toast,
   useDrawerSlug,
   useField,
@@ -15,6 +14,13 @@ import {
 } from '@payloadcms/ui'
 
 import { getClientSideURL } from '@/utilities/getURL'
+
+const formatDate = (isoDate: string) =>
+  new Date(isoDate).toLocaleDateString(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
 
 type MailchimpCampaign = {
   archiveUrl: string | null
@@ -83,7 +89,7 @@ export const CampaignPicker: React.FC = () => {
   }
 
   // If this field already has a saved campaign id (editing an existing
-  // newsletter), swap the fallback "Campaign <id>" pill for the real title
+  // newsletter), swap the fallback "Campaign <id>" label for the real title
   // once the campaign list has been fetched.
   useEffect(() => {
     if (!selectedCampaign && value) {
@@ -130,14 +136,62 @@ export const CampaignPicker: React.FC = () => {
   return (
     <div className="field-type">
       <FieldLabel label="Newsletter" />
-      <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-        <DrawerToggler slug={drawerSlug} onClick={handleOpen}>
-          <Button buttonStyle="secondary" el="span" size="small">
-            {value ? 'Change newsletter' : 'Select newsletter'}
-          </Button>
-        </DrawerToggler>
-        {currentLabel && <Pill>{importing ? `Importing "${currentLabel}"…` : currentLabel}</Pill>}
-      </div>
+
+      {value ? (
+        <div
+          style={{
+            alignItems: 'center',
+            background: 'var(--theme-elevation-50)',
+            borderRadius: 'var(--style-radius-s)',
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'space-between',
+            padding: '0.85rem 1rem',
+          }}
+        >
+          <div>
+            <div style={{ fontWeight: 600 }}>
+              {importing ? `Importing "${currentLabel}"…` : currentLabel}
+            </div>
+            {selectedCampaign?.sendTime && (
+              <div
+                style={{
+                  color: 'var(--theme-elevation-500)',
+                  fontSize: '0.8rem',
+                  marginTop: '0.15rem',
+                }}
+              >
+                Sent {formatDate(selectedCampaign.sendTime)}
+              </div>
+            )}
+          </div>
+          <DrawerToggler slug={drawerSlug} onClick={handleOpen}>
+            <Button buttonStyle="secondary" el="span" size="small">
+              Change
+            </Button>
+          </DrawerToggler>
+        </div>
+      ) : (
+        <div
+          style={{
+            alignItems: 'center',
+            background: 'var(--theme-elevation-50)',
+            border: '1px dashed var(--theme-elevation-150)',
+            borderRadius: 'var(--style-radius-s)',
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'space-between',
+            padding: '0.85rem 1rem',
+          }}
+        >
+          <span style={{ color: 'var(--theme-elevation-500)' }}>No newsletter selected</span>
+          <DrawerToggler slug={drawerSlug} onClick={handleOpen}>
+            <Button buttonStyle="secondary" el="span" size="small">
+              Select newsletter
+            </Button>
+          </DrawerToggler>
+        </div>
+      )}
 
       <Drawer slug={drawerSlug} title="Select a Mailchimp Campaign">
         {error && <p style={{ color: 'var(--theme-error-500)' }}>{error}</p>}
@@ -164,13 +218,7 @@ export const CampaignPicker: React.FC = () => {
                 <div>
                   <div style={{ fontWeight: 600 }}>{campaign.title}</div>
                   <div style={{ color: 'var(--theme-elevation-500)', fontSize: '0.8rem' }}>
-                    {campaign.sendTime
-                      ? new Date(campaign.sendTime).toLocaleDateString(undefined, {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric',
-                        })
-                      : 'Unknown send date'}
+                    {campaign.sendTime ? formatDate(campaign.sendTime) : 'Unknown send date'}
                   </div>
                 </div>
                 <Button

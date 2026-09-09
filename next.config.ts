@@ -98,7 +98,20 @@ const nextConfig: NextConfig = {
     return webpackConfig
   },
   async headers() {
-    return [{ source: '/:path*', headers: securityHeaders }]
+    return [
+      { source: '/:path*', headers: securityHeaders },
+      {
+        // NewsletterEmbed renders a sender's raw Mailchimp HTML in a srcDoc
+        // iframe, which inherits this page's CSP (srcDoc has no response of
+        // its own to carry a policy). That email references arbitrary
+        // external images/fonts/frames we can't enumerate, so the site-wide
+        // CSP just logs noise here. The iframe's `sandbox` (no
+        // allow-scripts) is the actual security boundary for this content,
+        // not CSP, so drop the report-only policy for this route.
+        source: '/newsletters/:slug*',
+        headers: securityHeaders.filter((h) => h.key !== 'Content-Security-Policy-Report-Only'),
+      },
+    ]
   },
   reactStrictMode: true,
   redirects,
