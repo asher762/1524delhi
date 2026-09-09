@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
 import localFont from 'next/font/local'
-import { Literata } from 'next/font/google'
+import { Jost } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -33,10 +33,9 @@ const boska = localFont({
   display: 'swap',
 })
 
-const literata = Literata({
+const jost = Jost({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-literata',
+  variable: '--font-jost',
   display: 'swap',
 })
 
@@ -44,7 +43,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(boska.variable, literata.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(boska.variable, jost.variable)} lang="en" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

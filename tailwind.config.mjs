@@ -4,7 +4,7 @@ const config = {
     extend: {
       fontFamily: {
         serif: ['var(--font-boska)', 'Georgia', 'serif'],
-        sans: ['var(--font-literata)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-jost)', 'system-ui', 'sans-serif'],
       },
       typography: () => ({
         DEFAULT: {

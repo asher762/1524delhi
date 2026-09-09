@@ -21,7 +21,7 @@
   }
 
   body {
-    font-family: var(--font-literata), system-ui, sans-serif;
+    font-family: var(--font-jost), system-ui, sans-serif;
   }
 }
 
@@ -48,8 +48,8 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
-  --font-mono: var(--font-literata);
-  --font-sans: var(--font-literata);
+  --font-mono: var(--font-jost);
+  --font-sans: var(--font-jost);
   --font-serif: var(--font-boska);
 }
 
