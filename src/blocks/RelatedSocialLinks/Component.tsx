@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Page } from '@/payload-types'
+import RichText from '@/components/RichText'
 import {
   Carousel,
   CarouselContent,
@@ -31,7 +32,7 @@ export const RelatedSocialLinksComponent: React.FC<
 
   return (
     <div className="container my-16" id={`block-${id}`}>
-      {title && <h2 className="text-3xl font-bold mb-8 text-center">{title}</h2>}
+      {title && <RichText className="mb-8 text-center" data={title} enableGutter={false} />}
       <Carousel
         opts={{
           align: 'start',
