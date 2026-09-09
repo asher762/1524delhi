@@ -6,6 +6,7 @@ import React from 'react'
 import type { Props as MediaProps } from '../types'
 
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { selectImageSource } from '@/utilities/selectImageSource'
 import { ImageWithLoader } from './ImageWithLoader'
 
 // Delivered quality. 100 disables almost all perceptual optimisation in the
@@ -60,6 +61,15 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let alt = altFromProps
   let src: StaticImageData | string = srcFromProps || ''
 
+  // NOTE: this is used by the browser to determine which image to download at
+  // different screen sizes. The previous default emitted srcset-style `w`
+  // descriptors (e.g. `(max-width: 1920px) 3840w`), which are not valid in a
+  // `sizes` attribute — every entry was discarded and the browser silently fell
+  // back to 100vw. `100vw` is now stated explicitly (identical behaviour, no
+  // longer accidental); any call site rendering into a narrower slot should
+  // pass an explicit `size`.
+  const sizes = sizeFromProps ?? '100vw'
+
   if (!src && resource && typeof resource === 'object') {
     const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
 
@@ -69,19 +79,16 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
     const cacheTag = resource.updatedAt
 
-    src = getMediaUrl(url, cacheTag)
+    // Prefer the smallest pre-generated variant that's still big enough for
+    // how this image is actually rendered (see selectImageSource) — falls
+    // back to the full-resolution original when no variant is large enough
+    // (e.g. a full-bleed hero) or the resource has no generated sizes.
+    const resolvedUrl = selectImageSource(resource, sizes) ?? url
+
+    src = getMediaUrl(resolvedUrl, cacheTag)
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
-
-  // NOTE: this is used by the browser to determine which image to download at
-  // different screen sizes. The previous default emitted srcset-style `w`
-  // descriptors (e.g. `(max-width: 1920px) 3840w`), which are not valid in a
-  // `sizes` attribute — every entry was discarded and the browser silently fell
-  // back to 100vw. `100vw` is now stated explicitly (identical behaviour, no
-  // longer accidental); any call site rendering into a narrower slot should
-  // pass an explicit `size`.
-  const sizes = sizeFromProps ?? '100vw'
 
   return (
     // `relative` unconditionally (not only when `fill`) so the loading
