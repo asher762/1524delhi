@@ -10,6 +10,7 @@ import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { InfoBlock } from '../../blocks/InfoBlock/config'
+import { FullWidthInfoBlock } from '../../blocks/FullWidthInfoBlock/config'
 import { RichTextBlock } from '../../blocks/RichTextBlock/config'
 import { CarouselBlock } from '../../blocks/CarouselBlock/config'
 import { RelatedSocialLinks } from '../../blocks/RelatedSocialLinks/config'
@@ -84,7 +85,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, CardsBlock, Content, MediaBlock, Archive, FormBlock, InfoBlock, RichTextBlock, CarouselBlock, RelatedSocialLinks],
+              blocks: [CallToAction, CardsBlock, Content, MediaBlock, Archive, FormBlock, InfoBlock, FullWidthInfoBlock, RichTextBlock, CarouselBlock, RelatedSocialLinks],
               required: true,
               admin: {
                 initCollapsed: true,

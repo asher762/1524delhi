@@ -9,6 +9,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { InfoBlockComponent } from '@/blocks/InfoBlock/Component'
+import { FullWidthInfoBlockComponent } from '@/blocks/FullWidthInfoBlock/Component'
 import { RichTextBlockComponent } from '@/blocks/RichTextBlock/Component'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CarouselBlock } from '@/blocks/CarouselBlock/Component'
@@ -23,6 +24,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   infoBlock: InfoBlockComponent,
+  fullWidthInfoBlock: FullWidthInfoBlockComponent,
   richTextBlock: RichTextBlockComponent,
   carouselBlock: CarouselBlock,
   socialLinks: RelatedSocialLinksComponent,

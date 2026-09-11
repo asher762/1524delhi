@@ -7,6 +7,7 @@ import { Banner } from '../../blocks/Banner/config'
 import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { InfoBlock } from '../../blocks/InfoBlock/config'
+import { FullWidthInfoBlock } from '../../blocks/FullWidthInfoBlock/config'
 import { Content } from '../../blocks/Content/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Archive } from '../../blocks/ArchiveBlock/config'
@@ -108,6 +109,7 @@ export const Experiences: CollectionConfig<'experiences'> = {
                 Archive,
                 FormBlock,
                 InfoBlock,
+                FullWidthInfoBlock,
                 Banner,
                 CarouselBlock,
                 RelatedSocialLinks,

@@ -184,6 +184,7 @@ export interface Hotel {
     | ArchiveBlock
     | FormBlock
     | InfoBlock
+    | FullWidthInfoBlock
     | BannerBlock
     | CarouselBlock
     | RelatedSocialLinksBlock
@@ -517,6 +518,7 @@ export interface Page {
     | ArchiveBlock
     | FormBlock
     | InfoBlock
+    | FullWidthInfoBlock
     | RichTextBlock
     | CarouselBlock
     | RelatedSocialLinksBlock
@@ -837,6 +839,7 @@ export interface VillasAndEstate {
     | ArchiveBlock
     | FormBlock
     | InfoBlock
+    | FullWidthInfoBlock
     | BannerBlock
     | CarouselBlock
     | RelatedSocialLinksBlock
@@ -1104,6 +1107,52 @@ export interface InfoBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullWidthInfoBlock".
+ */
+export interface FullWidthInfoBlock {
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  media: number | Media;
+  textAlign?: ('left' | 'center' | 'right') | null;
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'ghost' | 'secondary') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'fullWidthInfoBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
@@ -1255,6 +1304,7 @@ export interface Experience {
     | ArchiveBlock
     | FormBlock
     | InfoBlock
+    | FullWidthInfoBlock
     | BannerBlock
     | CarouselBlock
     | RelatedSocialLinksBlock
@@ -1300,6 +1350,7 @@ export interface Journey {
     | ArchiveBlock
     | FormBlock
     | InfoBlock
+    | FullWidthInfoBlock
     | BannerBlock
     | CarouselBlock
     | RelatedSocialLinksBlock
@@ -1717,6 +1768,7 @@ export interface HotelsSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        fullWidthInfoBlock?: T | FullWidthInfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
@@ -1879,6 +1931,28 @@ export interface InfoBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FullWidthInfoBlock_select".
+ */
+export interface FullWidthInfoBlockSelect<T extends boolean = true> {
+  richText?: T;
+  media?: T;
+  textAlign?: T;
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BannerBlock_select".
  */
 export interface BannerBlockSelect<T extends boolean = true> {
@@ -1956,6 +2030,7 @@ export interface VillasAndEstatesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        fullWidthInfoBlock?: T | FullWidthInfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
@@ -1998,6 +2073,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        fullWidthInfoBlock?: T | FullWidthInfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
@@ -2040,6 +2116,7 @@ export interface JourneysSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        fullWidthInfoBlock?: T | FullWidthInfoBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         socialLinks?: T | RelatedSocialLinksBlockSelect<T>;
@@ -2120,6 +2197,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         infoBlock?: T | InfoBlockSelect<T>;
+        fullWidthInfoBlock?: T | FullWidthInfoBlockSelect<T>;
         richTextBlock?: T | RichTextBlockSelect<T>;
         carouselBlock?: T | CarouselBlockSelect<T>;
         socialLinks?: T | RelatedSocialLinksBlockSelect<T>;

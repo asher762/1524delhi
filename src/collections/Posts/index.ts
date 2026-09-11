@@ -16,6 +16,7 @@ import { Banner } from '../../blocks/Banner/config'
 import { CardsBlock } from '../../blocks/CardsBlock/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { InfoBlock } from '../../blocks/InfoBlock/config'
+import { FullWidthInfoBlock } from '../../blocks/FullWidthInfoBlock/config'
 import { Content } from '../../blocks/Content/config'
 import { CarouselBlock } from '../../blocks/CarouselBlock/config'
 import { RelatedSocialLinks } from '../../blocks/RelatedSocialLinks/config'
@@ -102,6 +103,7 @@ export const Posts: CollectionConfig<'posts'> = {
                         CardsBlock,
                         MediaBlock,
                         InfoBlock,
+                        FullWidthInfoBlock,
                         Content,
                         CarouselBlock,
                         RelatedSocialLinks,

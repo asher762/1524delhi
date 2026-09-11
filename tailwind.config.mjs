@@ -31,7 +31,7 @@ const config = {
                 fontWeight: '600',
               },
               p: {
-                fontSize: '1.10rem',
+                fontSize: '1.20rem',
                 fontWeight: '200',
             },
             },
@@ -41,10 +41,10 @@ const config = {
           css: [
             {
               h1: {
-                fontSize: '4.5rem',
+                fontSize: '3.5rem',
               },
               h2: {
-                fontSize: '3.5rem',
+                fontSize: '3rem',
               },
               h3: {
                 fontSize: '2rem',
